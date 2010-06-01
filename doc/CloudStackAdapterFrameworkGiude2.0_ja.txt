@@ -1,0 +1,73 @@
+﻿Cloud.com CloudStack Adapter Framework Guide (Version 2.0 Preview)
+May 5, 2010
+
+＜Contents＞
+1 Overview ...... 4
+1.1 Getting Started ...... 4
+2 UserAuthenticators ...... 5
+
+1 Overview : 概要
+
+The CloudStack Adapter Framework allows you to further customize your CloudStack Software to suit your business needs. We’d like to think that our default adapter implementations should be sufficient enough to suit your needs but we also know that every business has unique requirements. This framework will allow you to build your own adapters and easily integrate within the Cloud.com CloudStack. We currently support custom implementation of the following:
+ UserAuthenticators – allows you to integrate custom authentication schemes that the Management Server can use to validate user credentials.
+ HostAllocators – allows you to create custom rules to determine which physical host to allocate the guest virtual machines on.
+ PodAllocators – allows you to create custom rules to determine which pod to allow the guest virtual machines on.
+ ConsoleProxyAllocators – allows you to create custom rules to determine which routing nodes to allow the console proxy on.
+ Investigators – allows you to create custom rules to determine when a virtual machine is detected as “down” for HA purposes.
+
+CloudStack Adapter Frameworkは、ビジネスニーズに合わせてColoudStackソフトをさらにカスタマイズできます。デフォルトのアダプタの実装がニーズを十分に満たすと考えたいですが、あらゆるビジネスは独自の要件があることも私たちは知っています。このフレームワークは、あなたのアダプタをビルドし、Cloud.comのCloudStackに簡単に統合するでしょう。現在、次のカスタマイズ実装をサポートしています。
+ UserAuthenticators – Management Serverがユーザ資格証明書を有効にするために使用するカスタム認証スキーマを統合できます。
+ HostAllocators – ゲストの仮想マシンをどの物理ホストに割り当てるかを決定するために、カスタムルールを作成できます。
+ PodAllocators – ゲストの仮想マシンをどのpodで許可するかを決定するために、カスタムルールを作成できます。
+ ConsoleProxyAllocators – コンソールプロキシをどのルーティングノードで許可するかを決定するために、カスタムルールを作成できます。
+ Investigators – HA目的で仮想マシンがいつ“落ちている"と検出されるかを決定するために、カスタムルールを作成できます。
+
+1.1 Getting Started : はじめに
+
+The CloudStack Adapter Framework is built entirely using Java as the programming language. To get started:
+ Make you have the CloudStack Management Server installed and running (If not, please refer to the Cloud.com CloudStack Installation Guide)
+ Understanding of XML (Refer to the W3C XML Tutorial)
+ Understanding of the Java programming language.
+ Understanding of how the Cloud.com CloudStack works.
+
+CloudStack Adapter Frameworkは、完全にプログラミング言語Javaを使用して作られています。はじめるには次のことが必要です。
+ CloudStack Management Serverをインストールし、実行してください。（Cloud.com CloudStack Installationガイドを参照してください）
+ XML（W3C XMLチュートリアル参照）の理解。
+ Javaプログラミング言語の理解。
+ Cloud.com CloudStackがどのように働くかに関する理解。
+
+2 UserAuthenticators
+
+User authenticators are written by extending the com.vmops.server.auth.DefaultUserAuthenticator interface. The interface contains one method.
+User authenticators は、com.vmops.server.auth.DefaultUserAuthenticatorインタフェースを拡張して書かれています。インタフェースは、1つのメソッドを含んでいます。
+
+/**
+* ユーザ名とパスワードによるユーザ認証。
+*
+* @param username
+* @param password
+* @param domainId
+* @return true if the user has been successfully authenticated, false otherwise
+**/
+public boolean authenticate(String username, String password, Long domainId);
+
+A custom adapter can be written by implementing this one method. Here’s an example custom authenticator:
+この1つのメソッドを実装することで、カスタムアダプタを書くことができます。次に、サンプルのカスタムauthenticatorを示します。
+
+（※ソースコード省略）
+
+Once this class has been written and your code has been packaged into a JAR file, copy the jar file to /usr/share/java. Then modify components.xml & components-premium.xml found in /usr/share/vmops/management/conf. Look for the following in both files. 
+
+一度このクラスが書かれて、コードがJARファイルにパッケージされたら、そのjarを/usr/share/javaにコピーしてください。 そして、components.xml と/usr/share/vmops/management/confにあるcomplenents-premium.xmlを変更してください。 両方のファイルで、次の箇所を探してください。
+
+<adapters key="com.vmops.server.auth.UserAuthenticator">
+    <adapter name="MD5" class="com.vmops.server.auth.MD5UserAuthenticator"/>
+</adapters>
+
+Replace the MD5UserAuthenticator with your class name (you can change the name of the adapter as well). You will also need to modify /usr/share/vmops/management/etc/tomcat6.conf and append the path and name of your jar to the end of the CLASSPATH.
+
+MD5UserAuthenticatorをクラス名に変更してください(アダプタの名前を変えることができます)。 また、 /usr/share/vmops/management/etc/tomcat6.confを変更して、jarへのパスと名前をCLASSPATHの末尾に追加する必要があるでしょう。
+
+Once this has been completed, restart the Management Server by typing “service vmops-management restart”.
+
+ここまで完了したら、「service vmops-management restar」と打ち込んで、Management Serverを再起動してください。
