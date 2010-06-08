@@ -1,0 +1,468 @@
+Cloud.com CloudStack Community Edition 2.0 Preview Installation Guide
+April 2010
+
+＜Contents＞
+1 Overview ...... 3
+2 Prerequisites ...... 4
+3 Installing and Setting Up the CloudStack Agent on a Computing Node ...... 4
+4 Installing and Setting Up the CloudStack Management Server ...... 5
+5 Describe Your Deployment ...... 8
+5.1 Setting Up Zones ...... 8
+5.2 Setting Up Service Offerings (Optional)...... 8
+5.3 Setting Up Disk Offering (Optional) ...... 8
+5.4 Checking the Computing Node ...... 8
+5.5 Setting up Primary and Secondary Storage Devices ...... 9
+5.5.1 Primary Storage ...... 9
+5.5.2 Secondary Storage ...... 10
+6 Testing ...... 10
+
+────────────────────────────────────────
+1 Overview : 概要
+
+Cloud.com CloudStack Version 2.0 is designed to work with a wide variety of enterprise-grade and commodity network and storage infrastructure including the following:
+
+・Layer-3 switching at the core and layer-2 switching at the edge. With layer-3 switching at the core, there is no limit on the number of physical servers that can be managed in a cloud.
+・1-GbE and 10-GbE Ethernet NICs and switches
+・NFS, local, and iSCSI storage
+
+Cloud.com CloudStack 2.0は、様々なエンタープライズグレードとコモディティなネットワーク、ストレージインフラが、次のものを含んで動作するように設計されました。
+
+・コアで切り替わるレイヤー3と、エッジで切り替わるレイヤー2。コアでのレイヤー3スイッチは、クラウドで管理できる物理サーバ数に上限がありません。
+・1-GbE/10-GbE イーサネット NIC、スイッチ
+・NFS、ローカル、iSCSIのストレージ
+
+The CloudStack consists of two types of nodes:
+・CloudStack Management Server: This server is the resource manager in the system. It controls allocation of virtual machines to Computing Nodes and assigns storage and IP addresses to the virtual machine instances.
+・CloudStack Computing Node: The Computing Nodes run the virtual machine instances. Servers are grouped into Zones and Pods. The initial installation has one Zone and one Pod.
+  o Zone: A Zone consists of multiple Pods. Typically a Zone is a datacenter.
+  o Pod: A Pod is usually one rack of hardware and will include primary storage and a layer-2 switch.
+
+CloudStackは、2種類のノードタイプで構成されます。：
+・CloudStack Management Server: このサーバは、システムのリソースマネージャです。コンピューティングノードへの仮想マシンの割当てと、仮想マシンインスタンスへのストレージとIPアドレスの割振りを制御します。
+・CloudStack Computing Node: コンピューティングノードは、仮想マシンインスタンスを実行します。サーバは、ゾーンとポッドに分けられます。インストール当初は、1つのゾーンと1つのポッドを持ちます。
+  o Zone: ゾーンは、複数のポッドから構成されます。典型的なゾーンが、データセンタです。
+  o Pod：ポッドは、通常、1台のハードウェアを指します。プライマリのストレージとレイヤ2スイッチを含むでしょう。
+
+For this release, there is one Management Server and multiple Computing Node servers. The Management Server is installed on an Ubuntu 10.04 or Fedora 13 system that could be a VM or a dedicated server. The CloudStack Agent is installed on the Computing Nodes. Additional Computing Nodes can be added after the initial installation. The Computing Nodes must also be Ubuntu 10.04 or Fedora 13.
+
+このリリースのために、1つのマネジメントサーバと複数のコンピューティングノードサーバがあります。マネジメントサーバは、仮想マシン、あるいは専用サーバのUbuntu10.04かFedora13のシステム上にインストールされます。CloudStackエージェントは、コンピューティングノード上にインストールされます。最初のインストールの後に、追加コンピューティングノードを加えることができます。 コンピューティングノードは、Ubuntu10.04かFedora13になります。
+
+Note: In a single server installation, the Management Server and the Agent may be installed on the same server. The Agent should be installed first, then the Management Server.
+
+注意: 単一のサーバへのインストールでは、マネジメントサーバとエージェントが同じサーバにインストールされるかもしれません。エージェントは最初にインストールするべきで、それからマネジメントサーバをインストールします。
+
+────────────────────────────────────────
+2 Prerequisites : 必要条件
+
+The Cloud.com CloudStack has the following hardware and software requirements.
+
+CloudStackには、次のハードウェア/ソフトウェア要件があります。
+
+[Management Server]
+Description
+　Hosts the Cloud.com CloudStack Management Server Software.
+Minimum Requirements
+・64-bit x86 CPU (more cores equals better performance)
+・2 GB of memory
+・80 GB of local disk
+・At least 1 NIC
+・Ubuntu 10.04 64-bit or Fedora 13 64-bit
+・Statically allocated IP address
+・Fully Qualified Domain Name as returned by the hostname command
+
+[Computing Node]
+Description
+　Provides all the CPU and memory resource for allocated guest virtual machines.
+　すべてのCPUとメモリリソースを、ゲストの仮想マシンに割り当てるために提供します。
+Minimum Requirements
+・64-bit x86 CPU (max # of cores for better performance)
+・Hardware virtualization support required
+・4 GB of memory
+・30 GB of local disk
+・At least 1 NIC
+・Ubuntu 10.04 64-bit or Fedora 13 64-bit
+・Statically allocated IP Address
+
+────────────────────────────────────────
+3 Installing and Setting Up the CloudStack Agent on a Computing Node
+
+Begin by installing the Cloud Agent on each Computing Node using the following steps. All commands should be run as root. On Fedora you have to make sure that the hostname resolves in DNS or /etc/hosts.
+
+次のステップを踏んで、各コンピューティングノードへのCloudエージェントのインストールを開始します。
+
+  1. Add access to the Cloud.com repository. On Ubuntu you will need to edit /etc/apt/sources.list and add:
+
+  Cloud.comリポジトリにアクセスします。Ubuntuでは、/etc/apt/sources.listを編集して、次の記述を追加する必要があるでしょう。
+
+deb http://download.cloud.com/apt/ubuntu/stable/oss ./
+
+  On Fedora:
+
+cd /etc/yum.repos.d/
+wget http://download.cloud.com/foss/cloud.repo
+
+  2. Update your local package list and install the Cloud Agent. On Ubuntu:
+
+  ローカルのパッケージリストを更新し、CloudエージェントをUbuntuにイントールしてください。
+  
+# aptitude update
+# aptitude install cloud-agent
+
+  On Fedora:
+# yum clean all
+# yum install cloud-agent
+
+  3. Disable SELinux . This is usually needed on Fedora and not needed on Ubuntu.
+
+  SELinuxを無効化します。この操作はFedoraではたいてい必要ですが、Ubuntuでは必要ありません。
+
+  Set SELinux up to be permissive by default. First, set the SELINUX variable in /etc/selinux/config to “permissive”. This ensures that MySQL and the Management Server can run properly on system reboot. Then disable SELinux until the system is rebooted:
+  
+  デフォルトでpermissive（寛大な設定）になるように、SELinuxをセットアップしてください。まず、/etc/selinux/configのSELINUXの値に「permissive」をセットしてください。これは、MySQLとマネジメントサーバが適切にシステムリブートで実行できることを保証します。次に、システムがリブートされるまで、SELinuxを無効にしてください。
+
+setenforce 0
+
+  4. Set up the Cloud Agent by running the following command.
+
+  次のコマンドを実行して、Cloudエージェントをセットアップしてください。
+
+# cloud-setup-agent
+
+  The Cloud Agent will ask for the Management Server’s IP address. You will be prompted to enter this during the Cloud Agent setup. You may see some failure messages when stopping services in this script; that is fine.
+
+  Cloudエージェントは、マネジメントサーバのIPアドレスを要求するでしょう。Cloudエージェントのセットアップ中、これに入るよう促されるでしょう。このスクリプトでサービスを停止する時、いくつかの失敗メッセージが表示されるかもしれませんが、それは問題ありません。
+
+  Note: A Computing Node must have a statically allocated IP address; the cloud-agent-setup will error and fail if a DHCP-assigned address is present. A Computing Node’s host OS must also have a fully qualified domain name.
+
+  注意: コンピューティングノードには、静的に割り当てられたIPアドレスがなければなりません。DHCPで割り当てられるアドレスが存在すると、Cloudエージェントのセットアップはエラーが出て失敗します。また、コンピューティングノードのホストOSは、完全修飾ドメイン名がなければなりません。
+
+  5. Open up the iptables ports to allow console proxy access and allow bridge traffic to pass to the guests. Alternatively you can disable the User Firewall (on Ubuntu) or stop the iptables service (Fedora).
+
+  コンソールプロキシアクセスを許可するためにiptablesポートを開き、ブリッジトラフィックがゲストで通ることを許容してください。あるいは、（Ubuntuの）ユーザファイヤーウォールを無効にするか、または（Fedoraの）iptablesサービスを停止できます。
+
+  On Ubuntu
+
+# iptables -I FORWARD -i cloud-br0 -o cloud-br0 -j ACCEPT
+# ufw allow proto tcp from any to any port 5900:6100
+
+Edit /etc/iptables.rules and place the following above a COMMIT line
+
+/etc/iptables.rulesを編集して、COMMIT行の上に次を記述してください。
+
+-I FORWARD -i cloud-br0 -o cloud-br0 -j ACCEPT
+
+  On Fedora
+
+# iptables -I FORWARD -i cloud-br0 -o cloud-br0 -j ACCEPT
+# iptables ?I INPUT -m state --state NEW -m tcp -p tcp --dport 5900:6100 ?j ACCEPT
+
+Edit /etc/sysconfig/iptables.save and add these two lines above “COMMIT”
+
+/etc/sysconfig/iptables.saveを編集して、これらの2行を“COMMIT”の上に記述してください。
+
+-I FORWARD -i cloud-br0 -o cloud-br0 -j ACCEPT
+-I INPUT -m state --state NEW -m tcp -p tcp --dport 5900:6100 ?j ACCEPT
+
+The Cloud Agent is now installed and set up.
+
+これで、Cloudエージェントのインストールとセットアップができました。
+
+────────────────────────────────────────
+4 Installing and Setting Up the CloudStack Management Server
+
+Next, install and set up the CloudStack Management Server.
+
+次に、CloudStack マネジメントサーバをインストールして、セットアップします。
+
+Note: Make sure that the Management Server has a fully-qualified domain name as returned by “hostname”. For example, “cloud.example.com” is fully qualified, but “cloud” is not. Running NTP is also recommended.
+
+注意: マネジメントサーバに「ホスト名」によって返される完全修飾ドメイン名があることを確認にしてください。たとえば、「cloud.example.com」は完全に資格がありますが、「cloud」ではいけません。また、実行中のNTPが推薦されます。
+
+  1. On the Management Server, disable the User Firewall (on Ubuntu) or stop the iptables service (Fedora). Alternately, configure them to allow traffic to ports 80, 8080, 8096, and 8250.
+  
+  マネジメントサーバでは、（Ubuntuの）ユーザファイヤーウォールを無効化するか、（Fedoraの）iptableサービスを停止します。あるいは、ポート番号80、8080、8096、8250へのトラフィックを許可する設定をします。
+
+  On Ubuntu:
+
+# ufw allow 80
+# ufw allow 8080
+# ufw allow 8096
+# ufw allow 8250
+
+  On Fedora:
+
+iptables -I INPUT -m state --state NEW -p tcp --dport 80 -j ACCEPT
+iptables -I INPUT -m state --state NEW -p tcp --dport 8080 -j ACCEPT
+iptables -I INPUT -m state --state NEW -p tcp --dport 8096 -j ACCEPT
+iptables -I INPUT -m state --state NEW -p tcp --dport 8250 -j ACCEPT
+
+  Edit /etc/sysconfig/iptables.save and add these lines above the COMMIT
+
+  /etc/sysconfig/iptables.saveを編集して、COMMITの上にこれらの行を追加します。
+
+-I INPUT -m state --state NEW -p tcp --dport 80 -j ACCEPT
+-I INPUT -m state --state NEW -p tcp --dport 8080 -j ACCEPT
+-I INPUT -m state --state NEW -p tcp --dport 8096 -j ACCEPT
+-I INPUT -m state --state NEW -p tcp --dport 8250 -j ACCEPT
+
+  2. Install MySQL. On Ubuntu:
+
+# aptitude install mysql-server
+
+  On Fedora:
+
+# yum install mysql-server
+
+  3. Edit the MySQL configuration to suit the CloudStack application. Do this by editing /etc/mysql/my.cnf (on Ubuntu) or /etc/my.cnf (on Fedora) and inserting the following lines in the [mysqld] section. For example you could place them directly below the datadir line.
+
+  MySQLの構成を編集して、CloudStackアプリケーションに適合させてください。これは、（Ubuntuの）/etc/mysql/my.cnfか、（Fedoraの）/etc/my.cnfを編集することで行います。次の行を[mysqld]セクションに挿入してください。たとえば、datadir行のすぐ下に、それらを配置することができます。
+
+innodb_rollback_on_timeout=1
+innodb_lock_wait_timeout=600
+
+  In Fedora you will need to start MySQL:
+
+  Fedoraの場合、MySQLを開始する必要があるでしょう。
+
+service mysqld start
+
+  4. Prepare the repository to find the CloudStack packages. If this system has had the Agent installed on it you may skip to step 5.
+
+  CloudStackパッケージを見つけるためのリポジトリを用意してください。システムでエージェントをインストール済みであれば、ステップ5まで手順をスキップできます。
+
+  On Ubuntu you will need to edit /etc/apt/sources.list and add:
+
+  Ubuntuでは、/etc/apt/sources.listを編集し、次を追加する必要があるでしょう。
+
+deb http://download.cloud.com/apt/ubuntu/stable/oss ./
+
+  On Fedora:
+
+cd /etc/yum.repos.d/
+wget http://download.cloud.com/foss/cloud.repo
+
+  5. Install the management server. 
+  
+  マネジメントサーバをインストールしてください。
+
+  On Ubuntu:
+
+# aptitude update
+# aptitude install cloud-client
+
+  On Fedora
+
+# yum clean all
+# yum install cloud-client
+
+  6. Turn off tomcat6.
+
+  Tomcat6を停止してください。
+
+Note: The Cloud Management Server will start and stop Tomcat as part of its service.
+
+注意: Coudマネジメントサーバは、サービスの一部として、Tomcatを開始/停止します。
+
+# service tomcat6 stop
+# chkconfig tomcat6 off
+
+  7. Set up the database. The CloudStack will connect to the database as the cloud user. Typically it will do the deployment as the root user. Use the first argument set to specify the cloud user password and the --deploy-as option to specify the root user’s password (if set) during database set up.
+
+  データベースをセットアップしてください。CloudStackは、cloudユーザとしてデータベースに接続します。一般的には、rootユーザとしてデプロイをします。データベースをセットアップする時、cloudユーザのパスワードを指定するために第一引数を、そして、（設定するのであれば）rootユーザのパスワードを指定するために--deploy-asオプションを使用してください。
+
+  Note: This command will fail if the host does not have a fully qualified domain name as returned by the hostname command.
+
+  注意: ホストに、hostnameコマンドによって返される完全修飾ドメイン名がない場合、このコマンドは失敗するでしょう。
+
+  On Ubuntu the MySQL install prompts for a password. This is the password that you should use in the --deploy-as option.
+
+  UbuntuでのMySQLは、パスワードのためのプロンプトを使ってインストールします。これは、--deploy-asオプションで使用するべきパスワードです。
+
+  On Ubuntu:
+
+# cloud-setup-databases cloud:<dbpassword> kvm --deploy-as=root:<rootpassword>
+
+  On Feodra MySQL does not prompt for a password on install. The command line below assumes MySQL root does not have a password. If it does you should run the Ubuntu version of this command above.
+
+  FedoraでのMySQLは、インストール時にパスワードのためのプロンプトがありません。以下のコマンドラインは、MySQLのrootにパスワードがないと仮定します。もしそうであれば、上のコマンドのUbuntuバージョンを実行するべきです。
+
+  On Fedora:
+
+# cloud-setup-databases cloud kvm ?deploy-as=root
+
+  8. Set up /etc/sudoers for use by the cloud user. The cloud user must be able to mount and unmount file systems and run chmod. Run “sudo visudo” and add the following at the end of the file:
+
+  cloudユーザによって使用するために、/etc/sudoersをセットアップします。cloudユーザは、ファイルシステムをマウント/アンマウントできるとともに、chmodを実行できなければいけません。「sudo visudo」を実行して、ファイルの最後に次の記述を追加してください。
+
+cloud ALL=(ALL) NOPASSWD: /bin/mount,/bin/umount,/bin/chmod
+
+  On Fedora you will also have to find and comment out this line:
+
+  また、Fedoraでは、この行を探してコメントアウトする必要があります。
+
+Defaults requiretty
+
+  9. Insure that the NFS Client is available to the Management server. 
+
+  NFSクライアントが、マネジメントサーバに利用可能であるかを確認してください。
+
+  On Ubuntu:
+
+# apt-get install nfs-client
+
+  On Fedora the NFS client is pre-installed.
+
+  Fedoraでは、NFSクライアントはプリインストールされています。
+
+  10. Start the Management Server:
+
+  マネジメントサーバを開始してください。
+
+# service cloud-management start
+
+────────────────────────────────────────
+5 Describe Your Deployment : デプロイについての説明
+
+Now your CloudStack Management Server is running. The next step is to tell it about the computer nodes, storage, and network configuration that you have done in the previous sections. To begin describing your deployment, log in to the Administrator Web UI:
+
+これで、CloudStackマネジメントサーバは実行されます。次のステップでは、マネジメントサーバに、コンピュータノードとストレージ、前節で行ったネットワーク設定を教えます。管理者Web UIからログインするところから、デプロイを開始します。
+
+http://management-server-ip-address:8080/client
+
+The default user is “admin” and the default password is “password”.
+
+デフォルトユーザは「admin」で、デフォルトパスワードは「password」です。
+
+Once you have logged on, see the following sections to set up your Zones and Offerings.
+
+一度ログオンしたら、ゾーンとOfferingを設定するために次節を参照します。
+
+5.1 Setting Up Zones : ゾーンのセットアップ
+
+Now add a public IP address range. These are the IP addresses that will be assigned to accounts when a public IP address is requested. Usually they are routable from the external intranet, but you can use a RFC 1918 range (e.g., 192.168.3.0/24) if needed.
+
+公共のIPアドレスの範囲を追加してください。これらは、公共のIPアドレスが要求される時に、アカウントに割り当てられるIPアドレスです。 通常、それらはイントラネットの外部からルーティング可能ですが、もし必要であれば、RFC1918の範囲のIPアドレス（たとえば、192.168.3.0/24）を使用できます。
+
+1. Navigate to the Zones section by clicking on Zones right next to Global Settings.
+2. Select your Zone under Configuration > Zones.
+3. Click on “Add Public IP Range” on the right. This dialog requires the following information:
+  ・Gateway: This is the gateway in use for these IP’s.
+  ・Netmask: This is the netmask associated with this IP range.
+  ・IP Range: This takes a lower and an upper IP address that together form a range. These IP addresses are 
+
+assumed to be accessible from the public internet and will be allocated for access to guest networks.
+
+1. Global Settingsの右隣にあるZonesをクリックすることで、Zonesセクションを開きます。
+2. Configuration > Zones 以下から、Zoneを選択します。
+3. 右にある「Add Public IP Range」をクリックしてください。このダイアログは、次の情報を求めます。
+  ・Gateway: これらのIPが使用するゲートウェイです。
+  ・Netmask: このIPレンジに関連するネットマスクです。
+  ・IP Range: 下側のIPアドレスと上側のIPアドレスを一緒に扱う範囲を形成します。これらのIPアドレスは、公共のインターネットからアクセスしやすいという思われるので、ゲストネットワークへのアクセスに割り当てられるでしょう。
+
+5.2 Setting Up Service Offerings (Optional)
+
+The CloudStack ships with several default service offerings and disk offerings. You can optionally edit these now or proceed with the defaults. The offerings are also in the Configuration tab under Service Offerings, which is next to Zones. This area displays a list of service offerings. Add or edit service offerings as needed. To add a service offering you need to provide:
+
+・Name: The name of the service offering.
+・Display text: A short description of the offering.
+・Storage type: The type of disk that should be allocated to the guest. Local allocates from storage attached to the KVM Host OS directly. Shared allocates from storage accessible via NFS or iSCSI.
+・Number of CPU cores: How many cores an instance with this offering should be allocated.
+・CPU (in MHz): The CPU speed of the cores that the instance is allocated.
+・Memory (in MB): The amount of memory in megabytes that the instance should be allocated.
+
+CloudStackは、数個のデフォルトサービスオファリングとディスクオファリングで運用します。ここで、任意でこれらを編集するか、あるいは、デフォルトの設定を続けることができます。オファリングは、Service Offeringsの下のConfigurationタブにもあります。それは、Zonesの横です。この領域は、サービスオファリングのリストを表示します。必要に応じてサービスオファリングを追加、または編集してください。サービスオファリングを塚するために、次の情報の提示が必要です。
+
+・Name: サービスオファリングの名前。
+・Display text: オファリングの短い説明。
+・Storage type: ゲストに割り当てる必要があるディスクのタイプ。ローカルアロケートは、ストレージからKVMホストOSへ直接割り当てる。シェアアロケートは、アクセス可能なストレージから、NFSかiSCSIを経由する。
+・Number of CPU cores: このオファリングに割り当てるべきインスタンスは何コアか。
+・CPU (in MHz): インスタンスに割り当てられたコアのCPU速度。
+・Memory (in MB): インスタンスに割り当てるべきメモリ量（メガバイト）。
+
+The service offering provides CPU and RAM.
+
+サービスオファリングは、CPUとRAMを提供します。
+
+5.3 Setting Up Disk Offering (Optional)
+
+You can also edit the Disk Offering. This link is next to the Service Offerings link. The available parameters to add or edit disk offerings are:
+
+・Name: Name of the disk offering (e.g. extra large)
+・Description: A short description of the disk offering
+・Disk size: The size of the disk offering in megabytes (e.g. 1024 is a 1 GB offering)
+
+また、Disk Offeringを編集できます。このリンクはService Offeringsリンクの横にあります。Disk Offeringを追加、または編集する利用可能なパラメータは、次の通りです。
+
+・Name: ディスクオファリングの名前（例: extra large）
+・Description: ディスクオファリングの短い説明
+・Disk size: ディスクオファリングのサイズをメガバイト単位で表したもの（例: 1024にすると1GBのオファリング）
+
+5.4 Checking the Computing Node
+
+Check to ensure that the Computing Node (the KVM Host) has been recognized by the system. Click on the Hosts tab. You should see this host in the list of available hosts.
+
+コンピューティングノード（KVMホスト）が、システムによって認識されたかを確認するチェックをしてください。Hostsタブをクリックしてください。利用可能なホストのリスト内に、このホストがあるかを見ます。
+
+5.5 Setting up Primary and Secondary Storage Devices : プライマリ/セカンダリストレージデバイスのセットアップ
+
+Next you will need to tell the system about the primary and secondary storage devices that are available. Click on the Storage tab near the top of the UI, and set up each of the following sections.
+
+次に、利用可能なプライマリとセカンダリのストレージデバイスをシステムに教える必要があります。UIのトップ付近にあるStorageタブをクリックして、以下の各項のセットアップをしてください。
+
+  5.5.1 Primary Storage
+
+  The Primary Storage section will display first. Click on Add Primary Storage. The following dialog will display.
+
+  プライマリストレージセクションが、最初に表示されます。Add Primary Storageをクリックしてください。次のダイアログが表示されます。
+
+  Provide information for the following fields:
+
+  ・Availability Zone: the Zone of the storage device
+  ・Pod: the Pod of the storage device
+  ・Name: a name to assist you in recognizing the storage device
+  ・Protocol: iSCSI or NFS, depending on your device’s capabilities
+  ・Server: the DNS name or IP address of the iSCSI or NFS server
+  ・Path: the exported path to the storage
+
+  以下のフィールドの情報を示します。
+
+  ・Availability Zone: ストレージデバイスのゾーン
+  ・Pod: ストレージデバイスのポッド
+  ・Name: ストレーイデバイスの識別を助ける名前
+  ・Protocol: 使用するデバイスの容量によって、iSCSI か NFS
+  ・Server: DNS名、あるいは、iSCSIかNFSサーバのIPアドレス
+  ・Path: ストレージへの出力されたパス
+
+  5.5.2 Secondary Storage
+
+  You will need to add secondary storage. This process is similar to primary storage. Click on the Secondary Storage link near Primary Storage to begin.
+
+  あなたは、セカンダリのストレージを追加する必要があるでしょう。その手順は、プライマリストレージと同様です。Primary Storageを始めた箇所の近くにあるSecondary Storageリンクをクリックしてください。
+
+────────────────────────────────────────
+6 Testing : テスト
+
+When secondary storage is available the Management Server will begin downloading the two provided templates. These templates are large and may take 10?15 minutes to download depending on the speed of your network.
+
+セカンダリのストレージが有効化されると、マネジメントサーバは提供された2つのテンプレートのダウンロードを開始します。これらのテンプレートは巨大なため、ネットワーク速度によってはダウンロードに10～15分かかります。
+
+Important: If you attempt to start virtual machines prior to the completion of the download of both templates the VM creation will fail.
+
+重要: 両方のテンプレートのダウンロードが完了する前に、仮想マシンを開始しようとすると、仮想マシンの作成は失敗します。
+
+The UI provides a progress indication for the provided CentOS template in the Templates tab. You can click “Refresh” on the lower, right side of the page to update the download percentage. When that download completes you can begin using the system.
+
+ユーザインタフェースが、テンプレートタブの中でCentOSテンプレートを提供するための進捗指示を提示します。ダウンロードパーセンテージをアップデートするには、ページ右側の下部にある「Refresh」をクリックします。ダウンロードが完了したら、システムの利用を開始できます。
+
+Try creating a new virtual machine. Go to the Instances tab and click on “Create a new VM” and follow the wizard steps. It may take several minutes to start the first VM. Subsequent VM starts should be faster. Once the CentOS image is up the root password is “password”. You can use the console viewer (from the Instances tab) to log in.
+
+新しい仮想マシンの作成を試してください。インスタンスタブを開き、「Create a new VM」をクリックし、次のウィザードステップを行います。数分で最初の仮想マシンをスタートできるでしょう。以後の仮想マシンの起動は、より速いはずです。一度起動したCentOSイメージのrootパスワードは、「password」です。（インスタンスタブの中の）コンソールビューアをログインに使用できます。
+
+You can create additional users and administrators for the system. Click on the “Launch Test Provisioning Tool” on the upper right of the screen to do this.
+
+システムに、追加ユーザ/管理者を作成できます。これは、画面右上部の「Launch Test Provisioning Tool」をクリックして行います。
+
+You may want to read the Administration Guide available at http://open.cloud.com.
+
+利用可能な管理者ガイドが、http://open.cloud.com.にあります。
+
