@@ -1,7 +1,7 @@
-Cloud.com CloudStack Community Edition 2.0 Preview Installation Guide
+ï»¿Cloud.com CloudStack Community Edition 2.0 Preview Installation Guide
 April 2010
 
-ƒContents„
+ï¼œContentsï¼
 1 Overview ...... 3
 2 Prerequisites ...... 4
 3 Installing and Setting Up the CloudStack Agent on a Computing Node ...... 4
@@ -16,83 +16,83 @@ April 2010
 5.5.2 Secondary Storage ...... 10
 6 Testing ...... 10
 
-„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ
-1 Overview : ŠT—v
+â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+1 Overview : æ¦‚è¦
 
 Cloud.com CloudStack Version 2.0 is designed to work with a wide variety of enterprise-grade and commodity network and storage infrastructure including the following:
 
-ELayer-3 switching at the core and layer-2 switching at the edge. With layer-3 switching at the core, there is no limit on the number of physical servers that can be managed in a cloud.
-E1-GbE and 10-GbE Ethernet NICs and switches
-ENFS, local, and iSCSI storage
+ãƒ»Layer-3 switching at the core and layer-2 switching at the edge. With layer-3 switching at the core, there is no limit on the number of physical servers that can be managed in a cloud.
+ãƒ»1-GbE and 10-GbE Ethernet NICs and switches
+ãƒ»NFS, local, and iSCSI storage
 
-Cloud.com CloudStack 2.0‚ÍA—lX‚ÈƒGƒ“ƒ^[ƒvƒ‰ƒCƒYƒOƒŒ[ƒh‚ÆƒRƒ‚ƒfƒBƒeƒB‚Èƒlƒbƒgƒ[ƒNAƒXƒgƒŒ[ƒWƒCƒ“ƒtƒ‰‚ªAŸ‚Ì‚à‚Ì‚ğŠÜ‚ñ‚Å“®ì‚·‚é‚æ‚¤‚ÉİŒv‚³‚ê‚Ü‚µ‚½B
+Cloud.com CloudStack 2.0ã¯ã€æ§˜ã€…ãªã‚¨ãƒ³ã‚¿ãƒ¼ãƒ—ãƒ©ã‚¤ã‚ºã‚°ãƒ¬ãƒ¼ãƒ‰ã¨ã‚³ãƒ¢ãƒ‡ã‚£ãƒ†ã‚£ãªãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯ã€ã‚¹ãƒˆãƒ¬ãƒ¼ã‚¸ã‚¤ãƒ³ãƒ•ãƒ©ãŒã€æ¬¡ã®ã‚‚ã®ã‚’å«ã‚“ã§å‹•ä½œã™ã‚‹ã‚ˆã†ã«è¨­è¨ˆã•ã‚Œã¾ã—ãŸã€‚
 
-EƒRƒA‚ÅØ‚è‘Ö‚í‚éƒŒƒCƒ„[3‚ÆAƒGƒbƒW‚ÅØ‚è‘Ö‚í‚éƒŒƒCƒ„[2BƒRƒA‚Å‚ÌƒŒƒCƒ„[3ƒXƒCƒbƒ`‚ÍAƒNƒ‰ƒEƒh‚ÅŠÇ—‚Å‚«‚é•¨—ƒT[ƒo”‚ÉãŒÀ‚ª‚ ‚è‚Ü‚¹‚ñB
-E1-GbE/10-GbE ƒC[ƒTƒlƒbƒg NICAƒXƒCƒbƒ`
-ENFSAƒ[ƒJƒ‹AiSCSI‚ÌƒXƒgƒŒ[ƒW
+ãƒ»ã‚³ã‚¢ã§åˆ‡ã‚Šæ›¿ã‚ã‚‹ãƒ¬ã‚¤ãƒ¤ãƒ¼3ã¨ã€ã‚¨ãƒƒã‚¸ã§åˆ‡ã‚Šæ›¿ã‚ã‚‹ãƒ¬ã‚¤ãƒ¤ãƒ¼2ã€‚ã‚³ã‚¢ã§ã®ãƒ¬ã‚¤ãƒ¤ãƒ¼3ã‚¹ã‚¤ãƒƒãƒã¯ã€ã‚¯ãƒ©ã‚¦ãƒ‰ã§ç®¡ç†ã§ãã‚‹ç‰©ç†ã‚µãƒ¼ãƒæ•°ã«ä¸Šé™ãŒã‚ã‚Šã¾ã›ã‚“ã€‚
+ãƒ»1-GbE/10-GbE ã‚¤ãƒ¼ã‚µãƒãƒƒãƒˆ NICã€ã‚¹ã‚¤ãƒƒãƒ
+ãƒ»NFSã€ãƒ­ãƒ¼ã‚«ãƒ«ã€iSCSIã®ã‚¹ãƒˆãƒ¬ãƒ¼ã‚¸
 
 The CloudStack consists of two types of nodes:
-ECloudStack Management Server: This server is the resource manager in the system. It controls allocation of virtual machines to Computing Nodes and assigns storage and IP addresses to the virtual machine instances.
-ECloudStack Computing Node: The Computing Nodes run the virtual machine instances. Servers are grouped into Zones and Pods. The initial installation has one Zone and one Pod.
+ãƒ»CloudStack Management Server: This server is the resource manager in the system. It controls allocation of virtual machines to Computing Nodes and assigns storage and IP addresses to the virtual machine instances.
+ãƒ»CloudStack Computing Node: The Computing Nodes run the virtual machine instances. Servers are grouped into Zones and Pods. The initial installation has one Zone and one Pod.
   o Zone: A Zone consists of multiple Pods. Typically a Zone is a datacenter.
   o Pod: A Pod is usually one rack of hardware and will include primary storage and a layer-2 switch.
 
-CloudStack‚ÍA2í—Ş‚Ìƒm[ƒhƒ^ƒCƒv‚Å\¬‚³‚ê‚Ü‚·BF
-ECloudStack Management Server: ‚±‚ÌƒT[ƒo‚ÍAƒVƒXƒeƒ€‚ÌƒŠƒ\[ƒXƒ}ƒl[ƒWƒƒ‚Å‚·BƒRƒ“ƒsƒ…[ƒeƒBƒ“ƒOƒm[ƒh‚Ö‚Ì‰¼‘zƒ}ƒVƒ“‚ÌŠ„“–‚Ä‚ÆA‰¼‘zƒ}ƒVƒ“ƒCƒ“ƒXƒ^ƒ“ƒX‚Ö‚ÌƒXƒgƒŒ[ƒW‚ÆIPƒAƒhƒŒƒX‚ÌŠ„U‚è‚ğ§Œä‚µ‚Ü‚·B
-ECloudStack Computing Node: ƒRƒ“ƒsƒ…[ƒeƒBƒ“ƒOƒm[ƒh‚ÍA‰¼‘zƒ}ƒVƒ“ƒCƒ“ƒXƒ^ƒ“ƒX‚ğÀs‚µ‚Ü‚·BƒT[ƒo‚ÍAƒ][ƒ“‚Æƒ|ƒbƒh‚É•ª‚¯‚ç‚ê‚Ü‚·BƒCƒ“ƒXƒg[ƒ‹“–‰‚ÍA1‚Â‚Ìƒ][ƒ“‚Æ1‚Â‚Ìƒ|ƒbƒh‚ğ‚¿‚Ü‚·B
-  o Zone: ƒ][ƒ“‚ÍA•¡”‚Ìƒ|ƒbƒh‚©‚ç\¬‚³‚ê‚Ü‚·B“TŒ^“I‚Èƒ][ƒ“‚ªAƒf[ƒ^ƒZƒ“ƒ^‚Å‚·B
-  o PodFƒ|ƒbƒh‚ÍA’ÊíA1‘ä‚Ìƒn[ƒhƒEƒFƒA‚ğw‚µ‚Ü‚·Bƒvƒ‰ƒCƒ}ƒŠ‚ÌƒXƒgƒŒ[ƒW‚ÆƒŒƒCƒ„2ƒXƒCƒbƒ`‚ğŠÜ‚Ş‚Å‚µ‚å‚¤B
+CloudStackã¯ã€2ç¨®é¡ã®ãƒãƒ¼ãƒ‰ã‚¿ã‚¤ãƒ—ã§æ§‹æˆã•ã‚Œã¾ã™ã€‚ï¼š
+ãƒ»CloudStack Management Server: ã“ã®ã‚µãƒ¼ãƒã¯ã€ã‚·ã‚¹ãƒ†ãƒ ã®ãƒªã‚½ãƒ¼ã‚¹ãƒãƒãƒ¼ã‚¸ãƒ£ã§ã™ã€‚ã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ãƒ†ã‚£ãƒ³ã‚°ãƒãƒ¼ãƒ‰ã¸ã®ä»®æƒ³ãƒã‚·ãƒ³ã®å‰²å½“ã¦ã¨ã€ä»®æƒ³ãƒã‚·ãƒ³ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã¸ã®ã‚¹ãƒˆãƒ¬ãƒ¼ã‚¸ã¨IPã‚¢ãƒ‰ãƒ¬ã‚¹ã®å‰²æŒ¯ã‚Šã‚’åˆ¶å¾¡ã—ã¾ã™ã€‚
+ãƒ»CloudStack Computing Node: ã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ãƒ†ã‚£ãƒ³ã‚°ãƒãƒ¼ãƒ‰ã¯ã€ä»®æƒ³ãƒã‚·ãƒ³ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’å®Ÿè¡Œã—ã¾ã™ã€‚ã‚µãƒ¼ãƒã¯ã€ã‚¾ãƒ¼ãƒ³ã¨ãƒãƒƒãƒ‰ã«åˆ†ã‘ã‚‰ã‚Œã¾ã™ã€‚ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«å½“åˆã¯ã€1ã¤ã®ã‚¾ãƒ¼ãƒ³ã¨1ã¤ã®ãƒãƒƒãƒ‰ã‚’æŒã¡ã¾ã™ã€‚
+  o Zone: ã‚¾ãƒ¼ãƒ³ã¯ã€è¤‡æ•°ã®ãƒãƒƒãƒ‰ã‹ã‚‰æ§‹æˆã•ã‚Œã¾ã™ã€‚å…¸å‹çš„ãªã‚¾ãƒ¼ãƒ³ãŒã€ãƒ‡ãƒ¼ã‚¿ã‚»ãƒ³ã‚¿ã§ã™ã€‚
+  o Podï¼šãƒãƒƒãƒ‰ã¯ã€é€šå¸¸ã€1å°ã®ãƒãƒ¼ãƒ‰ã‚¦ã‚§ã‚¢ã‚’æŒ‡ã—ã¾ã™ã€‚ãƒ—ãƒ©ã‚¤ãƒãƒªã®ã‚¹ãƒˆãƒ¬ãƒ¼ã‚¸ã¨ãƒ¬ã‚¤ãƒ¤2ã‚¹ã‚¤ãƒƒãƒã‚’å«ã‚€ã§ã—ã‚‡ã†ã€‚
 
 For this release, there is one Management Server and multiple Computing Node servers. The Management Server is installed on an Ubuntu 10.04 or Fedora 13 system that could be a VM or a dedicated server. The CloudStack Agent is installed on the Computing Nodes. Additional Computing Nodes can be added after the initial installation. The Computing Nodes must also be Ubuntu 10.04 or Fedora 13.
 
-‚±‚ÌƒŠƒŠ[ƒX‚Ì‚½‚ß‚ÉA1‚Â‚Ìƒ}ƒlƒWƒƒ“ƒgƒT[ƒo‚Æ•¡”‚ÌƒRƒ“ƒsƒ…[ƒeƒBƒ“ƒOƒm[ƒhƒT[ƒo‚ª‚ ‚è‚Ü‚·Bƒ}ƒlƒWƒƒ“ƒgƒT[ƒo‚ÍA‰¼‘zƒ}ƒVƒ“A‚ ‚é‚¢‚Íê—pƒT[ƒo‚ÌUbuntu10.04‚©Fedora13‚ÌƒVƒXƒeƒ€ã‚ÉƒCƒ“ƒXƒg[ƒ‹‚³‚ê‚Ü‚·BCloudStackƒG[ƒWƒFƒ“ƒg‚ÍAƒRƒ“ƒsƒ…[ƒeƒBƒ“ƒOƒm[ƒhã‚ÉƒCƒ“ƒXƒg[ƒ‹‚³‚ê‚Ü‚·BÅ‰‚ÌƒCƒ“ƒXƒg[ƒ‹‚ÌŒã‚ÉA’Ç‰ÁƒRƒ“ƒsƒ…[ƒeƒBƒ“ƒOƒm[ƒh‚ğ‰Á‚¦‚é‚±‚Æ‚ª‚Å‚«‚Ü‚·B ƒRƒ“ƒsƒ…[ƒeƒBƒ“ƒOƒm[ƒh‚ÍAUbuntu10.04‚©Fedora13‚É‚È‚è‚Ü‚·B
+ã“ã®ãƒªãƒªãƒ¼ã‚¹ã®ãŸã‚ã«ã€1ã¤ã®ãƒãƒã‚¸ãƒ¡ãƒ³ãƒˆã‚µãƒ¼ãƒã¨è¤‡æ•°ã®ã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ãƒ†ã‚£ãƒ³ã‚°ãƒãƒ¼ãƒ‰ã‚µãƒ¼ãƒãŒã‚ã‚Šã¾ã™ã€‚ãƒãƒã‚¸ãƒ¡ãƒ³ãƒˆã‚µãƒ¼ãƒã¯ã€ä»®æƒ³ãƒã‚·ãƒ³ã€ã‚ã‚‹ã„ã¯å°‚ç”¨ã‚µãƒ¼ãƒã®Ubuntu10.04ã‹Fedora13ã®ã‚·ã‚¹ãƒ†ãƒ ä¸Šã«ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã•ã‚Œã¾ã™ã€‚CloudStackã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã¯ã€ã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ãƒ†ã‚£ãƒ³ã‚°ãƒãƒ¼ãƒ‰ä¸Šã«ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã•ã‚Œã¾ã™ã€‚æœ€åˆã®ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã®å¾Œã«ã€è¿½åŠ ã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ãƒ†ã‚£ãƒ³ã‚°ãƒãƒ¼ãƒ‰ã‚’åŠ ãˆã‚‹ã“ã¨ãŒã§ãã¾ã™ã€‚ ã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ãƒ†ã‚£ãƒ³ã‚°ãƒãƒ¼ãƒ‰ã¯ã€Ubuntu10.04ã‹Fedora13ã«ãªã‚Šã¾ã™ã€‚
 
 Note: In a single server installation, the Management Server and the Agent may be installed on the same server. The Agent should be installed first, then the Management Server.
 
-’ˆÓ: ’Pˆê‚ÌƒT[ƒo‚Ö‚ÌƒCƒ“ƒXƒg[ƒ‹‚Å‚ÍAƒ}ƒlƒWƒƒ“ƒgƒT[ƒo‚ÆƒG[ƒWƒFƒ“ƒg‚ª“¯‚¶ƒT[ƒo‚ÉƒCƒ“ƒXƒg[ƒ‹‚³‚ê‚é‚©‚à‚µ‚ê‚Ü‚¹‚ñBƒG[ƒWƒFƒ“ƒg‚ÍÅ‰‚ÉƒCƒ“ƒXƒg[ƒ‹‚·‚é‚×‚«‚ÅA‚»‚ê‚©‚çƒ}ƒlƒWƒƒ“ƒgƒT[ƒo‚ğƒCƒ“ƒXƒg[ƒ‹‚µ‚Ü‚·B
+æ³¨æ„: å˜ä¸€ã®ã‚µãƒ¼ãƒã¸ã®ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã§ã¯ã€ãƒãƒã‚¸ãƒ¡ãƒ³ãƒˆã‚µãƒ¼ãƒã¨ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆãŒåŒã˜ã‚µãƒ¼ãƒã«ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã•ã‚Œã‚‹ã‹ã‚‚ã—ã‚Œã¾ã›ã‚“ã€‚ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã¯æœ€åˆã«ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã™ã‚‹ã¹ãã§ã€ãã‚Œã‹ã‚‰ãƒãƒã‚¸ãƒ¡ãƒ³ãƒˆã‚µãƒ¼ãƒã‚’ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã—ã¾ã™ã€‚
 
-„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ
-2 Prerequisites : •K—vğŒ
+â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+2 Prerequisites : å¿…è¦æ¡ä»¶
 
 The Cloud.com CloudStack has the following hardware and software requirements.
 
-CloudStack‚É‚ÍAŸ‚Ìƒn[ƒhƒEƒFƒA/ƒ\ƒtƒgƒEƒFƒA—vŒ‚ª‚ ‚è‚Ü‚·B
+CloudStackã«ã¯ã€æ¬¡ã®ãƒãƒ¼ãƒ‰ã‚¦ã‚§ã‚¢/ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢è¦ä»¶ãŒã‚ã‚Šã¾ã™ã€‚
 
 [Management Server]
 Description
-@Hosts the Cloud.com CloudStack Management Server Software.
+ã€€Hosts the Cloud.com CloudStack Management Server Software.
 Minimum Requirements
-E64-bit x86 CPU (more cores equals better performance)
-E2 GB of memory
-E80 GB of local disk
-EAt least 1 NIC
-EUbuntu 10.04 64-bit or Fedora 13 64-bit
-EStatically allocated IP address
-EFully Qualified Domain Name as returned by the hostname command
+ãƒ»64-bit x86 CPU (more cores equals better performance)
+ãƒ»2 GB of memory
+ãƒ»80 GB of local disk
+ãƒ»At least 1 NIC
+ãƒ»Ubuntu 10.04 64-bit or Fedora 13 64-bit
+ãƒ»Statically allocated IP address
+ãƒ»Fully Qualified Domain Name as returned by the hostname command
 
 [Computing Node]
 Description
-@Provides all the CPU and memory resource for allocated guest virtual machines.
-@‚·‚×‚Ä‚ÌCPU‚Æƒƒ‚ƒŠƒŠƒ\[ƒX‚ğAƒQƒXƒg‚Ì‰¼‘zƒ}ƒVƒ“‚ÉŠ„‚è“–‚Ä‚é‚½‚ß‚É’ñ‹Ÿ‚µ‚Ü‚·B
+ã€€Provides all the CPU and memory resource for allocated guest virtual machines.
+ã€€ã™ã¹ã¦ã®CPUã¨ãƒ¡ãƒ¢ãƒªãƒªã‚½ãƒ¼ã‚¹ã‚’ã€ã‚²ã‚¹ãƒˆã®ä»®æƒ³ãƒã‚·ãƒ³ã«å‰²ã‚Šå½“ã¦ã‚‹ãŸã‚ã«æä¾›ã—ã¾ã™ã€‚
 Minimum Requirements
-E64-bit x86 CPU (max # of cores for better performance)
-EHardware virtualization support required
-E4 GB of memory
-E30 GB of local disk
-EAt least 1 NIC
-EUbuntu 10.04 64-bit or Fedora 13 64-bit
-EStatically allocated IP Address
+ãƒ»64-bit x86 CPU (max # of cores for better performance)
+ãƒ»Hardware virtualization support required
+ãƒ»4 GB of memory
+ãƒ»30 GB of local disk
+ãƒ»At least 1 NIC
+ãƒ»Ubuntu 10.04 64-bit or Fedora 13 64-bit
+ãƒ»Statically allocated IP Address
 
-„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ
+â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 3 Installing and Setting Up the CloudStack Agent on a Computing Node
 
 Begin by installing the Cloud Agent on each Computing Node using the following steps. All commands should be run as root. On Fedora you have to make sure that the hostname resolves in DNS or /etc/hosts.
 
-Ÿ‚ÌƒXƒeƒbƒv‚ğ“¥‚ñ‚ÅAŠeƒRƒ“ƒsƒ…[ƒeƒBƒ“ƒOƒm[ƒh‚Ö‚ÌCloudƒG[ƒWƒFƒ“ƒg‚ÌƒCƒ“ƒXƒg[ƒ‹‚ğŠJn‚µ‚Ü‚·B
+æ¬¡ã®ã‚¹ãƒ†ãƒƒãƒ—ã‚’è¸ã‚“ã§ã€å„ã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ãƒ†ã‚£ãƒ³ã‚°ãƒãƒ¼ãƒ‰ã¸ã®Cloudã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã®ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã‚’é–‹å§‹ã—ã¾ã™ã€‚
 
   1. Add access to the Cloud.com repository. On Ubuntu you will need to edit /etc/apt/sources.list and add:
 
-  Cloud.comƒŠƒ|ƒWƒgƒŠ‚ÉƒAƒNƒZƒX‚µ‚Ü‚·BUbuntu‚Å‚ÍA/etc/apt/sources.list‚ğ•ÒW‚µ‚ÄAŸ‚Ì‹Lq‚ğ’Ç‰Á‚·‚é•K—v‚ª‚ ‚é‚Å‚µ‚å‚¤B
+  Cloud.comãƒªãƒã‚¸ãƒˆãƒªã«ã‚¢ã‚¯ã‚»ã‚¹ã—ã¾ã™ã€‚Ubuntuã§ã¯ã€/etc/apt/sources.listã‚’ç·¨é›†ã—ã¦ã€æ¬¡ã®è¨˜è¿°ã‚’è¿½åŠ ã™ã‚‹å¿…è¦ãŒã‚ã‚‹ã§ã—ã‚‡ã†ã€‚
 
 deb http://download.cloud.com/apt/ubuntu/stable/oss ./
 
@@ -103,7 +103,7 @@ wget http://download.cloud.com/foss/cloud.repo
 
   2. Update your local package list and install the Cloud Agent. On Ubuntu:
 
-  ƒ[ƒJƒ‹‚ÌƒpƒbƒP[ƒWƒŠƒXƒg‚ğXV‚µACloudƒG[ƒWƒFƒ“ƒg‚ğUbuntu‚ÉƒCƒ“ƒg[ƒ‹‚µ‚Ä‚­‚¾‚³‚¢B
+  ãƒ­ãƒ¼ã‚«ãƒ«ã®ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ãƒªã‚¹ãƒˆã‚’æ›´æ–°ã—ã€Cloudã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã‚’Ubuntuã«ã‚¤ãƒ³ãƒˆãƒ¼ãƒ«ã—ã¦ãã ã•ã„ã€‚
   
 # aptitude update
 # aptitude install cloud-agent
@@ -114,31 +114,31 @@ wget http://download.cloud.com/foss/cloud.repo
 
   3. Disable SELinux . This is usually needed on Fedora and not needed on Ubuntu.
 
-  SELinux‚ğ–³Œø‰»‚µ‚Ü‚·B‚±‚Ì‘€ì‚ÍFedora‚Å‚Í‚½‚¢‚Ä‚¢•K—v‚Å‚·‚ªAUbuntu‚Å‚Í•K—v‚ ‚è‚Ü‚¹‚ñB
+  SELinuxã‚’ç„¡åŠ¹åŒ–ã—ã¾ã™ã€‚ã“ã®æ“ä½œã¯Fedoraã§ã¯ãŸã„ã¦ã„å¿…è¦ã§ã™ãŒã€Ubuntuã§ã¯å¿…è¦ã‚ã‚Šã¾ã›ã‚“ã€‚
 
-  Set SELinux up to be permissive by default. First, set the SELINUX variable in /etc/selinux/config to gpermissiveh. This ensures that MySQL and the Management Server can run properly on system reboot. Then disable SELinux until the system is rebooted:
+  Set SELinux up to be permissive by default. First, set the SELINUX variable in /etc/selinux/config to â€œpermissiveâ€. This ensures that MySQL and the Management Server can run properly on system reboot. Then disable SELinux until the system is rebooted:
   
-  ƒfƒtƒHƒ‹ƒg‚ÅpermissiveiŠ°‘å‚Èİ’èj‚É‚È‚é‚æ‚¤‚ÉASELinux‚ğƒZƒbƒgƒAƒbƒv‚µ‚Ä‚­‚¾‚³‚¢B‚Ü‚¸A/etc/selinux/config‚ÌSELINUX‚Ì’l‚Éupermissivev‚ğƒZƒbƒg‚µ‚Ä‚­‚¾‚³‚¢B‚±‚ê‚ÍAMySQL‚Æƒ}ƒlƒWƒƒ“ƒgƒT[ƒo‚ª“KØ‚ÉƒVƒXƒeƒ€ƒŠƒu[ƒg‚ÅÀs‚Å‚«‚é‚±‚Æ‚ğ•ÛØ‚µ‚Ü‚·BŸ‚ÉAƒVƒXƒeƒ€‚ªƒŠƒu[ƒg‚³‚ê‚é‚Ü‚ÅASELinux‚ğ–³Œø‚É‚µ‚Ä‚­‚¾‚³‚¢B
+  ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã§permissiveï¼ˆå¯›å¤§ãªè¨­å®šï¼‰ã«ãªã‚‹ã‚ˆã†ã«ã€SELinuxã‚’ã‚»ãƒƒãƒˆã‚¢ãƒƒãƒ—ã—ã¦ãã ã•ã„ã€‚ã¾ãšã€/etc/selinux/configã®SELINUXã®å€¤ã«ã€Œpermissiveã€ã‚’ã‚»ãƒƒãƒˆã—ã¦ãã ã•ã„ã€‚ã“ã‚Œã¯ã€MySQLã¨ãƒãƒã‚¸ãƒ¡ãƒ³ãƒˆã‚µãƒ¼ãƒãŒé©åˆ‡ã«ã‚·ã‚¹ãƒ†ãƒ ãƒªãƒ–ãƒ¼ãƒˆã§å®Ÿè¡Œã§ãã‚‹ã“ã¨ã‚’ä¿è¨¼ã—ã¾ã™ã€‚æ¬¡ã«ã€ã‚·ã‚¹ãƒ†ãƒ ãŒãƒªãƒ–ãƒ¼ãƒˆã•ã‚Œã‚‹ã¾ã§ã€SELinuxã‚’ç„¡åŠ¹ã«ã—ã¦ãã ã•ã„ã€‚
 
 setenforce 0
 
   4. Set up the Cloud Agent by running the following command.
 
-  Ÿ‚ÌƒRƒ}ƒ“ƒh‚ğÀs‚µ‚ÄACloudƒG[ƒWƒFƒ“ƒg‚ğƒZƒbƒgƒAƒbƒv‚µ‚Ä‚­‚¾‚³‚¢B
+  æ¬¡ã®ã‚³ãƒãƒ³ãƒ‰ã‚’å®Ÿè¡Œã—ã¦ã€Cloudã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã‚’ã‚»ãƒƒãƒˆã‚¢ãƒƒãƒ—ã—ã¦ãã ã•ã„ã€‚
 
 # cloud-setup-agent
 
-  The Cloud Agent will ask for the Management Serverfs IP address. You will be prompted to enter this during the Cloud Agent setup. You may see some failure messages when stopping services in this script; that is fine.
+  The Cloud Agent will ask for the Management Serverâ€™s IP address. You will be prompted to enter this during the Cloud Agent setup. You may see some failure messages when stopping services in this script; that is fine.
 
-  CloudƒG[ƒWƒFƒ“ƒg‚ÍAƒ}ƒlƒWƒƒ“ƒgƒT[ƒo‚ÌIPƒAƒhƒŒƒX‚ğ—v‹‚·‚é‚Å‚µ‚å‚¤BCloudƒG[ƒWƒFƒ“ƒg‚ÌƒZƒbƒgƒAƒbƒv’†A‚±‚ê‚É“ü‚é‚æ‚¤‘£‚³‚ê‚é‚Å‚µ‚å‚¤B‚±‚ÌƒXƒNƒŠƒvƒg‚ÅƒT[ƒrƒX‚ğ’â~‚·‚éA‚¢‚­‚Â‚©‚Ì¸”sƒƒbƒZ[ƒW‚ª•\¦‚³‚ê‚é‚©‚à‚µ‚ê‚Ü‚¹‚ñ‚ªA‚»‚ê‚Í–â‘è‚ ‚è‚Ü‚¹‚ñB
+  Cloudã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã¯ã€ãƒãƒã‚¸ãƒ¡ãƒ³ãƒˆã‚µãƒ¼ãƒã®IPã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’è¦æ±‚ã™ã‚‹ã§ã—ã‚‡ã†ã€‚Cloudã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã®ã‚»ãƒƒãƒˆã‚¢ãƒƒãƒ—ä¸­ã€ã“ã‚Œã«å…¥ã‚‹ã‚ˆã†ä¿ƒã•ã‚Œã‚‹ã§ã—ã‚‡ã†ã€‚ã“ã®ã‚¹ã‚¯ãƒªãƒ—ãƒˆã§ã‚µãƒ¼ãƒ“ã‚¹ã‚’åœæ­¢ã™ã‚‹æ™‚ã€ã„ãã¤ã‹ã®å¤±æ•—ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãŒè¡¨ç¤ºã•ã‚Œã‚‹ã‹ã‚‚ã—ã‚Œã¾ã›ã‚“ãŒã€ãã‚Œã¯å•é¡Œã‚ã‚Šã¾ã›ã‚“ã€‚
 
-  Note: A Computing Node must have a statically allocated IP address; the cloud-agent-setup will error and fail if a DHCP-assigned address is present. A Computing Nodefs host OS must also have a fully qualified domain name.
+  Note: A Computing Node must have a statically allocated IP address; the cloud-agent-setup will error and fail if a DHCP-assigned address is present. A Computing Nodeâ€™s host OS must also have a fully qualified domain name.
 
-  ’ˆÓ: ƒRƒ“ƒsƒ…[ƒeƒBƒ“ƒOƒm[ƒh‚É‚ÍAÃ“I‚ÉŠ„‚è“–‚Ä‚ç‚ê‚½IPƒAƒhƒŒƒX‚ª‚È‚¯‚ê‚Î‚È‚è‚Ü‚¹‚ñBDHCP‚ÅŠ„‚è“–‚Ä‚ç‚ê‚éƒAƒhƒŒƒX‚ª‘¶İ‚·‚é‚ÆACloudƒG[ƒWƒFƒ“ƒg‚ÌƒZƒbƒgƒAƒbƒv‚ÍƒGƒ‰[‚ªo‚Ä¸”s‚µ‚Ü‚·B‚Ü‚½AƒRƒ“ƒsƒ…[ƒeƒBƒ“ƒOƒm[ƒh‚ÌƒzƒXƒgOS‚ÍAŠ®‘SCüƒhƒƒCƒ“–¼‚ª‚È‚¯‚ê‚Î‚È‚è‚Ü‚¹‚ñB
+  æ³¨æ„: ã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ãƒ†ã‚£ãƒ³ã‚°ãƒãƒ¼ãƒ‰ã«ã¯ã€é™çš„ã«å‰²ã‚Šå½“ã¦ã‚‰ã‚ŒãŸIPã‚¢ãƒ‰ãƒ¬ã‚¹ãŒãªã‘ã‚Œã°ãªã‚Šã¾ã›ã‚“ã€‚DHCPã§å‰²ã‚Šå½“ã¦ã‚‰ã‚Œã‚‹ã‚¢ãƒ‰ãƒ¬ã‚¹ãŒå­˜åœ¨ã™ã‚‹ã¨ã€Cloudã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã®ã‚»ãƒƒãƒˆã‚¢ãƒƒãƒ—ã¯ã‚¨ãƒ©ãƒ¼ãŒå‡ºã¦å¤±æ•—ã—ã¾ã™ã€‚ã¾ãŸã€ã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ãƒ†ã‚£ãƒ³ã‚°ãƒãƒ¼ãƒ‰ã®ãƒ›ã‚¹ãƒˆOSã¯ã€å®Œå…¨ä¿®é£¾ãƒ‰ãƒ¡ã‚¤ãƒ³åãŒãªã‘ã‚Œã°ãªã‚Šã¾ã›ã‚“ã€‚
 
   5. Open up the iptables ports to allow console proxy access and allow bridge traffic to pass to the guests. Alternatively you can disable the User Firewall (on Ubuntu) or stop the iptables service (Fedora).
 
-  ƒRƒ“ƒ\[ƒ‹ƒvƒƒLƒVƒAƒNƒZƒX‚ğ‹–‰Â‚·‚é‚½‚ß‚Éiptablesƒ|[ƒg‚ğŠJ‚«AƒuƒŠƒbƒWƒgƒ‰ƒtƒBƒbƒN‚ªƒQƒXƒg‚Å’Ê‚é‚±‚Æ‚ğ‹–—e‚µ‚Ä‚­‚¾‚³‚¢B‚ ‚é‚¢‚ÍAiUbuntu‚Ìjƒ†[ƒUƒtƒ@ƒCƒ„[ƒEƒH[ƒ‹‚ğ–³Œø‚É‚·‚é‚©A‚Ü‚½‚ÍiFedora‚ÌjiptablesƒT[ƒrƒX‚ğ’â~‚Å‚«‚Ü‚·B
+  ã‚³ãƒ³ã‚½ãƒ¼ãƒ«ãƒ—ãƒ­ã‚­ã‚·ã‚¢ã‚¯ã‚»ã‚¹ã‚’è¨±å¯ã™ã‚‹ãŸã‚ã«iptablesãƒãƒ¼ãƒˆã‚’é–‹ãã€ãƒ–ãƒªãƒƒã‚¸ãƒˆãƒ©ãƒ•ã‚£ãƒƒã‚¯ãŒã‚²ã‚¹ãƒˆã§é€šã‚‹ã“ã¨ã‚’è¨±å®¹ã—ã¦ãã ã•ã„ã€‚ã‚ã‚‹ã„ã¯ã€ï¼ˆUbuntuã®ï¼‰ãƒ¦ãƒ¼ã‚¶ãƒ•ã‚¡ã‚¤ãƒ¤ãƒ¼ã‚¦ã‚©ãƒ¼ãƒ«ã‚’ç„¡åŠ¹ã«ã™ã‚‹ã‹ã€ã¾ãŸã¯ï¼ˆFedoraã®ï¼‰iptablesã‚µãƒ¼ãƒ“ã‚¹ã‚’åœæ­¢ã§ãã¾ã™ã€‚
 
   On Ubuntu
 
@@ -147,7 +147,7 @@ setenforce 0
 
 Edit /etc/iptables.rules and place the following above a COMMIT line
 
-/etc/iptables.rules‚ğ•ÒW‚µ‚ÄACOMMITs‚Ìã‚ÉŸ‚ğ‹Lq‚µ‚Ä‚­‚¾‚³‚¢B
+/etc/iptables.rulesã‚’ç·¨é›†ã—ã¦ã€COMMITè¡Œã®ä¸Šã«æ¬¡ã‚’è¨˜è¿°ã—ã¦ãã ã•ã„ã€‚
 
 -I FORWARD -i cloud-br0 -o cloud-br0 -j ACCEPT
 
@@ -156,31 +156,31 @@ Edit /etc/iptables.rules and place the following above a COMMIT line
 # iptables -I FORWARD -i cloud-br0 -o cloud-br0 -j ACCEPT
 # iptables ?I INPUT -m state --state NEW -m tcp -p tcp --dport 5900:6100 ?j ACCEPT
 
-Edit /etc/sysconfig/iptables.save and add these two lines above gCOMMITh
+Edit /etc/sysconfig/iptables.save and add these two lines above â€œCOMMITâ€
 
-/etc/sysconfig/iptables.save‚ğ•ÒW‚µ‚ÄA‚±‚ê‚ç‚Ì2s‚ğgCOMMITh‚Ìã‚É‹Lq‚µ‚Ä‚­‚¾‚³‚¢B
+/etc/sysconfig/iptables.saveã‚’ç·¨é›†ã—ã¦ã€ã“ã‚Œã‚‰ã®2è¡Œã‚’â€œCOMMITâ€ã®ä¸Šã«è¨˜è¿°ã—ã¦ãã ã•ã„ã€‚
 
 -I FORWARD -i cloud-br0 -o cloud-br0 -j ACCEPT
 -I INPUT -m state --state NEW -m tcp -p tcp --dport 5900:6100 ?j ACCEPT
 
 The Cloud Agent is now installed and set up.
 
-‚±‚ê‚ÅACloudƒG[ƒWƒFƒ“ƒg‚ÌƒCƒ“ƒXƒg[ƒ‹‚ÆƒZƒbƒgƒAƒbƒv‚ª‚Å‚«‚Ü‚µ‚½B
+ã“ã‚Œã§ã€Cloudã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã®ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã¨ã‚»ãƒƒãƒˆã‚¢ãƒƒãƒ—ãŒã§ãã¾ã—ãŸã€‚
 
-„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ
+â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 4 Installing and Setting Up the CloudStack Management Server
 
 Next, install and set up the CloudStack Management Server.
 
-Ÿ‚ÉACloudStack ƒ}ƒlƒWƒƒ“ƒgƒT[ƒo‚ğƒCƒ“ƒXƒg[ƒ‹‚µ‚ÄAƒZƒbƒgƒAƒbƒv‚µ‚Ü‚·B
+æ¬¡ã«ã€CloudStack ãƒãƒã‚¸ãƒ¡ãƒ³ãƒˆã‚µãƒ¼ãƒã‚’ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã—ã¦ã€ã‚»ãƒƒãƒˆã‚¢ãƒƒãƒ—ã—ã¾ã™ã€‚
 
-Note: Make sure that the Management Server has a fully-qualified domain name as returned by ghostnameh. For example, gcloud.example.comh is fully qualified, but gcloudh is not. Running NTP is also recommended.
+Note: Make sure that the Management Server has a fully-qualified domain name as returned by â€œhostnameâ€. For example, â€œcloud.example.comâ€ is fully qualified, but â€œcloudâ€ is not. Running NTP is also recommended.
 
-’ˆÓ: ƒ}ƒlƒWƒƒ“ƒgƒT[ƒo‚ÉuƒzƒXƒg–¼v‚É‚æ‚Á‚Ä•Ô‚³‚ê‚éŠ®‘SCüƒhƒƒCƒ“–¼‚ª‚ ‚é‚±‚Æ‚ğŠm”F‚É‚µ‚Ä‚­‚¾‚³‚¢B‚½‚Æ‚¦‚ÎAucloud.example.comv‚ÍŠ®‘S‚É‘Ši‚ª‚ ‚è‚Ü‚·‚ªAucloudv‚Å‚Í‚¢‚¯‚Ü‚¹‚ñB‚Ü‚½AÀs’†‚ÌNTP‚ª„‘E‚³‚ê‚Ü‚·B
+æ³¨æ„: ãƒãƒã‚¸ãƒ¡ãƒ³ãƒˆã‚µãƒ¼ãƒã«ã€Œãƒ›ã‚¹ãƒˆåã€ã«ã‚ˆã£ã¦è¿”ã•ã‚Œã‚‹å®Œå…¨ä¿®é£¾ãƒ‰ãƒ¡ã‚¤ãƒ³åãŒã‚ã‚‹ã“ã¨ã‚’ç¢ºèªã«ã—ã¦ãã ã•ã„ã€‚ãŸã¨ãˆã°ã€ã€Œcloud.example.comã€ã¯å®Œå…¨ã«è³‡æ ¼ãŒã‚ã‚Šã¾ã™ãŒã€ã€Œcloudã€ã§ã¯ã„ã‘ã¾ã›ã‚“ã€‚ã¾ãŸã€å®Ÿè¡Œä¸­ã®NTPãŒæ¨è–¦ã•ã‚Œã¾ã™ã€‚
 
   1. On the Management Server, disable the User Firewall (on Ubuntu) or stop the iptables service (Fedora). Alternately, configure them to allow traffic to ports 80, 8080, 8096, and 8250.
   
-  ƒ}ƒlƒWƒƒ“ƒgƒT[ƒo‚Å‚ÍAiUbuntu‚Ìjƒ†[ƒUƒtƒ@ƒCƒ„[ƒEƒH[ƒ‹‚ğ–³Œø‰»‚·‚é‚©AiFedora‚ÌjiptableƒT[ƒrƒX‚ğ’â~‚µ‚Ü‚·B‚ ‚é‚¢‚ÍAƒ|[ƒg”Ô†80A8080A8096A8250‚Ö‚Ìƒgƒ‰ƒtƒBƒbƒN‚ğ‹–‰Â‚·‚éİ’è‚ğ‚µ‚Ü‚·B
+  ãƒãƒã‚¸ãƒ¡ãƒ³ãƒˆã‚µãƒ¼ãƒã§ã¯ã€ï¼ˆUbuntuã®ï¼‰ãƒ¦ãƒ¼ã‚¶ãƒ•ã‚¡ã‚¤ãƒ¤ãƒ¼ã‚¦ã‚©ãƒ¼ãƒ«ã‚’ç„¡åŠ¹åŒ–ã™ã‚‹ã‹ã€ï¼ˆFedoraã®ï¼‰iptableã‚µãƒ¼ãƒ“ã‚¹ã‚’åœæ­¢ã—ã¾ã™ã€‚ã‚ã‚‹ã„ã¯ã€ãƒãƒ¼ãƒˆç•ªå·80ã€8080ã€8096ã€8250ã¸ã®ãƒˆãƒ©ãƒ•ã‚£ãƒƒã‚¯ã‚’è¨±å¯ã™ã‚‹è¨­å®šã‚’ã—ã¾ã™ã€‚
 
   On Ubuntu:
 
@@ -198,7 +198,7 @@ iptables -I INPUT -m state --state NEW -p tcp --dport 8250 -j ACCEPT
 
   Edit /etc/sysconfig/iptables.save and add these lines above the COMMIT
 
-  /etc/sysconfig/iptables.save‚ğ•ÒW‚µ‚ÄACOMMIT‚Ìã‚É‚±‚ê‚ç‚Ìs‚ğ’Ç‰Á‚µ‚Ü‚·B
+  /etc/sysconfig/iptables.saveã‚’ç·¨é›†ã—ã¦ã€COMMITã®ä¸Šã«ã“ã‚Œã‚‰ã®è¡Œã‚’è¿½åŠ ã—ã¾ã™ã€‚
 
 -I INPUT -m state --state NEW -p tcp --dport 80 -j ACCEPT
 -I INPUT -m state --state NEW -p tcp --dport 8080 -j ACCEPT
@@ -215,24 +215,24 @@ iptables -I INPUT -m state --state NEW -p tcp --dport 8250 -j ACCEPT
 
   3. Edit the MySQL configuration to suit the CloudStack application. Do this by editing /etc/mysql/my.cnf (on Ubuntu) or /etc/my.cnf (on Fedora) and inserting the following lines in the [mysqld] section. For example you could place them directly below the datadir line.
 
-  MySQL‚Ì\¬‚ğ•ÒW‚µ‚ÄACloudStackƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚É“K‡‚³‚¹‚Ä‚­‚¾‚³‚¢B‚±‚ê‚ÍAiUbuntu‚Ìj/etc/mysql/my.cnf‚©AiFedora‚Ìj/etc/my.cnf‚ğ•ÒW‚·‚é‚±‚Æ‚Ås‚¢‚Ü‚·BŸ‚Ìs‚ğ[mysqld]ƒZƒNƒVƒ‡ƒ“‚É‘}“ü‚µ‚Ä‚­‚¾‚³‚¢B‚½‚Æ‚¦‚ÎAdatadirs‚Ì‚·‚®‰º‚ÉA‚»‚ê‚ç‚ğ”z’u‚·‚é‚±‚Æ‚ª‚Å‚«‚Ü‚·B
+  MySQLã®æ§‹æˆã‚’ç·¨é›†ã—ã¦ã€CloudStackã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã«é©åˆã•ã›ã¦ãã ã•ã„ã€‚ã“ã‚Œã¯ã€ï¼ˆUbuntuã®ï¼‰/etc/mysql/my.cnfã‹ã€ï¼ˆFedoraã®ï¼‰/etc/my.cnfã‚’ç·¨é›†ã™ã‚‹ã“ã¨ã§è¡Œã„ã¾ã™ã€‚æ¬¡ã®è¡Œã‚’[mysqld]ã‚»ã‚¯ã‚·ãƒ§ãƒ³ã«æŒ¿å…¥ã—ã¦ãã ã•ã„ã€‚ãŸã¨ãˆã°ã€datadirè¡Œã®ã™ãä¸‹ã«ã€ãã‚Œã‚‰ã‚’é…ç½®ã™ã‚‹ã“ã¨ãŒã§ãã¾ã™ã€‚
 
 innodb_rollback_on_timeout=1
 innodb_lock_wait_timeout=600
 
   In Fedora you will need to start MySQL:
 
-  Fedora‚Ìê‡AMySQL‚ğŠJn‚·‚é•K—v‚ª‚ ‚é‚Å‚µ‚å‚¤B
+  Fedoraã®å ´åˆã€MySQLã‚’é–‹å§‹ã™ã‚‹å¿…è¦ãŒã‚ã‚‹ã§ã—ã‚‡ã†ã€‚
 
 service mysqld start
 
   4. Prepare the repository to find the CloudStack packages. If this system has had the Agent installed on it you may skip to step 5.
 
-  CloudStackƒpƒbƒP[ƒW‚ğŒ©‚Â‚¯‚é‚½‚ß‚ÌƒŠƒ|ƒWƒgƒŠ‚ğ—pˆÓ‚µ‚Ä‚­‚¾‚³‚¢BƒVƒXƒeƒ€‚ÅƒG[ƒWƒFƒ“ƒg‚ğƒCƒ“ƒXƒg[ƒ‹Ï‚İ‚Å‚ ‚ê‚ÎAƒXƒeƒbƒv5‚Ü‚Åè‡‚ğƒXƒLƒbƒv‚Å‚«‚Ü‚·B
+  CloudStackãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã‚’è¦‹ã¤ã‘ã‚‹ãŸã‚ã®ãƒªãƒã‚¸ãƒˆãƒªã‚’ç”¨æ„ã—ã¦ãã ã•ã„ã€‚ã‚·ã‚¹ãƒ†ãƒ ã§ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã‚’ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«æ¸ˆã¿ã§ã‚ã‚Œã°ã€ã‚¹ãƒ†ãƒƒãƒ—5ã¾ã§æ‰‹é †ã‚’ã‚¹ã‚­ãƒƒãƒ—ã§ãã¾ã™ã€‚
 
   On Ubuntu you will need to edit /etc/apt/sources.list and add:
 
-  Ubuntu‚Å‚ÍA/etc/apt/sources.list‚ğ•ÒW‚µAŸ‚ğ’Ç‰Á‚·‚é•K—v‚ª‚ ‚é‚Å‚µ‚å‚¤B
+  Ubuntuã§ã¯ã€/etc/apt/sources.listã‚’ç·¨é›†ã—ã€æ¬¡ã‚’è¿½åŠ ã™ã‚‹å¿…è¦ãŒã‚ã‚‹ã§ã—ã‚‡ã†ã€‚
 
 deb http://download.cloud.com/apt/ubuntu/stable/oss ./
 
@@ -243,7 +243,7 @@ wget http://download.cloud.com/foss/cloud.repo
 
   5. Install the management server. 
   
-  ƒ}ƒlƒWƒƒ“ƒgƒT[ƒo‚ğƒCƒ“ƒXƒg[ƒ‹‚µ‚Ä‚­‚¾‚³‚¢B
+  ãƒãƒã‚¸ãƒ¡ãƒ³ãƒˆã‚µãƒ¼ãƒã‚’ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã—ã¦ãã ã•ã„ã€‚
 
   On Ubuntu:
 
@@ -257,26 +257,26 @@ wget http://download.cloud.com/foss/cloud.repo
 
   6. Turn off tomcat6.
 
-  Tomcat6‚ğ’â~‚µ‚Ä‚­‚¾‚³‚¢B
+  Tomcat6ã‚’åœæ­¢ã—ã¦ãã ã•ã„ã€‚
 
 Note: The Cloud Management Server will start and stop Tomcat as part of its service.
 
-’ˆÓ: Coudƒ}ƒlƒWƒƒ“ƒgƒT[ƒo‚ÍAƒT[ƒrƒX‚Ìˆê•”‚Æ‚µ‚ÄATomcat‚ğŠJn/’â~‚µ‚Ü‚·B
+æ³¨æ„: Coudãƒãƒã‚¸ãƒ¡ãƒ³ãƒˆã‚µãƒ¼ãƒã¯ã€ã‚µãƒ¼ãƒ“ã‚¹ã®ä¸€éƒ¨ã¨ã—ã¦ã€Tomcatã‚’é–‹å§‹/åœæ­¢ã—ã¾ã™ã€‚
 
 # service tomcat6 stop
 # chkconfig tomcat6 off
 
-  7. Set up the database. The CloudStack will connect to the database as the cloud user. Typically it will do the deployment as the root user. Use the first argument set to specify the cloud user password and the --deploy-as option to specify the root userfs password (if set) during database set up.
+  7. Set up the database. The CloudStack will connect to the database as the cloud user. Typically it will do the deployment as the root user. Use the first argument set to specify the cloud user password and the --deploy-as option to specify the root userâ€™s password (if set) during database set up.
 
-  ƒf[ƒ^ƒx[ƒX‚ğƒZƒbƒgƒAƒbƒv‚µ‚Ä‚­‚¾‚³‚¢BCloudStack‚ÍAcloudƒ†[ƒU‚Æ‚µ‚Äƒf[ƒ^ƒx[ƒX‚ÉÚ‘±‚µ‚Ü‚·Bˆê”Ê“I‚É‚ÍArootƒ†[ƒU‚Æ‚µ‚ÄƒfƒvƒƒC‚ğ‚µ‚Ü‚·Bƒf[ƒ^ƒx[ƒX‚ğƒZƒbƒgƒAƒbƒv‚·‚éAcloudƒ†[ƒU‚ÌƒpƒXƒ[ƒh‚ğw’è‚·‚é‚½‚ß‚É‘æˆêˆø”‚ğA‚»‚µ‚ÄAiİ’è‚·‚é‚Ì‚Å‚ ‚ê‚Îjrootƒ†[ƒU‚ÌƒpƒXƒ[ƒh‚ğw’è‚·‚é‚½‚ß‚É--deploy-asƒIƒvƒVƒ‡ƒ“‚ğg—p‚µ‚Ä‚­‚¾‚³‚¢B
+  ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹ã‚’ã‚»ãƒƒãƒˆã‚¢ãƒƒãƒ—ã—ã¦ãã ã•ã„ã€‚CloudStackã¯ã€cloudãƒ¦ãƒ¼ã‚¶ã¨ã—ã¦ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹ã«æ¥ç¶šã—ã¾ã™ã€‚ä¸€èˆ¬çš„ã«ã¯ã€rootãƒ¦ãƒ¼ã‚¶ã¨ã—ã¦ãƒ‡ãƒ—ãƒ­ã‚¤ã‚’ã—ã¾ã™ã€‚ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹ã‚’ã‚»ãƒƒãƒˆã‚¢ãƒƒãƒ—ã™ã‚‹æ™‚ã€cloudãƒ¦ãƒ¼ã‚¶ã®ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã‚’æŒ‡å®šã™ã‚‹ãŸã‚ã«ç¬¬ä¸€å¼•æ•°ã‚’ã€ãã—ã¦ã€ï¼ˆè¨­å®šã™ã‚‹ã®ã§ã‚ã‚Œã°ï¼‰rootãƒ¦ãƒ¼ã‚¶ã®ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã‚’æŒ‡å®šã™ã‚‹ãŸã‚ã«--deploy-asã‚ªãƒ—ã‚·ãƒ§ãƒ³ã‚’ä½¿ç”¨ã—ã¦ãã ã•ã„ã€‚
 
   Note: This command will fail if the host does not have a fully qualified domain name as returned by the hostname command.
 
-  ’ˆÓ: ƒzƒXƒg‚ÉAhostnameƒRƒ}ƒ“ƒh‚É‚æ‚Á‚Ä•Ô‚³‚ê‚éŠ®‘SCüƒhƒƒCƒ“–¼‚ª‚È‚¢ê‡A‚±‚ÌƒRƒ}ƒ“ƒh‚Í¸”s‚·‚é‚Å‚µ‚å‚¤B
+  æ³¨æ„: ãƒ›ã‚¹ãƒˆã«ã€hostnameã‚³ãƒãƒ³ãƒ‰ã«ã‚ˆã£ã¦è¿”ã•ã‚Œã‚‹å®Œå…¨ä¿®é£¾ãƒ‰ãƒ¡ã‚¤ãƒ³åãŒãªã„å ´åˆã€ã“ã®ã‚³ãƒãƒ³ãƒ‰ã¯å¤±æ•—ã™ã‚‹ã§ã—ã‚‡ã†ã€‚
 
   On Ubuntu the MySQL install prompts for a password. This is the password that you should use in the --deploy-as option.
 
-  Ubuntu‚Å‚ÌMySQL‚ÍAƒpƒXƒ[ƒh‚Ì‚½‚ß‚Ìƒvƒƒ“ƒvƒg‚ğg‚Á‚ÄƒCƒ“ƒXƒg[ƒ‹‚µ‚Ü‚·B‚±‚ê‚ÍA--deploy-asƒIƒvƒVƒ‡ƒ“‚Åg—p‚·‚é‚×‚«ƒpƒXƒ[ƒh‚Å‚·B
+  Ubuntuã§ã®MySQLã¯ã€ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã®ãŸã‚ã®ãƒ—ãƒ­ãƒ³ãƒ—ãƒˆã‚’ä½¿ã£ã¦ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã—ã¾ã™ã€‚ã“ã‚Œã¯ã€--deploy-asã‚ªãƒ—ã‚·ãƒ§ãƒ³ã§ä½¿ç”¨ã™ã‚‹ã¹ããƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã§ã™ã€‚
 
   On Ubuntu:
 
@@ -284,27 +284,27 @@ Note: The Cloud Management Server will start and stop Tomcat as part of its serv
 
   On Feodra MySQL does not prompt for a password on install. The command line below assumes MySQL root does not have a password. If it does you should run the Ubuntu version of this command above.
 
-  Fedora‚Å‚ÌMySQL‚ÍAƒCƒ“ƒXƒg[ƒ‹‚ÉƒpƒXƒ[ƒh‚Ì‚½‚ß‚Ìƒvƒƒ“ƒvƒg‚ª‚ ‚è‚Ü‚¹‚ñBˆÈ‰º‚ÌƒRƒ}ƒ“ƒhƒ‰ƒCƒ“‚ÍAMySQL‚Ìroot‚ÉƒpƒXƒ[ƒh‚ª‚È‚¢‚Æ‰¼’è‚µ‚Ü‚·B‚à‚µ‚»‚¤‚Å‚ ‚ê‚ÎAã‚ÌƒRƒ}ƒ“ƒh‚ÌUbuntuƒo[ƒWƒ‡ƒ“‚ğÀs‚·‚é‚×‚«‚Å‚·B
+  Fedoraã§ã®MySQLã¯ã€ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«æ™‚ã«ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã®ãŸã‚ã®ãƒ—ãƒ­ãƒ³ãƒ—ãƒˆãŒã‚ã‚Šã¾ã›ã‚“ã€‚ä»¥ä¸‹ã®ã‚³ãƒãƒ³ãƒ‰ãƒ©ã‚¤ãƒ³ã¯ã€MySQLã®rootã«ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ãŒãªã„ã¨ä»®å®šã—ã¾ã™ã€‚ã‚‚ã—ãã†ã§ã‚ã‚Œã°ã€ä¸Šã®ã‚³ãƒãƒ³ãƒ‰ã®Ubuntuãƒãƒ¼ã‚¸ãƒ§ãƒ³ã‚’å®Ÿè¡Œã™ã‚‹ã¹ãã§ã™ã€‚
 
   On Fedora:
 
 # cloud-setup-databases cloud kvm ?deploy-as=root
 
-  8. Set up /etc/sudoers for use by the cloud user. The cloud user must be able to mount and unmount file systems and run chmod. Run gsudo visudoh and add the following at the end of the file:
+  8. Set up /etc/sudoers for use by the cloud user. The cloud user must be able to mount and unmount file systems and run chmod. Run â€œsudo visudoâ€ and add the following at the end of the file:
 
-  cloudƒ†[ƒU‚É‚æ‚Á‚Äg—p‚·‚é‚½‚ß‚ÉA/etc/sudoers‚ğƒZƒbƒgƒAƒbƒv‚µ‚Ü‚·Bcloudƒ†[ƒU‚ÍAƒtƒ@ƒCƒ‹ƒVƒXƒeƒ€‚ğƒ}ƒEƒ“ƒg/ƒAƒ“ƒ}ƒEƒ“ƒg‚Å‚«‚é‚Æ‚Æ‚à‚ÉAchmod‚ğÀs‚Å‚«‚È‚¯‚ê‚Î‚¢‚¯‚Ü‚¹‚ñBusudo visudov‚ğÀs‚µ‚ÄAƒtƒ@ƒCƒ‹‚ÌÅŒã‚ÉŸ‚Ì‹Lq‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢B
+  cloudãƒ¦ãƒ¼ã‚¶ã«ã‚ˆã£ã¦ä½¿ç”¨ã™ã‚‹ãŸã‚ã«ã€/etc/sudoersã‚’ã‚»ãƒƒãƒˆã‚¢ãƒƒãƒ—ã—ã¾ã™ã€‚cloudãƒ¦ãƒ¼ã‚¶ã¯ã€ãƒ•ã‚¡ã‚¤ãƒ«ã‚·ã‚¹ãƒ†ãƒ ã‚’ãƒã‚¦ãƒ³ãƒˆ/ã‚¢ãƒ³ãƒã‚¦ãƒ³ãƒˆã§ãã‚‹ã¨ã¨ã‚‚ã«ã€chmodã‚’å®Ÿè¡Œã§ããªã‘ã‚Œã°ã„ã‘ã¾ã›ã‚“ã€‚ã€Œsudo visudoã€ã‚’å®Ÿè¡Œã—ã¦ã€ãƒ•ã‚¡ã‚¤ãƒ«ã®æœ€å¾Œã«æ¬¡ã®è¨˜è¿°ã‚’è¿½åŠ ã—ã¦ãã ã•ã„ã€‚
 
 cloud ALL=(ALL) NOPASSWD: /bin/mount,/bin/umount,/bin/chmod
 
   On Fedora you will also have to find and comment out this line:
 
-  ‚Ü‚½AFedora‚Å‚ÍA‚±‚Ìs‚ğ’T‚µ‚ÄƒRƒƒ“ƒgƒAƒEƒg‚·‚é•K—v‚ª‚ ‚è‚Ü‚·B
+  ã¾ãŸã€Fedoraã§ã¯ã€ã“ã®è¡Œã‚’æ¢ã—ã¦ã‚³ãƒ¡ãƒ³ãƒˆã‚¢ã‚¦ãƒˆã™ã‚‹å¿…è¦ãŒã‚ã‚Šã¾ã™ã€‚
 
 Defaults requiretty
 
   9. Insure that the NFS Client is available to the Management server. 
 
-  NFSƒNƒ‰ƒCƒAƒ“ƒg‚ªAƒ}ƒlƒWƒƒ“ƒgƒT[ƒo‚É—˜—p‰Â”\‚Å‚ ‚é‚©‚ğŠm”F‚µ‚Ä‚­‚¾‚³‚¢B
+  NFSã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆãŒã€ãƒãƒã‚¸ãƒ¡ãƒ³ãƒˆã‚µãƒ¼ãƒã«åˆ©ç”¨å¯èƒ½ã§ã‚ã‚‹ã‹ã‚’ç¢ºèªã—ã¦ãã ã•ã„ã€‚
 
   On Ubuntu:
 
@@ -312,157 +312,157 @@ Defaults requiretty
 
   On Fedora the NFS client is pre-installed.
 
-  Fedora‚Å‚ÍANFSƒNƒ‰ƒCƒAƒ“ƒg‚ÍƒvƒŠƒCƒ“ƒXƒg[ƒ‹‚³‚ê‚Ä‚¢‚Ü‚·B
+  Fedoraã§ã¯ã€NFSã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã¯ãƒ—ãƒªã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã•ã‚Œã¦ã„ã¾ã™ã€‚
 
   10. Start the Management Server:
 
-  ƒ}ƒlƒWƒƒ“ƒgƒT[ƒo‚ğŠJn‚µ‚Ä‚­‚¾‚³‚¢B
+  ãƒãƒã‚¸ãƒ¡ãƒ³ãƒˆã‚µãƒ¼ãƒã‚’é–‹å§‹ã—ã¦ãã ã•ã„ã€‚
 
 # service cloud-management start
 
-„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ
-5 Describe Your Deployment : ƒfƒvƒƒC‚É‚Â‚¢‚Ä‚Ìà–¾
+â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+5 Describe Your Deployment : ãƒ‡ãƒ—ãƒ­ã‚¤ã«ã¤ã„ã¦ã®èª¬æ˜
 
 Now your CloudStack Management Server is running. The next step is to tell it about the computer nodes, storage, and network configuration that you have done in the previous sections. To begin describing your deployment, log in to the Administrator Web UI:
 
-‚±‚ê‚ÅACloudStackƒ}ƒlƒWƒƒ“ƒgƒT[ƒo‚ÍÀs‚³‚ê‚Ü‚·BŸ‚ÌƒXƒeƒbƒv‚Å‚ÍAƒ}ƒlƒWƒƒ“ƒgƒT[ƒo‚ÉAƒRƒ“ƒsƒ…[ƒ^ƒm[ƒh‚ÆƒXƒgƒŒ[ƒWA‘Oß‚Ås‚Á‚½ƒlƒbƒgƒ[ƒNİ’è‚ğ‹³‚¦‚Ü‚·BŠÇ—ÒWeb UI‚©‚çƒƒOƒCƒ“‚·‚é‚Æ‚±‚ë‚©‚çAƒfƒvƒƒC‚ğŠJn‚µ‚Ü‚·B
+ã“ã‚Œã§ã€CloudStackãƒãƒã‚¸ãƒ¡ãƒ³ãƒˆã‚µãƒ¼ãƒã¯å®Ÿè¡Œã•ã‚Œã¾ã™ã€‚æ¬¡ã®ã‚¹ãƒ†ãƒƒãƒ—ã§ã¯ã€ãƒãƒã‚¸ãƒ¡ãƒ³ãƒˆã‚µãƒ¼ãƒã«ã€ã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ã‚¿ãƒãƒ¼ãƒ‰ã¨ã‚¹ãƒˆãƒ¬ãƒ¼ã‚¸ã€å‰ç¯€ã§è¡Œã£ãŸãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯è¨­å®šã‚’æ•™ãˆã¾ã™ã€‚ç®¡ç†è€…Web UIã‹ã‚‰ãƒ­ã‚°ã‚¤ãƒ³ã™ã‚‹ã¨ã“ã‚ã‹ã‚‰ã€ãƒ‡ãƒ—ãƒ­ã‚¤ã‚’é–‹å§‹ã—ã¾ã™ã€‚
 
 http://management-server-ip-address:8080/client
 
-The default user is gadminh and the default password is gpasswordh.
+The default user is â€œadminâ€ and the default password is â€œpasswordâ€.
 
-ƒfƒtƒHƒ‹ƒgƒ†[ƒU‚Íuadminv‚ÅAƒfƒtƒHƒ‹ƒgƒpƒXƒ[ƒh‚Íupasswordv‚Å‚·B
+ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆãƒ¦ãƒ¼ã‚¶ã¯ã€Œadminã€ã§ã€ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã¯ã€Œpasswordã€ã§ã™ã€‚
 
 Once you have logged on, see the following sections to set up your Zones and Offerings.
 
-ˆê“xƒƒOƒIƒ“‚µ‚½‚çAƒ][ƒ“‚ÆOffering‚ğİ’è‚·‚é‚½‚ß‚ÉŸß‚ğQÆ‚µ‚Ü‚·B
+ä¸€åº¦ãƒ­ã‚°ã‚ªãƒ³ã—ãŸã‚‰ã€ã‚¾ãƒ¼ãƒ³ã¨Offeringã‚’è¨­å®šã™ã‚‹ãŸã‚ã«æ¬¡ç¯€ã‚’å‚ç…§ã—ã¾ã™ã€‚
 
-5.1 Setting Up Zones : ƒ][ƒ“‚ÌƒZƒbƒgƒAƒbƒv
+5.1 Setting Up Zones : ã‚¾ãƒ¼ãƒ³ã®ã‚»ãƒƒãƒˆã‚¢ãƒƒãƒ—
 
 Now add a public IP address range. These are the IP addresses that will be assigned to accounts when a public IP address is requested. Usually they are routable from the external intranet, but you can use a RFC 1918 range (e.g., 192.168.3.0/24) if needed.
 
-Œö‹¤‚ÌIPƒAƒhƒŒƒX‚Ì”ÍˆÍ‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢B‚±‚ê‚ç‚ÍAŒö‹¤‚ÌIPƒAƒhƒŒƒX‚ª—v‹‚³‚ê‚é‚ÉAƒAƒJƒEƒ“ƒg‚ÉŠ„‚è“–‚Ä‚ç‚ê‚éIPƒAƒhƒŒƒX‚Å‚·B ’ÊíA‚»‚ê‚ç‚ÍƒCƒ“ƒgƒ‰ƒlƒbƒg‚ÌŠO•”‚©‚çƒ‹[ƒeƒBƒ“ƒO‰Â”\‚Å‚·‚ªA‚à‚µ•K—v‚Å‚ ‚ê‚ÎARFC1918‚Ì”ÍˆÍ‚ÌIPƒAƒhƒŒƒXi‚½‚Æ‚¦‚ÎA192.168.3.0/24j‚ğg—p‚Å‚«‚Ü‚·B
+å…¬å…±ã®IPã‚¢ãƒ‰ãƒ¬ã‚¹ã®ç¯„å›²ã‚’è¿½åŠ ã—ã¦ãã ã•ã„ã€‚ã“ã‚Œã‚‰ã¯ã€å…¬å…±ã®IPã‚¢ãƒ‰ãƒ¬ã‚¹ãŒè¦æ±‚ã•ã‚Œã‚‹æ™‚ã«ã€ã‚¢ã‚«ã‚¦ãƒ³ãƒˆã«å‰²ã‚Šå½“ã¦ã‚‰ã‚Œã‚‹IPã‚¢ãƒ‰ãƒ¬ã‚¹ã§ã™ã€‚ é€šå¸¸ã€ãã‚Œã‚‰ã¯ã‚¤ãƒ³ãƒˆãƒ©ãƒãƒƒãƒˆã®å¤–éƒ¨ã‹ã‚‰ãƒ«ãƒ¼ãƒ†ã‚£ãƒ³ã‚°å¯èƒ½ã§ã™ãŒã€ã‚‚ã—å¿…è¦ã§ã‚ã‚Œã°ã€RFC1918ã®ç¯„å›²ã®IPã‚¢ãƒ‰ãƒ¬ã‚¹ï¼ˆãŸã¨ãˆã°ã€192.168.3.0/24ï¼‰ã‚’ä½¿ç”¨ã§ãã¾ã™ã€‚
 
 1. Navigate to the Zones section by clicking on Zones right next to Global Settings.
 2. Select your Zone under Configuration > Zones.
-3. Click on gAdd Public IP Rangeh on the right. This dialog requires the following information:
-  EGateway: This is the gateway in use for these IPfs.
-  ENetmask: This is the netmask associated with this IP range.
-  EIP Range: This takes a lower and an upper IP address that together form a range. These IP addresses are 
+3. Click on â€œAdd Public IP Rangeâ€ on the right. This dialog requires the following information:
+  ãƒ»Gateway: This is the gateway in use for these IPâ€™s.
+  ãƒ»Netmask: This is the netmask associated with this IP range.
+  ãƒ»IP Range: This takes a lower and an upper IP address that together form a range. These IP addresses are 
 
 assumed to be accessible from the public internet and will be allocated for access to guest networks.
 
-1. Global Settings‚Ì‰E—×‚É‚ ‚éZones‚ğƒNƒŠƒbƒN‚·‚é‚±‚Æ‚ÅAZonesƒZƒNƒVƒ‡ƒ“‚ğŠJ‚«‚Ü‚·B
-2. Configuration > Zones ˆÈ‰º‚©‚çAZone‚ğ‘I‘ğ‚µ‚Ü‚·B
-3. ‰E‚É‚ ‚éuAdd Public IP Rangev‚ğƒNƒŠƒbƒN‚µ‚Ä‚­‚¾‚³‚¢B‚±‚Ìƒ_ƒCƒAƒƒO‚ÍAŸ‚Ìî•ñ‚ğ‹‚ß‚Ü‚·B
-  EGateway: ‚±‚ê‚ç‚ÌIP‚ªg—p‚·‚éƒQ[ƒgƒEƒFƒC‚Å‚·B
-  ENetmask: ‚±‚ÌIPƒŒƒ“ƒW‚ÉŠÖ˜A‚·‚éƒlƒbƒgƒ}ƒXƒN‚Å‚·B
-  EIP Range: ‰º‘¤‚ÌIPƒAƒhƒŒƒX‚Æã‘¤‚ÌIPƒAƒhƒŒƒX‚ğˆê‚Éˆµ‚¤”ÍˆÍ‚ğŒ`¬‚µ‚Ü‚·B‚±‚ê‚ç‚ÌIPƒAƒhƒŒƒX‚ÍAŒö‹¤‚ÌƒCƒ“ƒ^[ƒlƒbƒg‚©‚çƒAƒNƒZƒX‚µ‚â‚·‚¢‚Æ‚¢‚¤v‚í‚ê‚é‚Ì‚ÅAƒQƒXƒgƒlƒbƒgƒ[ƒN‚Ö‚ÌƒAƒNƒZƒX‚ÉŠ„‚è“–‚Ä‚ç‚ê‚é‚Å‚µ‚å‚¤B
+1. Global Settingsã®å³éš£ã«ã‚ã‚‹Zonesã‚’ã‚¯ãƒªãƒƒã‚¯ã™ã‚‹ã“ã¨ã§ã€Zonesã‚»ã‚¯ã‚·ãƒ§ãƒ³ã‚’é–‹ãã¾ã™ã€‚
+2. Configuration > Zones ä»¥ä¸‹ã‹ã‚‰ã€Zoneã‚’é¸æŠã—ã¾ã™ã€‚
+3. å³ã«ã‚ã‚‹ã€ŒAdd Public IP Rangeã€ã‚’ã‚¯ãƒªãƒƒã‚¯ã—ã¦ãã ã•ã„ã€‚ã“ã®ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã¯ã€æ¬¡ã®æƒ…å ±ã‚’æ±‚ã‚ã¾ã™ã€‚
+  ãƒ»Gateway: ã“ã‚Œã‚‰ã®IPãŒä½¿ç”¨ã™ã‚‹ã‚²ãƒ¼ãƒˆã‚¦ã‚§ã‚¤ã§ã™ã€‚
+  ãƒ»Netmask: ã“ã®IPãƒ¬ãƒ³ã‚¸ã«é–¢é€£ã™ã‚‹ãƒãƒƒãƒˆãƒã‚¹ã‚¯ã§ã™ã€‚
+  ãƒ»IP Range: ä¸‹å´ã®IPã‚¢ãƒ‰ãƒ¬ã‚¹ã¨ä¸Šå´ã®IPã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’ä¸€ç·’ã«æ‰±ã†ç¯„å›²ã‚’å½¢æˆã—ã¾ã™ã€‚ã“ã‚Œã‚‰ã®IPã‚¢ãƒ‰ãƒ¬ã‚¹ã¯ã€å…¬å…±ã®ã‚¤ãƒ³ã‚¿ãƒ¼ãƒãƒƒãƒˆã‹ã‚‰ã‚¢ã‚¯ã‚»ã‚¹ã—ã‚„ã™ã„ã¨ã„ã†æ€ã‚ã‚Œã‚‹ã®ã§ã€ã‚²ã‚¹ãƒˆãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯ã¸ã®ã‚¢ã‚¯ã‚»ã‚¹ã«å‰²ã‚Šå½“ã¦ã‚‰ã‚Œã‚‹ã§ã—ã‚‡ã†ã€‚
 
 5.2 Setting Up Service Offerings (Optional)
 
 The CloudStack ships with several default service offerings and disk offerings. You can optionally edit these now or proceed with the defaults. The offerings are also in the Configuration tab under Service Offerings, which is next to Zones. This area displays a list of service offerings. Add or edit service offerings as needed. To add a service offering you need to provide:
 
-EName: The name of the service offering.
-EDisplay text: A short description of the offering.
-EStorage type: The type of disk that should be allocated to the guest. Local allocates from storage attached to the KVM Host OS directly. Shared allocates from storage accessible via NFS or iSCSI.
-ENumber of CPU cores: How many cores an instance with this offering should be allocated.
-ECPU (in MHz): The CPU speed of the cores that the instance is allocated.
-EMemory (in MB): The amount of memory in megabytes that the instance should be allocated.
+ãƒ»Name: The name of the service offering.
+ãƒ»Display text: A short description of the offering.
+ãƒ»Storage type: The type of disk that should be allocated to the guest. Local allocates from storage attached to the KVM Host OS directly. Shared allocates from storage accessible via NFS or iSCSI.
+ãƒ»Number of CPU cores: How many cores an instance with this offering should be allocated.
+ãƒ»CPU (in MHz): The CPU speed of the cores that the instance is allocated.
+ãƒ»Memory (in MB): The amount of memory in megabytes that the instance should be allocated.
 
-CloudStack‚ÍA”ŒÂ‚ÌƒfƒtƒHƒ‹ƒgƒT[ƒrƒXƒIƒtƒ@ƒŠƒ“ƒO‚ÆƒfƒBƒXƒNƒIƒtƒ@ƒŠƒ“ƒO‚Å‰^—p‚µ‚Ü‚·B‚±‚±‚ÅA”CˆÓ‚Å‚±‚ê‚ç‚ğ•ÒW‚·‚é‚©A‚ ‚é‚¢‚ÍAƒfƒtƒHƒ‹ƒg‚Ìİ’è‚ğ‘±‚¯‚é‚±‚Æ‚ª‚Å‚«‚Ü‚·BƒIƒtƒ@ƒŠƒ“ƒO‚ÍAService Offerings‚Ì‰º‚ÌConfigurationƒ^ƒu‚É‚à‚ ‚è‚Ü‚·B‚»‚ê‚ÍAZones‚Ì‰¡‚Å‚·B‚±‚Ì—Ìˆæ‚ÍAƒT[ƒrƒXƒIƒtƒ@ƒŠƒ“ƒO‚ÌƒŠƒXƒg‚ğ•\¦‚µ‚Ü‚·B•K—v‚É‰‚¶‚ÄƒT[ƒrƒXƒIƒtƒ@ƒŠƒ“ƒO‚ğ’Ç‰ÁA‚Ü‚½‚Í•ÒW‚µ‚Ä‚­‚¾‚³‚¢BƒT[ƒrƒXƒIƒtƒ@ƒŠƒ“ƒO‚ğ’Ë‚·‚é‚½‚ß‚ÉAŸ‚Ìî•ñ‚Ì’ñ¦‚ª•K—v‚Å‚·B
+CloudStackã¯ã€æ•°å€‹ã®ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚µãƒ¼ãƒ“ã‚¹ã‚ªãƒ•ã‚¡ãƒªãƒ³ã‚°ã¨ãƒ‡ã‚£ã‚¹ã‚¯ã‚ªãƒ•ã‚¡ãƒªãƒ³ã‚°ã§é‹ç”¨ã—ã¾ã™ã€‚ã“ã“ã§ã€ä»»æ„ã§ã“ã‚Œã‚‰ã‚’ç·¨é›†ã™ã‚‹ã‹ã€ã‚ã‚‹ã„ã¯ã€ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®è¨­å®šã‚’ç¶šã‘ã‚‹ã“ã¨ãŒã§ãã¾ã™ã€‚ã‚ªãƒ•ã‚¡ãƒªãƒ³ã‚°ã¯ã€Service Offeringsã®ä¸‹ã®Configurationã‚¿ãƒ–ã«ã‚‚ã‚ã‚Šã¾ã™ã€‚ãã‚Œã¯ã€Zonesã®æ¨ªã§ã™ã€‚ã“ã®é ˜åŸŸã¯ã€ã‚µãƒ¼ãƒ“ã‚¹ã‚ªãƒ•ã‚¡ãƒªãƒ³ã‚°ã®ãƒªã‚¹ãƒˆã‚’è¡¨ç¤ºã—ã¾ã™ã€‚å¿…è¦ã«å¿œã˜ã¦ã‚µãƒ¼ãƒ“ã‚¹ã‚ªãƒ•ã‚¡ãƒªãƒ³ã‚°ã‚’è¿½åŠ ã€ã¾ãŸã¯ç·¨é›†ã—ã¦ãã ã•ã„ã€‚ã‚µãƒ¼ãƒ“ã‚¹ã‚ªãƒ•ã‚¡ãƒªãƒ³ã‚°ã‚’å¡šã™ã‚‹ãŸã‚ã«ã€æ¬¡ã®æƒ…å ±ã®æç¤ºãŒå¿…è¦ã§ã™ã€‚
 
-EName: ƒT[ƒrƒXƒIƒtƒ@ƒŠƒ“ƒO‚Ì–¼‘OB
-EDisplay text: ƒIƒtƒ@ƒŠƒ“ƒO‚Ì’Z‚¢à–¾B
-EStorage type: ƒQƒXƒg‚ÉŠ„‚è“–‚Ä‚é•K—v‚ª‚ ‚éƒfƒBƒXƒN‚Ìƒ^ƒCƒvBƒ[ƒJƒ‹ƒAƒƒP[ƒg‚ÍAƒXƒgƒŒ[ƒW‚©‚çKVMƒzƒXƒgOS‚Ö’¼ÚŠ„‚è“–‚Ä‚éBƒVƒFƒAƒAƒƒP[ƒg‚ÍAƒAƒNƒZƒX‰Â”\‚ÈƒXƒgƒŒ[ƒW‚©‚çANFS‚©iSCSI‚ğŒo—R‚·‚éB
-ENumber of CPU cores: ‚±‚ÌƒIƒtƒ@ƒŠƒ“ƒO‚ÉŠ„‚è“–‚Ä‚é‚×‚«ƒCƒ“ƒXƒ^ƒ“ƒX‚Í‰½ƒRƒA‚©B
-ECPU (in MHz): ƒCƒ“ƒXƒ^ƒ“ƒX‚ÉŠ„‚è“–‚Ä‚ç‚ê‚½ƒRƒA‚ÌCPU‘¬“xB
-EMemory (in MB): ƒCƒ“ƒXƒ^ƒ“ƒX‚ÉŠ„‚è“–‚Ä‚é‚×‚«ƒƒ‚ƒŠ—ÊiƒƒKƒoƒCƒgjB
+ãƒ»Name: ã‚µãƒ¼ãƒ“ã‚¹ã‚ªãƒ•ã‚¡ãƒªãƒ³ã‚°ã®åå‰ã€‚
+ãƒ»Display text: ã‚ªãƒ•ã‚¡ãƒªãƒ³ã‚°ã®çŸ­ã„èª¬æ˜ã€‚
+ãƒ»Storage type: ã‚²ã‚¹ãƒˆã«å‰²ã‚Šå½“ã¦ã‚‹å¿…è¦ãŒã‚ã‚‹ãƒ‡ã‚£ã‚¹ã‚¯ã®ã‚¿ã‚¤ãƒ—ã€‚ãƒ­ãƒ¼ã‚«ãƒ«ã‚¢ãƒ­ã‚±ãƒ¼ãƒˆã¯ã€ã‚¹ãƒˆãƒ¬ãƒ¼ã‚¸ã‹ã‚‰KVMãƒ›ã‚¹ãƒˆOSã¸ç›´æ¥å‰²ã‚Šå½“ã¦ã‚‹ã€‚ã‚·ã‚§ã‚¢ã‚¢ãƒ­ã‚±ãƒ¼ãƒˆã¯ã€ã‚¢ã‚¯ã‚»ã‚¹å¯èƒ½ãªã‚¹ãƒˆãƒ¬ãƒ¼ã‚¸ã‹ã‚‰ã€NFSã‹iSCSIã‚’çµŒç”±ã™ã‚‹ã€‚
+ãƒ»Number of CPU cores: ã“ã®ã‚ªãƒ•ã‚¡ãƒªãƒ³ã‚°ã«å‰²ã‚Šå½“ã¦ã‚‹ã¹ãã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã¯ä½•ã‚³ã‚¢ã‹ã€‚
+ãƒ»CPU (in MHz): ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã«å‰²ã‚Šå½“ã¦ã‚‰ã‚ŒãŸã‚³ã‚¢ã®CPUé€Ÿåº¦ã€‚
+ãƒ»Memory (in MB): ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã«å‰²ã‚Šå½“ã¦ã‚‹ã¹ããƒ¡ãƒ¢ãƒªé‡ï¼ˆãƒ¡ã‚¬ãƒã‚¤ãƒˆï¼‰ã€‚
 
 The service offering provides CPU and RAM.
 
-ƒT[ƒrƒXƒIƒtƒ@ƒŠƒ“ƒO‚ÍACPU‚ÆRAM‚ğ’ñ‹Ÿ‚µ‚Ü‚·B
+ã‚µãƒ¼ãƒ“ã‚¹ã‚ªãƒ•ã‚¡ãƒªãƒ³ã‚°ã¯ã€CPUã¨RAMã‚’æä¾›ã—ã¾ã™ã€‚
 
 5.3 Setting Up Disk Offering (Optional)
 
 You can also edit the Disk Offering. This link is next to the Service Offerings link. The available parameters to add or edit disk offerings are:
 
-EName: Name of the disk offering (e.g. extra large)
-EDescription: A short description of the disk offering
-EDisk size: The size of the disk offering in megabytes (e.g. 1024 is a 1 GB offering)
+ãƒ»Name: Name of the disk offering (e.g. extra large)
+ãƒ»Description: A short description of the disk offering
+ãƒ»Disk size: The size of the disk offering in megabytes (e.g. 1024 is a 1 GB offering)
 
-‚Ü‚½ADisk Offering‚ğ•ÒW‚Å‚«‚Ü‚·B‚±‚ÌƒŠƒ“ƒN‚ÍService OfferingsƒŠƒ“ƒN‚Ì‰¡‚É‚ ‚è‚Ü‚·BDisk Offering‚ğ’Ç‰ÁA‚Ü‚½‚Í•ÒW‚·‚é—˜—p‰Â”\‚Èƒpƒ‰ƒ[ƒ^‚ÍAŸ‚Ì’Ê‚è‚Å‚·B
+ã¾ãŸã€Disk Offeringã‚’ç·¨é›†ã§ãã¾ã™ã€‚ã“ã®ãƒªãƒ³ã‚¯ã¯Service Offeringsãƒªãƒ³ã‚¯ã®æ¨ªã«ã‚ã‚Šã¾ã™ã€‚Disk Offeringã‚’è¿½åŠ ã€ã¾ãŸã¯ç·¨é›†ã™ã‚‹åˆ©ç”¨å¯èƒ½ãªãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã¯ã€æ¬¡ã®é€šã‚Šã§ã™ã€‚
 
-EName: ƒfƒBƒXƒNƒIƒtƒ@ƒŠƒ“ƒO‚Ì–¼‘Oi—á: extra largej
-EDescription: ƒfƒBƒXƒNƒIƒtƒ@ƒŠƒ“ƒO‚Ì’Z‚¢à–¾
-EDisk size: ƒfƒBƒXƒNƒIƒtƒ@ƒŠƒ“ƒO‚ÌƒTƒCƒY‚ğƒƒKƒoƒCƒg’PˆÊ‚Å•\‚µ‚½‚à‚Ìi—á: 1024‚É‚·‚é‚Æ1GB‚ÌƒIƒtƒ@ƒŠƒ“ƒOj
+ãƒ»Name: ãƒ‡ã‚£ã‚¹ã‚¯ã‚ªãƒ•ã‚¡ãƒªãƒ³ã‚°ã®åå‰ï¼ˆä¾‹: extra largeï¼‰
+ãƒ»Description: ãƒ‡ã‚£ã‚¹ã‚¯ã‚ªãƒ•ã‚¡ãƒªãƒ³ã‚°ã®çŸ­ã„èª¬æ˜
+ãƒ»Disk size: ãƒ‡ã‚£ã‚¹ã‚¯ã‚ªãƒ•ã‚¡ãƒªãƒ³ã‚°ã®ã‚µã‚¤ã‚ºã‚’ãƒ¡ã‚¬ãƒã‚¤ãƒˆå˜ä½ã§è¡¨ã—ãŸã‚‚ã®ï¼ˆä¾‹: 1024ã«ã™ã‚‹ã¨1GBã®ã‚ªãƒ•ã‚¡ãƒªãƒ³ã‚°ï¼‰
 
 5.4 Checking the Computing Node
 
 Check to ensure that the Computing Node (the KVM Host) has been recognized by the system. Click on the Hosts tab. You should see this host in the list of available hosts.
 
-ƒRƒ“ƒsƒ…[ƒeƒBƒ“ƒOƒm[ƒhiKVMƒzƒXƒgj‚ªAƒVƒXƒeƒ€‚É‚æ‚Á‚Ä”F¯‚³‚ê‚½‚©‚ğŠm”F‚·‚éƒ`ƒFƒbƒN‚ğ‚µ‚Ä‚­‚¾‚³‚¢BHostsƒ^ƒu‚ğƒNƒŠƒbƒN‚µ‚Ä‚­‚¾‚³‚¢B—˜—p‰Â”\‚ÈƒzƒXƒg‚ÌƒŠƒXƒg“à‚ÉA‚±‚ÌƒzƒXƒg‚ª‚ ‚é‚©‚ğŒ©‚Ü‚·B
+ã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ãƒ†ã‚£ãƒ³ã‚°ãƒãƒ¼ãƒ‰ï¼ˆKVMãƒ›ã‚¹ãƒˆï¼‰ãŒã€ã‚·ã‚¹ãƒ†ãƒ ã«ã‚ˆã£ã¦èªè­˜ã•ã‚ŒãŸã‹ã‚’ç¢ºèªã™ã‚‹ãƒã‚§ãƒƒã‚¯ã‚’ã—ã¦ãã ã•ã„ã€‚Hostsã‚¿ãƒ–ã‚’ã‚¯ãƒªãƒƒã‚¯ã—ã¦ãã ã•ã„ã€‚åˆ©ç”¨å¯èƒ½ãªãƒ›ã‚¹ãƒˆã®ãƒªã‚¹ãƒˆå†…ã«ã€ã“ã®ãƒ›ã‚¹ãƒˆãŒã‚ã‚‹ã‹ã‚’è¦‹ã¾ã™ã€‚
 
-5.5 Setting up Primary and Secondary Storage Devices : ƒvƒ‰ƒCƒ}ƒŠ/ƒZƒJƒ“ƒ_ƒŠƒXƒgƒŒ[ƒWƒfƒoƒCƒX‚ÌƒZƒbƒgƒAƒbƒv
+5.5 Setting up Primary and Secondary Storage Devices : ãƒ—ãƒ©ã‚¤ãƒãƒª/ã‚»ã‚«ãƒ³ãƒ€ãƒªã‚¹ãƒˆãƒ¬ãƒ¼ã‚¸ãƒ‡ãƒã‚¤ã‚¹ã®ã‚»ãƒƒãƒˆã‚¢ãƒƒãƒ—
 
 Next you will need to tell the system about the primary and secondary storage devices that are available. Click on the Storage tab near the top of the UI, and set up each of the following sections.
 
-Ÿ‚ÉA—˜—p‰Â”\‚Èƒvƒ‰ƒCƒ}ƒŠ‚ÆƒZƒJƒ“ƒ_ƒŠ‚ÌƒXƒgƒŒ[ƒWƒfƒoƒCƒX‚ğƒVƒXƒeƒ€‚É‹³‚¦‚é•K—v‚ª‚ ‚è‚Ü‚·BUI‚Ìƒgƒbƒv•t‹ß‚É‚ ‚éStorageƒ^ƒu‚ğƒNƒŠƒbƒN‚µ‚ÄAˆÈ‰º‚ÌŠe€‚ÌƒZƒbƒgƒAƒbƒv‚ğ‚µ‚Ä‚­‚¾‚³‚¢B
+æ¬¡ã«ã€åˆ©ç”¨å¯èƒ½ãªãƒ—ãƒ©ã‚¤ãƒãƒªã¨ã‚»ã‚«ãƒ³ãƒ€ãƒªã®ã‚¹ãƒˆãƒ¬ãƒ¼ã‚¸ãƒ‡ãƒã‚¤ã‚¹ã‚’ã‚·ã‚¹ãƒ†ãƒ ã«æ•™ãˆã‚‹å¿…è¦ãŒã‚ã‚Šã¾ã™ã€‚UIã®ãƒˆãƒƒãƒ—ä»˜è¿‘ã«ã‚ã‚‹Storageã‚¿ãƒ–ã‚’ã‚¯ãƒªãƒƒã‚¯ã—ã¦ã€ä»¥ä¸‹ã®å„é …ã®ã‚»ãƒƒãƒˆã‚¢ãƒƒãƒ—ã‚’ã—ã¦ãã ã•ã„ã€‚
 
   5.5.1 Primary Storage
 
   The Primary Storage section will display first. Click on Add Primary Storage. The following dialog will display.
 
-  ƒvƒ‰ƒCƒ}ƒŠƒXƒgƒŒ[ƒWƒZƒNƒVƒ‡ƒ“‚ªAÅ‰‚É•\¦‚³‚ê‚Ü‚·BAdd Primary Storage‚ğƒNƒŠƒbƒN‚µ‚Ä‚­‚¾‚³‚¢BŸ‚Ìƒ_ƒCƒAƒƒO‚ª•\¦‚³‚ê‚Ü‚·B
+  ãƒ—ãƒ©ã‚¤ãƒãƒªã‚¹ãƒˆãƒ¬ãƒ¼ã‚¸ã‚»ã‚¯ã‚·ãƒ§ãƒ³ãŒã€æœ€åˆã«è¡¨ç¤ºã•ã‚Œã¾ã™ã€‚Add Primary Storageã‚’ã‚¯ãƒªãƒƒã‚¯ã—ã¦ãã ã•ã„ã€‚æ¬¡ã®ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ãŒè¡¨ç¤ºã•ã‚Œã¾ã™ã€‚
 
   Provide information for the following fields:
 
-  EAvailability Zone: the Zone of the storage device
-  EPod: the Pod of the storage device
-  EName: a name to assist you in recognizing the storage device
-  EProtocol: iSCSI or NFS, depending on your devicefs capabilities
-  EServer: the DNS name or IP address of the iSCSI or NFS server
-  EPath: the exported path to the storage
+  ãƒ»Availability Zone: the Zone of the storage device
+  ãƒ»Pod: the Pod of the storage device
+  ãƒ»Name: a name to assist you in recognizing the storage device
+  ãƒ»Protocol: iSCSI or NFS, depending on your deviceâ€™s capabilities
+  ãƒ»Server: the DNS name or IP address of the iSCSI or NFS server
+  ãƒ»Path: the exported path to the storage
 
-  ˆÈ‰º‚ÌƒtƒB[ƒ‹ƒh‚Ìî•ñ‚ğ¦‚µ‚Ü‚·B
+  ä»¥ä¸‹ã®ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã®æƒ…å ±ã‚’ç¤ºã—ã¾ã™ã€‚
 
-  EAvailability Zone: ƒXƒgƒŒ[ƒWƒfƒoƒCƒX‚Ìƒ][ƒ“
-  EPod: ƒXƒgƒŒ[ƒWƒfƒoƒCƒX‚Ìƒ|ƒbƒh
-  EName: ƒXƒgƒŒ[ƒCƒfƒoƒCƒX‚Ì¯•Ê‚ğ•‚¯‚é–¼‘O
-  EProtocol: g—p‚·‚éƒfƒoƒCƒX‚Ì—e—Ê‚É‚æ‚Á‚ÄAiSCSI ‚© NFS
-  EServer: DNS–¼A‚ ‚é‚¢‚ÍAiSCSI‚©NFSƒT[ƒo‚ÌIPƒAƒhƒŒƒX
-  EPath: ƒXƒgƒŒ[ƒW‚Ö‚Ìo—Í‚³‚ê‚½ƒpƒX
+  ãƒ»Availability Zone: ã‚¹ãƒˆãƒ¬ãƒ¼ã‚¸ãƒ‡ãƒã‚¤ã‚¹ã®ã‚¾ãƒ¼ãƒ³
+  ãƒ»Pod: ã‚¹ãƒˆãƒ¬ãƒ¼ã‚¸ãƒ‡ãƒã‚¤ã‚¹ã®ãƒãƒƒãƒ‰
+  ãƒ»Name: ã‚¹ãƒˆãƒ¬ãƒ¼ã‚¤ãƒ‡ãƒã‚¤ã‚¹ã®è­˜åˆ¥ã‚’åŠ©ã‘ã‚‹åå‰
+  ãƒ»Protocol: ä½¿ç”¨ã™ã‚‹ãƒ‡ãƒã‚¤ã‚¹ã®å®¹é‡ã«ã‚ˆã£ã¦ã€iSCSI ã‹ NFS
+  ãƒ»Server: DNSåã€ã‚ã‚‹ã„ã¯ã€iSCSIã‹NFSã‚µãƒ¼ãƒã®IPã‚¢ãƒ‰ãƒ¬ã‚¹
+  ãƒ»Path: ã‚¹ãƒˆãƒ¬ãƒ¼ã‚¸ã¸ã®å‡ºåŠ›ã•ã‚ŒãŸãƒ‘ã‚¹
 
   5.5.2 Secondary Storage
 
   You will need to add secondary storage. This process is similar to primary storage. Click on the Secondary Storage link near Primary Storage to begin.
 
-  ‚ ‚È‚½‚ÍAƒZƒJƒ“ƒ_ƒŠ‚ÌƒXƒgƒŒ[ƒW‚ğ’Ç‰Á‚·‚é•K—v‚ª‚ ‚é‚Å‚µ‚å‚¤B‚»‚Ìè‡‚ÍAƒvƒ‰ƒCƒ}ƒŠƒXƒgƒŒ[ƒW‚Æ“¯—l‚Å‚·BPrimary Storage‚ğn‚ß‚½‰ÓŠ‚Ì‹ß‚­‚É‚ ‚éSecondary StorageƒŠƒ“ƒN‚ğƒNƒŠƒbƒN‚µ‚Ä‚­‚¾‚³‚¢B
+  ã‚ãªãŸã¯ã€ã‚»ã‚«ãƒ³ãƒ€ãƒªã®ã‚¹ãƒˆãƒ¬ãƒ¼ã‚¸ã‚’è¿½åŠ ã™ã‚‹å¿…è¦ãŒã‚ã‚‹ã§ã—ã‚‡ã†ã€‚ãã®æ‰‹é †ã¯ã€ãƒ—ãƒ©ã‚¤ãƒãƒªã‚¹ãƒˆãƒ¬ãƒ¼ã‚¸ã¨åŒæ§˜ã§ã™ã€‚Primary Storageã‚’å§‹ã‚ãŸç®‡æ‰€ã®è¿‘ãã«ã‚ã‚‹Secondary Storageãƒªãƒ³ã‚¯ã‚’ã‚¯ãƒªãƒƒã‚¯ã—ã¦ãã ã•ã„ã€‚
 
-„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ
-6 Testing : ƒeƒXƒg
+â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+6 Testing : ãƒ†ã‚¹ãƒˆ
 
 When secondary storage is available the Management Server will begin downloading the two provided templates. These templates are large and may take 10?15 minutes to download depending on the speed of your network.
 
-ƒZƒJƒ“ƒ_ƒŠ‚ÌƒXƒgƒŒ[ƒW‚ª—LŒø‰»‚³‚ê‚é‚ÆAƒ}ƒlƒWƒƒ“ƒgƒT[ƒo‚Í’ñ‹Ÿ‚³‚ê‚½2‚Â‚Ìƒeƒ“ƒvƒŒ[ƒg‚Ìƒ_ƒEƒ“ƒ[ƒh‚ğŠJn‚µ‚Ü‚·B‚±‚ê‚ç‚Ìƒeƒ“ƒvƒŒ[ƒg‚Í‹‘å‚È‚½‚ßAƒlƒbƒgƒ[ƒN‘¬“x‚É‚æ‚Á‚Ä‚Íƒ_ƒEƒ“ƒ[ƒh‚É10`15•ª‚©‚©‚è‚Ü‚·B
+ã‚»ã‚«ãƒ³ãƒ€ãƒªã®ã‚¹ãƒˆãƒ¬ãƒ¼ã‚¸ãŒæœ‰åŠ¹åŒ–ã•ã‚Œã‚‹ã¨ã€ãƒãƒã‚¸ãƒ¡ãƒ³ãƒˆã‚µãƒ¼ãƒã¯æä¾›ã•ã‚ŒãŸ2ã¤ã®ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆã®ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ã‚’é–‹å§‹ã—ã¾ã™ã€‚ã“ã‚Œã‚‰ã®ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆã¯å·¨å¤§ãªãŸã‚ã€ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯é€Ÿåº¦ã«ã‚ˆã£ã¦ã¯ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ã«10ï½15åˆ†ã‹ã‹ã‚Šã¾ã™ã€‚
 
 Important: If you attempt to start virtual machines prior to the completion of the download of both templates the VM creation will fail.
 
-d—v: —¼•û‚Ìƒeƒ“ƒvƒŒ[ƒg‚Ìƒ_ƒEƒ“ƒ[ƒh‚ªŠ®—¹‚·‚é‘O‚ÉA‰¼‘zƒ}ƒVƒ“‚ğŠJn‚µ‚æ‚¤‚Æ‚·‚é‚ÆA‰¼‘zƒ}ƒVƒ“‚Ìì¬‚Í¸”s‚µ‚Ü‚·B
+é‡è¦: ä¸¡æ–¹ã®ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆã®ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ãŒå®Œäº†ã™ã‚‹å‰ã«ã€ä»®æƒ³ãƒã‚·ãƒ³ã‚’é–‹å§‹ã—ã‚ˆã†ã¨ã™ã‚‹ã¨ã€ä»®æƒ³ãƒã‚·ãƒ³ã®ä½œæˆã¯å¤±æ•—ã—ã¾ã™ã€‚
 
-The UI provides a progress indication for the provided CentOS template in the Templates tab. You can click gRefreshh on the lower, right side of the page to update the download percentage. When that download completes you can begin using the system.
+The UI provides a progress indication for the provided CentOS template in the Templates tab. You can click â€œRefreshâ€ on the lower, right side of the page to update the download percentage. When that download completes you can begin using the system.
 
-ƒ†[ƒUƒCƒ“ƒ^ƒtƒF[ƒX‚ªAƒeƒ“ƒvƒŒ[ƒgƒ^ƒu‚Ì’†‚ÅCentOSƒeƒ“ƒvƒŒ[ƒg‚ğ’ñ‹Ÿ‚·‚é‚½‚ß‚Ìi’»w¦‚ğ’ñ¦‚µ‚Ü‚·Bƒ_ƒEƒ“ƒ[ƒhƒp[ƒZƒ“ƒe[ƒW‚ğƒAƒbƒvƒf[ƒg‚·‚é‚É‚ÍAƒy[ƒW‰E‘¤‚Ì‰º•”‚É‚ ‚éuRefreshv‚ğƒNƒŠƒbƒN‚µ‚Ü‚·Bƒ_ƒEƒ“ƒ[ƒh‚ªŠ®—¹‚µ‚½‚çAƒVƒXƒeƒ€‚Ì—˜—p‚ğŠJn‚Å‚«‚Ü‚·B
+ãƒ¦ãƒ¼ã‚¶ã‚¤ãƒ³ã‚¿ãƒ•ã‚§ãƒ¼ã‚¹ãŒã€ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆã‚¿ãƒ–ã®ä¸­ã§CentOSãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆã‚’æä¾›ã™ã‚‹ãŸã‚ã®é€²æ—æŒ‡ç¤ºã‚’æç¤ºã—ã¾ã™ã€‚ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ãƒ‘ãƒ¼ã‚»ãƒ³ãƒ†ãƒ¼ã‚¸ã‚’ã‚¢ãƒƒãƒ—ãƒ‡ãƒ¼ãƒˆã™ã‚‹ã«ã¯ã€ãƒšãƒ¼ã‚¸å³å´ã®ä¸‹éƒ¨ã«ã‚ã‚‹ã€ŒRefreshã€ã‚’ã‚¯ãƒªãƒƒã‚¯ã—ã¾ã™ã€‚ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ãŒå®Œäº†ã—ãŸã‚‰ã€ã‚·ã‚¹ãƒ†ãƒ ã®åˆ©ç”¨ã‚’é–‹å§‹ã§ãã¾ã™ã€‚
 
-Try creating a new virtual machine. Go to the Instances tab and click on gCreate a new VMh and follow the wizard steps. It may take several minutes to start the first VM. Subsequent VM starts should be faster. Once the CentOS image is up the root password is gpasswordh. You can use the console viewer (from the Instances tab) to log in.
+Try creating a new virtual machine. Go to the Instances tab and click on â€œCreate a new VMâ€ and follow the wizard steps. It may take several minutes to start the first VM. Subsequent VM starts should be faster. Once the CentOS image is up the root password is â€œpasswordâ€. You can use the console viewer (from the Instances tab) to log in.
 
-V‚µ‚¢‰¼‘zƒ}ƒVƒ“‚Ìì¬‚ğ‚µ‚Ä‚­‚¾‚³‚¢BƒCƒ“ƒXƒ^ƒ“ƒXƒ^ƒu‚ğŠJ‚«AuCreate a new VMv‚ğƒNƒŠƒbƒN‚µAŸ‚ÌƒEƒBƒU[ƒhƒXƒeƒbƒv‚ğs‚¢‚Ü‚·B”•ª‚ÅÅ‰‚Ì‰¼‘zƒ}ƒVƒ“‚ğƒXƒ^[ƒg‚Å‚«‚é‚Å‚µ‚å‚¤BˆÈŒã‚Ì‰¼‘zƒ}ƒVƒ“‚Ì‹N“®‚ÍA‚æ‚è‘¬‚¢‚Í‚¸‚Å‚·Bˆê“x‹N“®‚µ‚½CentOSƒCƒ[ƒW‚ÌrootƒpƒXƒ[ƒh‚ÍAupasswordv‚Å‚·BiƒCƒ“ƒXƒ^ƒ“ƒXƒ^ƒu‚Ì’†‚ÌjƒRƒ“ƒ\[ƒ‹ƒrƒ…[ƒA‚ğƒƒOƒCƒ“‚Ég—p‚Å‚«‚Ü‚·B
+æ–°ã—ã„ä»®æƒ³ãƒã‚·ãƒ³ã®ä½œæˆã‚’è©¦ã—ã¦ãã ã•ã„ã€‚ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚¿ãƒ–ã‚’é–‹ãã€ã€ŒCreate a new VMã€ã‚’ã‚¯ãƒªãƒƒã‚¯ã—ã€æ¬¡ã®ã‚¦ã‚£ã‚¶ãƒ¼ãƒ‰ã‚¹ãƒ†ãƒƒãƒ—ã‚’è¡Œã„ã¾ã™ã€‚æ•°åˆ†ã§æœ€åˆã®ä»®æƒ³ãƒã‚·ãƒ³ã‚’ã‚¹ã‚¿ãƒ¼ãƒˆã§ãã‚‹ã§ã—ã‚‡ã†ã€‚ä»¥å¾Œã®ä»®æƒ³ãƒã‚·ãƒ³ã®èµ·å‹•ã¯ã€ã‚ˆã‚Šé€Ÿã„ã¯ãšã§ã™ã€‚ä¸€åº¦èµ·å‹•ã—ãŸCentOSã‚¤ãƒ¡ãƒ¼ã‚¸ã®rootãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã¯ã€ã€Œpasswordã€ã§ã™ã€‚ï¼ˆã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚¿ãƒ–ã®ä¸­ã®ï¼‰ã‚³ãƒ³ã‚½ãƒ¼ãƒ«ãƒ“ãƒ¥ãƒ¼ã‚¢ã‚’ãƒ­ã‚°ã‚¤ãƒ³ã«ä½¿ç”¨ã§ãã¾ã™ã€‚
 
-You can create additional users and administrators for the system. Click on the gLaunch Test Provisioning Toolh on the upper right of the screen to do this.
+You can create additional users and administrators for the system. Click on the â€œLaunch Test Provisioning Toolâ€ on the upper right of the screen to do this.
 
-ƒVƒXƒeƒ€‚ÉA’Ç‰Áƒ†[ƒU/ŠÇ—Ò‚ğì¬‚Å‚«‚Ü‚·B‚±‚ê‚ÍA‰æ–Ê‰Eã•”‚ÌuLaunch Test Provisioning Toolv‚ğƒNƒŠƒbƒN‚µ‚Äs‚¢‚Ü‚·B
+ã‚·ã‚¹ãƒ†ãƒ ã«ã€è¿½åŠ ãƒ¦ãƒ¼ã‚¶/ç®¡ç†è€…ã‚’ä½œæˆã§ãã¾ã™ã€‚ã“ã‚Œã¯ã€ç”»é¢å³ä¸Šéƒ¨ã®ã€ŒLaunch Test Provisioning Toolã€ã‚’ã‚¯ãƒªãƒƒã‚¯ã—ã¦è¡Œã„ã¾ã™ã€‚
 
 You may want to read the Administration Guide available at http://open.cloud.com.
 
-—˜—p‰Â”\‚ÈŠÇ—ÒƒKƒCƒh‚ªAhttp://open.cloud.com.‚É‚ ‚è‚Ü‚·B
+åˆ©ç”¨å¯èƒ½ãªç®¡ç†è€…ã‚¬ã‚¤ãƒ‰ãŒã€http://open.cloud.com.ã«ã‚ã‚Šã¾ã™ã€‚
 
