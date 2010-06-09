@@ -1,0 +1,86 @@
+﻿2 Selecting Hardware and Software
+
+The CloudStack has been designed to support a wide variety of hardware for Computing Nodes, storage, and network devices. The following sections describe the requirements and in some cases provide statements on models that have been certified.
+
+CloudStackは、コンピューティングノード、ストレージ、およびネットワークデバイスのさまざまなハードウェアをサポートするように設計されています。次のセクションでは、システム要件と、いくつかの場合に提供される公認のモデルに関するステートメントについて説明します。
+
+────────────────────────────────────────
+2.1 Computing Nodes
+
+64 bit x86 machines with processors supporting either AMD-V or Intel VT virtualization extensions are required.
+
+AMD-V、あるいはIntel VT仮想拡張をサポートする64bit-x86マシンが必要です。
+
+Citrix provides a hardware compatibility list for XenServer at http://hcl.xensource.com/ for those customers using the Citrix XenServer as their hypervisor.
+
+Citrixは、ハイパーバイザーとしてCitrix XenServerを使用する顧客のために、XenServerと互換性のあるハードウェアの一覧を http://hcl.xensource.com/ で提供します。
+
+RedHat provides a hardware compatibility list for RHEL at https://hardware.redhat.com/; however, it does not appear possible to do a search to constrain results to hardware that supports KVM.
+
+RedHatは、RHELと互換性のあるハードウェアの一覧を https://hardware.redhat.com/ で提供します。しかしながら、KVMをサポートするハードウェアに結果を絞り込むための検索はできないように見えます。
+
+Each machine should have at minimum 36 GB local disk storage and 1 or more Gigabit Ethernet cards. We recommend 10 Gbps cards for best performance.
+
+各マシンには、最小36GBのローカルディスクストレージと、1Gigabit以上のイーサネットカードが必要です。最も良いパフォーマンスのために、10Gbpsカードを推薦します。
+
+The CloudStack automatically detects the amount of CPU and memory resources provided by the Computing Nodes.
+
+CloudStackは、コンピューティングノードが提供するCPUとメモリのリソースを自動的に検出します。
+
+────────────────────────────────────────
+2.2 Management Servers
+
+The Management Server requires a 64 bit version of Linux. For the Community Edition Ubuntu 10.04 and Fedora 13 beta are supported. The Management Server may be placed on a virtual machine.
+
+マネジメントサーバは、64bitバージョンのLinuxが必要です。Community Editionは、Ubuntu 10.04 と Fedora 13 beta をサポートしています。マネジメントサーバは、仮想マシン上に配置することもあります。
+
+A hardware load balancer (such as NetScaler) may be used to load balance traffic from the web and connections from the Computing Nodes.
+
+（NetScalerのような）ハードウェアのロードバランサが、Webとコンピューティングノードからのコネクションからのトラフィックを負荷分散するために使われるかもしれません。
+
+────────────────────────────────────────
+2.3 Storage
+
+The CloudStack has been certified with popular storage, including:
+
+CloudStackは、次の製品を含む人気があるストレージでの動作を認めました。
+
+・ Dell EqualLogic for iSCSI
+・ Network Appliances filers for NFS
+・ Scale Computing for NFS
+
+────────────────────────────────────────
+2.4 Network
+
+The CloudStack has been certified with popular networking equipment including:
+
+CloudStackは、次の製品を含む人気があるネットワーク設備での動作を認めました。
+
+・ Network switch: Cisco 3750-E or compatible Gigabit Ethernet switch
+・ Dell 6224 Gigabit Ethernet switch
+
+Additional hardware configurations can be certified as professional service engagements based on individual customer needs.
+
+個別の顧客のニーズに基づくプロフェッショナルサービス契約として、追加ハードウェアの設定が認められます。
+
+────────────────────────────────────────
+2.5 Hypervisor Support
+
+For the Community Edition, the version of Ubuntu or Fedora used on the Computing Nodes defines the Hypervisor version. This has been specified in the "Computing Node" section.
+
+Community Editionでは、コンピューティングノードで使用されるUbuntuかFedoraのバージョンとして、Hypervisorバージョンを指定します。これは、「コンピューティングノード」のセクションで記述しました。
+
+For the Service Provider and Enterprise Editions, Citrix XenServer 5.5 update 2 is required on the Computing Nodes.
+
+Service ProviderとEnterprise Editionsでは、Citrix XenServer 5.5 update 2 が、コンピューティングノードで必要です。
+
+────────────────────────────────────────
+2.6 Guest OS and Software Support
+
+The CloudStack works with all operating systems supported by the underlying hypervisor.
+
+CloudStackは、すべてのオペレーティングシステムが基本的なハイパーバイザーによってサポートされている状態で、稼動します。
+
+For Premium, a list of supported Guest OS's can be found at http://support.citrix.com/servlet/KbServlet/download/22621-102-642152/XenServer-5.5.0-Update2-guest.pdf.
+
+Premiumに関しては、サポートされるゲストOSの一覧を http://support.citrix.com/servlet/KbServlet/download/22621-102-642152/XenServer-5.5.0-Update2-guest.pdf で見つけることができます。
