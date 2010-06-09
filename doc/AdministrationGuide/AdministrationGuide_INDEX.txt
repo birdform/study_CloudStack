@@ -1,0 +1,115 @@
+﻿Cloud.com CloudStack Administration Guide(Version 2.0 preview)
+May 2010
+
+＜Contents＞
+
+1 Introduction ........ 7
+
+  1.1 Service Offerings........ 7
+  1.2 Accounts and Domains ........ 7
+  1.3 Server Types ........ 7
+  1.4 Networking Features and Virtualization........ 8
+  1.5 Storage Features and Virtualization ........ 8
+  1.6 Administrator Controlled Allocation ........ 9
+  1.7 Guest VM Management ........ 9
+  1.8 Manageability ........ 9
+  1.9 API and Extensibility ........ 10
+  1.10 Scalability and Availability ........ 10
+
+2 Selecting Hardware and Software ........ 11
+  2.1 Computing Nodes ........ 11
+  2.2 Management Servers ........ 11
+  2.3 Storage ........ 11
+  2.4 Network ........ 11
+  2.5 Hypervisor Support ........ 11
+  2.6 Guest OS and Software Support ........ 11
+
+3 Planning a Deployment ........ 13
+  3.1 Management Server Farm ........ 13
+  3.2 Scaling Concepts ........ 13
+  3.2.1 Computing Nodes ........ 13
+  3.2.2 Pods ........ 13
+  3.2.3 Availability Zones ........ 14
+  3.3 Multi-Site Deployment ........ 14
+
+4 Defining Your Service Offering ........ 16
+
+5 Understanding Network Types and Network Virtualization ........ 17
+  5.1 Guest Network ........ 17
+  5.2 Network Virtualization within One Pod ........ 18
+  5.3 Network Virtualization within One Availability Zone ........ 19
+  5.4 Types of Network Virtualization ........ 21
+  5.4.1 Software-based Network Virtualization ........ 21
+  5.4.2 Hardware-based Network Virtualization ........ 21
+  5.5 Private Address Allocation ........ 22
+  5.6 Public Address Allocation ........ 22
+
+6 Storage Features and Types ........ 24
+  6.1 Primary Storage ........ 24
+  6.2 Secondary Storage ........ 24
+  6.3 Working with Volumes ........ 24
+  6.4 Working with ISO Images ........ 25
+  6.5 Working with Blank VM's ........ 25
+  6.6 Working with Templates ........ 25
+    6.6.1 Creating Templates ........ 25
+    6.6.2 Importing AMI's ........ 26
+    6.6.3 Adding Password Management to Your Templates ........ 28
+    6.6.4 Uploading Templates ........ 28
+    6.6.5 Public Templates and Domain Templates ........ 29
+    6.6.6 Private Templates ........ 29
+    6.6.7 Published Templates ........ 29
+  6.7 Working with Snapshots ........ 29
+    6.7.1 Automatic Snapshot Creation and Retention ........ 29
+    6.7.2 User Controlled Backup and Restore ........ 30
+
+7 Network Features ........ 31
+  7.1 Guest Virtual Networks ........ 31
+  7.2 IP Forwarding and Firewalling ........ 31
+  7.3 IP Load Balancing ........ 31
+  7.4 Security Groups ........ 31
+  7.5 Limits ........ 31
+  7.6 DNS and DHCP ........ 31
+
+8 Working with System Virtual Machines ........ 33
+  8.1 Console Proxy ........ 33
+  8.2 Virtual Router ........ 33
+  8.3 Storage Replicator ........ 33
+
+9 System Reliability and HA ........ 34
+  9.1 Management Server ........ 34
+  9.2 Computing Node ........ 34
+  9.3 Primary Storage Outage and Data Loss ........ 34
+  9.4 Secondary Storage Outage and Data Loss ........ 34
+  9.5 HA-Enabled VM (Service Provider and Enterprise Edition) ........ 34
+
+10 Management Features ........ 36
+  10.1 Users, Administrators, and Domains ........ 36
+    10.1.1 Root Administrators ........ 36
+    10.1.2 Domain Administrators ........ 36
+  10.2 Provisioning ........ 36
+    10.2.1 Register ........ 36
+  10.3 VM Lifecycle Management ........ 36
+    10.3.1 VM Creation ........ 36
+    10.3.2 VM Deletion ........ 36
+    10.3.3 VM Lifecycle ........ 37
+    10.3.4 Remote Access ........ 37
+  10.4 Administrator Alerts ........ 37
+  10.5 Event Logs ........ 38
+  10.6 Working with Server Logs ........ 39
+
+11 Working with Computing Nodes ........ 40
+  11.1 Adding Computing Nodes with Community Edition ........ 40
+  11.2 Adding Computing Nodes with Service Provider and Enterprise Edition ........ 40
+  11.3 Scheduled Maintenance and Maintenance Mode ........ 40
+  11.4 Removing Computing Nodes ........ 40
+  11.5 Computing Node Allocation ........ 40
+    11.5.1 OS Preferences ........ 40
+    11.5.2 Over-Provisioning ......... 40
+
+12 User Interface and API ......... 41
+  12.1 User Interface ......... 41
+    12.1.1 Admin User Interface ........ 41
+    12.1.2 End User Interface ........ 41
+  12.2 API ........ 41
+    12.2.1 Provisioning and Authentication API ........ 41
+    12.2.2 Allocators ........ 42

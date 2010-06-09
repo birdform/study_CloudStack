@@ -1,0 +1,197 @@
+1 Introduction
+
+The Cloud.com CloudStack is a complete software suite used to create Infrastructure as a Service clouds. Target customers include service providers and enterprises.
+
+Cloud.com CloudStack‚ÍAIaaS‚Ìì¬‚ÉŽg—p‚³‚ê‚éŠ®‘S‚Èƒ\ƒtƒgƒEƒFƒAƒXƒC[ƒg‚Å‚·B ƒ^[ƒQƒbƒgŒÚ‹q‚É‚ÍAƒT[ƒrƒXƒvƒƒoƒCƒ_[‚ÆŠé‹Æ‚ðŠÜ‚Ý‚Ü‚·B
+
+„h The Cloud.com CloudStack enables service providers to setup an on-demand, elastic cloud computing service that competes with the Amazon EC2 service. It enables a utility computing service by allowing service providers to sell self-service virtual machine instances over the Internet.
+„h The Cloud.com CloudStack enables enterprises to setup an on-premise "private cloud" for use by their own employees. The current generation of virtualization infrastructure shipped by VMware, Citrix, and Microsoft targets enterprise IT departments who manage virtual machines in the same way as they would manage physical machines. The Cloud.com CloudStack, on the other hand, enables self service of virtual machines by users outside of IT departments.
+
+E Cloud.com CloudStack‚ÍAƒT[ƒrƒXƒvƒƒoƒCƒ_‚ªAAmazonEC2ƒT[ƒrƒX‚Æ‹£‡‚·‚éƒIƒ“ƒfƒ}ƒ“ƒh‚Å’e—Í«‚Ì‚ ‚éƒNƒ‰ƒEƒhƒRƒ“ƒsƒ…[ƒeƒBƒ“ƒOƒT[ƒrƒX‚ðƒZƒbƒgƒAƒbƒv‚·‚é‚±‚Æ‚ð‰Â”\‚É‚µ‚Ü‚·BƒT[ƒrƒXƒvƒƒoƒCƒ_‚ªƒZƒ‹ƒtƒT[ƒrƒX‚Ì‰¼‘zƒ}ƒVƒ“ƒCƒ“ƒXƒ^ƒ“ƒX‚ðƒCƒ“ƒ^[ƒlƒbƒgã‚Å”Ì”„‚·‚é‚Ì‚ð‹–—e‚·‚é‚±‚Æ‚É‚æ‚Á‚ÄAƒ†[ƒeƒBƒŠƒeƒBƒRƒ“ƒsƒ…[ƒeƒBƒ“ƒOƒT[ƒrƒX‚ðŽÀŒ»‚µ‚Ü‚·B
+E Cloud.com CloudStack‚ÍAŠé‹Æ‚ªAŽ©•ª‚½‚¿‚Ì]‹Æˆõ‚É‚æ‚éŽg—p‚ð‘O’ñ‚Æ‚µ‚½ƒIƒ“ƒvƒŒƒ~ƒX‚Ìuƒvƒ‰ƒCƒx[ƒgƒNƒ‰ƒEƒhv‚ðƒZƒbƒgƒAƒbƒv‚·‚é‚±‚Æ‚ð‰Â”\‚É‚µ‚Ü‚·BVMwareACitrixA‚¨‚æ‚ÑMicrosoft‚É‚æ‚Á‚Äo‰×‚³‚ê‚½‰¼‘z‰»ƒCƒ“ƒtƒ‰ƒXƒgƒ‰ƒNƒ`ƒƒ‚ÌŒ»Ý‚Ì¢‘ã‚ÍA•¨—ƒ}ƒVƒ“‚ðŠÇ—‚·‚é‚Ì‚Æ“¯—l‚É‰¼‘zƒ}ƒVƒ“‚ðŠÇ—‚·‚éŠé‹ÆIT‚Ì•”–å‚ðƒ^[ƒQƒbƒg‚É‚µ‚Ü‚·Bˆê•ûACloud.com CloudStack‚ÍAIT•”–å‚ÌŠO•”‚Ìƒ†[ƒU‚É‚æ‚é‰¼‘zƒ}ƒVƒ“‚ÌƒZƒ‹ƒtƒT[ƒrƒX‚ð‰Â”\‚É‚µ‚Ü‚·B
+
+The Cloud.com CloudStack includes the Management Server and extensions to industry-standard hypervisor software (e.g., XenServer, VMware, KVM) installed on Computing Nodes running in the cloud. The Management Server is deployed on a farm of management servers. The Management Server is a resource manager for the cloud. The administrator provisions resources (Computing Nodes, storage devices, IP addresses, etc.) into the Management Server and the Management Server manages those resources and presents web interfaces to end users and administrators that enable them to take actions on some or all of their instances in the IaaS cloud.
+
+Cloud.com CloudStack‚ÍAƒ}ƒlƒWƒƒ“ƒgƒT[ƒo‚ÆAƒNƒ‰ƒEƒh‚ÅŽÀs‚·‚éƒRƒ“ƒsƒ…[ƒeƒBƒ“ƒOƒm[ƒhã‚ÉƒCƒ“ƒXƒg[ƒ‹‚³‚ê‚½‹ÆŠE•W€‚ÌƒnƒCƒp[ƒoƒCƒU[ƒ\ƒtƒgƒEƒFƒAi‚½‚Æ‚¦‚ÎAXenServerAVMwareAKVMj‚ÌŠg’£‚ðŠÜ‚Ý‚Ü‚·Bƒ}ƒlƒWƒƒ“ƒgƒT[ƒo‚ÍAŠÇ—ƒT[ƒo‚Ìƒtƒ@[ƒ€‚ÅƒfƒvƒƒC‚³‚ê‚Ü‚·Bƒ}ƒlƒWƒƒ“ƒgƒT[ƒo‚ÍAƒNƒ‰ƒEƒh‚Ì‚½‚ß‚ÌƒŠƒ\[ƒXƒ}ƒl[ƒWƒƒ‚Å‚·BŠÇ—ŽÒ‚ÍAƒ}ƒlƒWƒƒ“ƒgƒT[ƒo‚ÉƒŠƒ\[ƒXiƒm[ƒhAƒXƒgƒŒ[ƒWƒfƒoƒCƒXAIPƒAƒhƒŒƒX‚È‚Çj‚ð‹Ÿ‹‹‚µAƒ}ƒlƒWƒƒ“ƒgƒT[ƒo‚ª‚»‚ê‚ç‚ÌƒŠƒ\[ƒX‚ðŠÇ—‚µ‚ÄAƒGƒ“ƒhƒ†[ƒU‚ÆŠÇ—ŽÒ‚ÉWebƒCƒ“ƒ^ƒtƒF[ƒX‚ð’ñ‹Ÿ‚µ‚Ü‚·B‚±‚ê‚ÍAIaaSƒNƒ‰ƒEƒh‚Å”Þ‚ç‚Ì‘S‚Ä‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚Ì‚¤‚¿‚Ì‚¢‚­‚Â‚©‚ðŽÀs‚·‚é‚±‚Æ‚ð‰Â”\‚É‚µ‚Ü‚·B
+
+„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ
+1.1 Service Offerings
+
+The CloudStack allows the administrator to define Service Offerings and Disk Offerings. These allow the administrator to define the virtual hardware (CPU speed and count, RAM size, and disk size) that the user can select when creating a new instance. The administrator can also provision templates in the system. Templates are the base OS images that the user can select when creating a new instance. For example, the CloudStack includes CentOS 5.3 as a template. All popular Linux and Windows OS versions are supported.
+
+CloudStack‚Å‚ÍAŠÇ—ŽÒ‚ÍService Offerings‚ÆDisk Offerings‚ð’è‹`‚Å‚«‚Ü‚·BV‚µ‚¢ƒCƒ“ƒXƒ^ƒ“ƒX‚ðì¬‚·‚éŽžA—˜—pŽÒ‚ª‘I‘ð‚µ‚½‰¼‘zƒn[ƒhƒEƒFƒAiCPU‘¬“xAƒJƒEƒ“ƒgARAMƒTƒCƒYAƒfƒBƒXƒNƒTƒCƒYj‚ð’è‹`‚·‚é‚±‚Æ‚ª‚Å‚«‚Ü‚·B‚Ü‚½AŠÇ—ŽÒ‚ÍAƒVƒXƒeƒ€‚Ìƒeƒ“ƒvƒŒ[ƒg‚ð—pˆÓ‚·‚é‚±‚Æ‚à‚Å‚«‚Ü‚·Bƒeƒ“ƒvƒŒ[ƒg‚Æ‚ÍAV‹KƒCƒ“ƒXƒ^ƒ“ƒXì¬Žž‚Éƒ†[ƒU‚ª‘I‘ð‰Â”\‚Èƒx[ƒX‚Æ‚È‚éOSƒCƒ[ƒW‚Ì‚±‚Æ‚Å‚·B‚½‚Æ‚¦‚ÎACloudStack‚ÍAƒeƒ“ƒvƒŒ[ƒg‚Æ‚µ‚ÄCentOS 5.3 ‚ðŽg—p‚Å‚«‚Ü‚·B‚·‚×‚Ä‚Ì—L–¼‚ÈLinux‚ÆWindows OS ‚Ìƒo[ƒWƒ‡ƒ“‚ªƒTƒ|[ƒg‚³‚ê‚Ä‚¢‚Ü‚·B
+
+„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ
+1.2 Accounts and Domains
+
+The CloudStack has users that are accounts and domains that are groups of accounts. An account is typically a customer of the service provider or perhaps a department in a large organization. Accounts are the unit of isolation in the cloud. A domain is a set of accounts that have some logical relationship to each other and a set of delegated administrators with some authority over the domain and its subdomains. For example, a service provider could create a domain for each of several resellers.
+
+CloudStack‚ÍAƒAƒJƒEƒ“ƒg‚Å‚ ‚éƒ†[ƒU‚ÆAƒAƒJƒEƒ“ƒgƒOƒ‹[ƒv‚Å‚ ‚éƒhƒƒCƒ“‚ðŽ‚¿‚Ü‚·BƒAƒJƒEƒ“ƒg‚Æ‚ÍA’ÊíAƒT[ƒrƒXƒvƒƒoƒCƒ_‚ÌŒÚ‹q‚Å‚·‚ªAê‡‚É‚æ‚Á‚Ä‚Í‹‘å‚È‘gD‚Ìˆê•”‚Å‚·BƒAƒJƒEƒ“ƒg‚ÍAƒNƒ‰ƒEƒh‚Ì’†‚Å‚Ì•ª—£‚Ì’PˆÊ‚Å‚·BƒhƒƒCƒ“‚Æ‚ÍAŒÝ‚¢‚É‚¢‚­‚Â‚©‚Ì˜_—“I‚ÈŠÖŒW«‚ðŽ‚ÂƒAƒJƒEƒ“ƒg‚ÌƒZƒbƒg‚Å‚ ‚èA‚Ü‚½AƒhƒƒCƒ“‚âƒTƒuƒhƒƒCƒ“‚ð’´‚¦‚½Œ ŒÀ‚ðŽ‚Â‘ã•\“I‚ÈŠÇ—ŽÒ‚ÌƒZƒbƒg‚Å‚·B‚½‚Æ‚¦‚ÎAƒT[ƒrƒXƒvƒƒoƒCƒ_‚ÌƒNƒ‰ƒEƒh‚Å‚ÍA‚»‚ê‚¼‚ê‚ÌÄ”Ì‹ÆŽÒ‚²‚Æ‚ÌƒhƒƒCƒ“‚ðì‚è‚Ü‚·B
+
+„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ
+1.3 Server Types
+
+There are two required types of servers in the CloudStack: Management Servers and Computing Nodes. Management Servers:
+
+CloudStack‚ª•K—v‚Æ‚·‚é2Ží—Þ‚ÌƒT[ƒo‚ªAŠÇ—ƒT[ƒo‚ÆƒRƒ“ƒsƒ…[ƒeƒBƒ“ƒOƒm[ƒh‚Å‚·BŠÇ—ƒT[ƒo‚ÍAŽŸ‚Ì‚æ‚¤‚È‚à‚Ì‚Å‚·B
+
+„h provide the web user interfaces for the administrator and end users
+„h provide the API's for the CloudStack
+„h manage the assignment of guest VM's to particular Computing Nodes
+„h manage the assignment of public and private IP addresses to particular accounts
+„h manage the allocation of storage to guests' virtual disk images
+„h manage snapshots, templates, and ISO images, possibly replicating them across data centers
+„h provide a single point of configuration for the cloud
+
+E ŠÇ—ŽÒ‚ÆƒGƒ“ƒhƒ†[ƒU‚ÉWebƒ†[ƒUƒCƒ“ƒ^ƒtƒF[ƒX‚ð’ñ‹Ÿ‚µ‚Ü‚·
+ECloudStack‚Ì‚½‚ß‚ÌAPI‚ð’ñ‹Ÿ‚µ‚Ü‚·
+EƒQƒXƒg‰¼‘zƒ}ƒVƒ“‚Ì“Á’è‚ÌƒRƒ“ƒsƒ…[ƒ^ƒm[ƒh‚Ö‚ÌŠ„“–‚Ä‚ðŠÇ—‚µ‚Ü‚·
+EƒpƒuƒŠƒbƒN/ƒvƒ‰ƒCƒx[ƒgIPƒAƒhƒŒƒX‚Ì“Á’èƒAƒJƒEƒ“ƒg‚Ö‚ÌŠ„“–‚Ä‚ðŠÇ—‚µ‚Ü‚·
+EƒQƒXƒg‚Ì‰¼‘zƒfƒBƒXƒNƒCƒ[ƒW‚Ö‚ÌƒXƒgƒŒ[ƒW‚ÌŠ„“–‚Ä‚ðŠÇ—‚µ‚Ü‚·
+„h ƒXƒiƒbƒvƒVƒ‡ƒbƒgAƒeƒ“ƒvƒŒ[ƒgAISOƒCƒ[ƒWA‚Ü‚½Aê‡‚É‚æ‚Á‚Ä‚ÍAƒf[ƒ^ƒZƒ“ƒ^[‚ð‰z‚¦‚½ƒŒƒvƒŠƒP[ƒVƒ‡ƒ“‚ðŠÇ—‚µ‚Ü‚·
+„h ƒNƒ‰ƒEƒh‚Ì‚½‚ß‚ÌÝ’è‚Ì’Pˆêƒ|ƒCƒ“ƒg‚ð’ñ‹Ÿ‚µ‚Ü‚·
+
+The Management Server runs in a Tomcat container and requires MySQL for persistence. The MySQL database required by the Management Server may optionally be placed on a separate system from the Management Server itself. This type of server is called a "Database Server".
+
+ƒ}ƒlƒWƒƒ“ƒgƒT[ƒo‚ÍTomcatƒRƒ“ƒeƒi‚ÅŽÀs‚³‚êA‰i‘±‰»‚Ì‚½‚ß‚ÉMySQL‚ð•K—v‚Æ‚µ‚Ü‚·Bƒ}ƒlƒWƒƒ“ƒgƒT[ƒo‚É‚æ‚Á‚Ä•K—v‚Æ‚³‚ê‚½MySQLƒf[ƒ^ƒx[ƒX‚ÍA”CˆÓ‚Åƒ}ƒlƒWƒƒ“ƒgƒT[ƒo‚©‚ç•ª‚©‚ê‚½ƒVƒXƒeƒ€ã‚ÉÝ’u‚³‚ê‚é‚©‚à‚µ‚ê‚Ü‚¹‚ñB‚±‚Ìƒ^ƒCƒv‚ÌƒT[ƒo‚ÍAuƒf[ƒ^ƒx[ƒXƒT[ƒov‚ÆŒÄ‚Î‚ê‚Ü‚·B
+
+Computing Nodes are the resource in the cloud that hosts the guest virtual machines. For example, a Linux KVM-enabled host and a Citrix XenServer host are Computing Nodes. Computing Nodes:
+
+ƒRƒ“ƒsƒ…[ƒeƒBƒ“ƒOƒm[ƒh‚ÍAƒNƒ‰ƒEƒh‚ÅƒQƒXƒg‚Ì‰¼‘zƒ}ƒVƒ“‚ðƒzƒXƒg‚·‚éƒŠƒ\[ƒX‚Å‚·B‚½‚Æ‚¦‚ÎALinux‚ÌKVM‚Å—˜—p‰Â”\‚É‚È‚Á‚½ƒzƒXƒg‚ÆACitrix XenServer‚ÌƒzƒXƒg‚ÍAƒRƒ“ƒsƒ…[ƒeƒBƒ“ƒOƒm[ƒh‚Å‚·BƒRƒ“ƒsƒ…[ƒeƒBƒ“ƒOƒm[ƒh‚ÍAŽŸ‚Ì‚æ‚¤‚È‚à‚Ì‚Å‚·B
+
+„h provide all the CPU, memory, storage, and networking resources needed to host the virtual machines
+„h are interconnected using a high bandwidth TCP/IP network and connected to the public Internet
+„h may reside in multiple data centers across different geographic locations
+„h may have different capacities (e.g., different CPU speeds, different amounts of RAM)
+„h are high-quality commodity hardware, are reliable individually, but can fail frequently when a large number of servers are involved
+
+E ‰¼‘zƒ}ƒVƒ“‚ðƒzƒXƒg‚·‚é‚Ì‚É•K—v‚È‚·‚×‚Ä‚ÌCPUAƒƒ‚ƒŠAƒXƒgƒŒ[ƒWAƒlƒbƒgƒ[ƒN‚È‚Ç‚ÌƒŠƒ\[ƒX‚ð’ñ‹Ÿ‚µ‚Ü‚·
+E ‚‘Ñˆæ‚ÌTCP/IPƒlƒbƒgƒ[ƒN‚ðŽg—p‚·‚é‚±‚Æ‚Å‘ŠŒÝÚ‘±‚³‚êAŒö‹¤‚ÌƒCƒ“ƒ^[ƒlƒbƒg‚ÉÚ‘±‚µ‚Ü‚·
+E ’n—“I‚É—£‚ê‚½•¡”‚Ìƒf[ƒ^ƒZƒ“ƒ^‚É‘®‚·‚é‚©‚à‚µ‚ê‚Ü‚¹‚ñ
+EˆÙ‚È‚éƒLƒƒƒpƒVƒeƒB‚ðŽ‚Â‚©‚à‚µ‚ê‚Ü‚¹‚ñi‚½‚Æ‚¦‚ÎAˆÙ‚È‚éCPU‘¬“xAˆÙ‚È‚éRAMƒTƒCƒYj
+E ‚•iŽ¿‚È¤•i‚Ìƒn[ƒhƒEƒFƒA‚Í’P“Æ‚Å‚ÍM—Š‚Å‚«‚Ü‚·‚ªA‘½‚­‚ÌƒT[ƒo‚ª‚©‚©‚í‚éŽž‚É‚Í•p”É‚ÉŽ¸”s‚·‚é‚±‚Æ‚ª‚ ‚è‚Ü‚·
+
+„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ
+1.4 Networking Features and Virtualization
+
+The CloudStack manages the allocation of private and public IP address. The administrator configures the system with available public and private IP addresses. Public IP addresses are routable from the public internet. Each account has at least one public IP address; the user may acquire additional ones. Private IP addresses are used for by the Management Server to communicate with CloudStack Agents on the hypervisors and System-owned VM's on the Computing Nodes.
+
+CloudStack‚Íƒvƒ‰ƒCƒx[ƒg‚ÆƒpƒuƒŠƒbƒN‚ÌIPƒAƒhƒŒƒX‚ÌŠ„“–‚Ä‚ðŠÇ—‚µ‚Ü‚·BŠÇ—ŽÒ‚ÍA—˜—p‰Â”\‚ÈƒpƒuƒŠƒbƒN/ƒvƒ‰ƒCƒx[ƒgIPƒAƒhƒŒƒX‚ÅAƒVƒXƒeƒ€‚ð\¬‚µ‚Ü‚·BƒpƒuƒŠƒbƒNIPƒAƒhƒŒƒX‚ÍAŒö‹¤‚ÌƒCƒ“ƒ^[ƒlƒbƒg‚©‚çƒ‹[ƒeƒBƒ“ƒO‰Â”\‚Å‚·BŠeƒAƒJƒEƒ“ƒg‚ÍA­‚È‚­‚Æ‚à1‚Â‚ÌƒpƒuƒŠƒbƒNIPƒAƒhƒŒƒX‚ðŽ‚¿‚Ü‚·Bƒ†[ƒU‚ÍA’Ç‰Á‚Å‚³‚ç‚ÉŽæ“¾‚·‚é‚©‚à‚µ‚ê‚Ü‚¹‚ñBƒvƒ‰ƒCƒx[ƒgIPƒAƒhƒŒƒX‚ÍAŠÇ—ƒT[ƒo‚ÆCloudStackƒG[ƒWƒFƒ“ƒg\\ƒnƒCƒp[ƒoƒCƒU[‚ÆƒVƒXƒeƒ€Š—L‚ÌƒRƒ“ƒsƒ…[ƒeƒBƒ“ƒOƒm[ƒh‚Ì‰¼‘zƒ}ƒVƒ“ã‚É‚ ‚é\\‚ªA‚â‚èŽæ‚è‚ð‚·‚é‚½‚ß‚ÉŽg—p‚³‚ê‚Ü‚·B
+
+Guest virtual machines owned by a given account are placed into a single, isolated virtual network. This network allows secure, private communication between the guest VM's. Guests can communicate with each other but not with the guests of other accounts.
+
+“Á’è‚ÌƒAƒJƒEƒ“ƒg‚ÉŠ—L‚³‚ê‚½ƒQƒXƒg‚Ì‰¼‘zƒ}ƒVƒ“‚ÍA’Pˆê‚Ì“Æ—§‚µ‚½‰¼‘zƒlƒbƒgƒ[ƒN‚É”z’u‚³‚ê‚Ü‚·B‚±‚Ìƒlƒbƒgƒ[ƒN‚Å‚ÍAƒQƒXƒg‚Ì‰¼‘zƒ}ƒVƒ“ŠÔ‚Ìƒvƒ‰ƒCƒx[ƒg‚È‚â‚èŽæ‚è‚ªƒZƒLƒ…ƒA‚É‰Â”\‚Å‚·BƒQƒXƒg‚Í‚¨ŒÝ‚¢‚É‚â‚èŽæ‚è‚Å‚«‚Ü‚·‚ªA‘¼‚ÌƒAƒJƒEƒ“ƒg‚ÌƒQƒXƒg‚Æ‚Í‚â‚èŽæ‚è‚Å‚«‚Ü‚¹‚ñB
+
+Every account is assigned a virtual router. The virtual router is a system-owned VM that provides a hardened barrier between the guest VM's and the public internet. The virtual router is the gateway for guest VM traffic to and from the public internet, and it provides DNS and DHCP services to the guests. All of the public address acquired by the account are assigned to the virtual router. The virtual router's presence in traffic enables the CloudStack to present several networking features to the end user. The virtual router can be configured by the user to port forward traffic from a public IP to a port on a particular guest VM. The port's traffic can also be load balanced across multiple guest VM's, providing for increased availability of a service behind the public IP address.
+
+‚·‚×‚Ä‚ÌƒAƒJƒEƒ“ƒg‚ªA‰¼‘zƒ‹[ƒ^‚ÉŠ„‚è“–‚Ä‚ç‚ê‚Ü‚·B‰¼‘zƒ‹[ƒ^‚ÍƒVƒXƒeƒ€‚ªŠ—L‚·‚é‰¼‘zƒ}ƒVƒ“‚Å‚ ‚èA‚±‚ê‚ÍAƒQƒXƒg‚Ì‰¼‘zƒ}ƒVƒ“‚ÆŒö‹¤‚ÌƒCƒ“ƒ^[ƒlƒbƒg‚ÌŠÔ‚Éd‚¢ƒoƒŠƒA‚ð’ñ‹Ÿ‚µ‚Ü‚·B‰¼‘zƒ‹[ƒ^‚ÍAƒQƒXƒg‚Ì‰¼‘zƒ}ƒVƒ“‚ÆŒö‹¤‚ÌƒCƒ“ƒ^[ƒlƒbƒg‚ÌŠÔ‚Å‚Ìƒgƒ‰ƒtƒBƒbƒN‚Ì‚½‚ß‚É‚ ‚éƒQ[ƒgƒEƒFƒC‚Å‚·B‚±‚ê‚ÍAƒQƒXƒg‚Ö‚ÌDNS‚ÆDHCP‚ÌƒT[ƒrƒX‚ð’ñ‹Ÿ‚µ‚Ü‚·B‚·‚×‚Ä‚ÌƒpƒuƒŠƒbƒNƒAƒhƒŒƒX‚ªAƒAƒJƒEƒ“ƒg‚ª‰¼‘zƒ‹[ƒ^‚ÉŠ„‚è“–‚Ä‚ç‚ê‚é‚±‚Æ‚ð•K—v‚Æ‚µ‚Ü‚·Bƒgƒ‰ƒtƒBƒbƒN‚É‰¼‘zƒ‹[ƒ^‚ª‘¶Ý‚·‚é‚±‚Æ‚ÅACloudStack‚Í‚¢‚­‚Â‚©‚Ìƒlƒbƒgƒ[ƒN‹@”\‚ðƒGƒ“ƒhƒ†[ƒU‚É’ñŽ¦‚·‚é‚±‚Æ‚ª‚Å‚«‚Ü‚·Bƒ†[ƒU‚ÍAƒpƒuƒŠƒbƒN‚ÌIP‚©‚ç“Á’è‚ÌƒQƒXƒg‰¼‘zƒ}ƒVƒ“‚Ìƒ|[ƒg‚Ü‚Åƒgƒ‰ƒtƒBƒbƒN‚ð“]‘—‚·‚éƒ|[ƒg‚ðA‰¼‘zƒ‹[ƒ^‚Å\¬‚Å‚«‚Ü‚·B‚Ü‚½Aƒ|[ƒg‚Ìƒgƒ‰ƒtƒBƒbƒN‚ÍAƒpƒuƒŠƒbƒNIPƒAƒhƒŒƒX‚Ì”wŒã‚É‚ ‚éƒT[ƒrƒX‚Ì‰Â—p«‚Ì‘‹­‚É”õ‚¦‚ÄA•¡”‚ÌƒQƒXƒg‰¼‘zƒ}ƒVƒ“‚Å‚Ì•‰‰×•ªŽU‚ª‚Å‚«‚Ü‚·B
+
+The CloudStack supports software and hardware-based network virtualization. The Community Edition supports software-based network virtualization. With it, the hypervisor is configured to encapsulate guest-generated Ethernet frames in UDP packets that are then sent to the hypervisor hosting the destination guest VM. The receiving hypervisor extracts the original Ethernet frame and writes it to the network interface of the destination guest. This network type of network virtualization has the advantage that it is easy to implement on a network. Hardware-based network virtualization relies on VLAN technology in the hypervisor and Layer 2 switch. In its simplest configuration one VLAN is assigned per account with active VM's. Cloud.com has developed more advanced techniques that allow VLAN's to be re-used within a cloud. With hardware-based network virtualization there is no need to encapsulate packets. The isolation provided by the tagged VLAN's provides good performance and security.
+
+CloudStack‚ÍAƒ\ƒtƒgƒEƒFƒA‚Æƒn[ƒhƒEƒFƒAƒx[ƒX‚Ìƒlƒbƒgƒ[ƒN‰¼‘z‰»‚ðƒTƒ|[ƒg‚µ‚Ü‚·BCommunity Edition‚ÍAƒ\ƒtƒgƒEƒFƒAƒx[ƒX‚Ìƒlƒbƒgƒ[ƒN‰¼‘z‰»‚ðƒTƒ|[ƒg‚µ‚Ü‚·BƒnƒCƒp[ƒoƒCƒU[‚ÍAUDPƒpƒPƒbƒg‚ÅƒQƒXƒg‚ª¶¬‚µ‚½ƒC[ƒTƒlƒbƒgƒtƒŒ[ƒ€‚ðƒJƒvƒZƒ‹‰»‚·‚é‚½‚ß‚É\¬‚³‚êA–Ú“I’n‚Å‚ ‚éƒQƒXƒg‰¼‘zƒ}ƒVƒ“‚ðƒzƒXƒg‚·‚éƒnƒCƒp[ƒoƒCƒU[‚É‘—M‚³‚ê‚Ü‚·BŽóM‘¤‚ÌƒnƒCƒp[ƒoƒCƒU[‚ÍAƒIƒŠƒWƒiƒ‹‚ÌƒC[ƒTƒlƒbƒgƒtƒŒ[ƒ€‚ð’Šo‚µ‚ÄA‚»‚ê‚ð–Ú“I’n‚Å‚ ‚éƒQƒXƒg‚Ìƒlƒbƒgƒ[ƒNEƒCƒ“ƒ^[ƒtƒF[ƒX‚É‘‚«ž‚Ý‚Ü‚·B‚±‚Ìƒlƒbƒgƒ[ƒNƒ^ƒCƒv‚Ìƒlƒbƒgƒ[ƒN‰¼‘z‰»‚É‚ÍAƒlƒbƒgƒ[ƒN‚ÅŽÀ‘•‚·‚é‚Ì‚ª—eˆÕ‚Å‚ ‚é‚Æ‚¢‚¤—˜“_‚ª‚ ‚è‚Ü‚·Bƒn[ƒhƒEƒFƒAƒx[ƒX‚Ìƒlƒbƒgƒ[ƒN‰¼‘z‰»‚ÍAƒnƒCƒp[ƒoƒCƒU[‚Å‚ÌVLAN‹Zp‚ÆALayer2ƒXƒCƒbƒ`‚ÉˆË‘¶‚µ‚½‚à‚Ì‚Å‚·BÅ‚àŠÈ’P‚È\¬‚Å‚ÍA1‚Â‚ÌVLAN‚ªAƒAƒNƒeƒBƒu‚È‰¼‘zƒ}ƒVƒ“‚ÌƒAƒJƒEƒ“ƒg’PˆÊ‚ÅŠ„‚è“–‚Ä‚ç‚ê‚Ü‚·BCloud.com‚ÍAVLAN‚ªƒNƒ‰ƒEƒh‚ÅÄŽg—p‚³‚ê‚é‚±‚Æ‚ð‹–—e‚·‚éA‚æ‚è‚“x‚È‹Zp‚ðŠJ”­‚µ‚Ü‚µ‚½Bƒn[ƒhƒEƒFƒAƒx[ƒX‚Ìƒlƒbƒgƒ[ƒN‰¼‘z‰»‚Å‚ÍAƒpƒPƒbƒg‚ðƒJƒvƒZƒ‹‰»‚·‚é•K—v‚Í‘S‚­‚ ‚è‚Ü‚¹‚ñBƒ^ƒO•t‚¯‚³‚ê‚½VLAN‚ª‚à‚½‚ç‚·•ª—£iisolationj‚ÍA‚ƒpƒtƒH[ƒ}ƒ“ƒX‚ÆƒZƒLƒ…ƒŠƒeƒB‚ð’ñ‹Ÿ‚µ‚Ü‚·B
+
+„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ
+1.5 Storage Features and Virtualization
+
+Templates define the base OS image that will be used when a guest is first booted. For example, a template might be 64 bit CentOS 5.3. Every template has a privacy level associated with it. Privacy levels include:
+
+ƒeƒ“ƒvƒŒ[ƒg‚ÍAƒQƒXƒg‚ªÅ‰‚Éƒu[ƒg‚µ‚½Žž‚ÉŽg—p‚·‚é‚±‚Æ‚É‚È‚éƒx[ƒXOSƒCƒ[ƒW‚ð’è‹`‚µ‚Ü‚·B‚½‚Æ‚¦‚ÎA64bit CentOS 5.3‚Ìƒeƒ“ƒvƒŒ[ƒg‚ª‚ ‚è‚Ü‚·B‚·‚×‚Ä‚Ìƒeƒ“ƒvƒŒ[ƒg‚ÍA‚»‚ê‚É•t‚·‚éƒvƒ‰ƒCƒoƒV[ƒŒƒxƒ‹‚ðŽ‚¿‚Ü‚·Bƒvƒ‰ƒCƒoƒV[ƒŒƒxƒ‹‚ðŽŸ‚ÉŽ¦‚µ‚Ü‚·B
+
+„h Public: the template is available to all users
+„h Domain-public: the template is available to all accounts in that domain and its subdomains
+„h Published: the template is available to its owner and select accounts the owner published it to
+„h Private: the template is available to only its owner
+
+„h Public: ‚·‚×‚Ä‚Ìƒ†[ƒU‚ªƒeƒ“ƒvƒŒ[ƒg‚ðŽg—p‚Å‚«‚Ü‚·
+„h Domain-public: ‚»‚ÌƒhƒƒCƒ“‚ÆƒTƒuƒhƒƒCƒ“‚ÌƒAƒJƒEƒ“ƒg‚·‚×‚Ä‚ªAƒeƒ“ƒvƒŒ[ƒg‚ðŽg—p‚Å‚«‚Ü‚·
+„h Published: Š—LŽÒ‚ÆŠ—LŽÒ‚ª‘I‘ð‚µ‚½ƒAƒJƒEƒ“ƒg‚ªƒeƒ“ƒvƒŒ[ƒg‚ðŽg—p‚Å‚«‚Ü‚·
+„h Private: Š—LŽÒ‚Ì‚Ý‚ªƒeƒ“ƒvƒŒ[ƒg‚ðŽg—p‚Å‚«‚Ü‚·
+
+Administrators and end users can add templates to the system. Users can see the template's owner when viewing the template.
+
+ŠÇ—ŽÒ‚ÆƒGƒ“ƒhƒ†[ƒU‚ÍAƒVƒXƒeƒ€‚Éƒeƒ“ƒvƒŒ[ƒg‚ð’Ç‰Á‚Å‚«‚Ü‚·Bƒ†[ƒU‚ÍAƒeƒ“ƒvƒŒ[ƒg‚ðŒ©‚éŽž‚ÉAƒeƒ“ƒvƒŒ[ƒg‚ÌŠ—LŽÒ‚ðŠm”F‚·‚é‚±‚Æ‚ª‚Å‚«‚Ü‚·B
+
+The CloudStack defines a Volume as a unit of storage available to a guest VM. Volumes are either root disks or data disks. The root disk has "/" in the file system and is usually the boot device. Data disks provide for additional storage, e.g. as /opt or D:. Every guest VM has a root disk and a data disk. End users can mount multiple data disks to guest VM's. Users choose data disks from the Disk Offerings created by administrators. The user can create a template from a volume as well; this is the standard procedure for private template creation.
+
+CloudStack‚ÍAƒQƒXƒg‰¼‘zƒ}ƒVƒ“‚ª—˜—p‰Â”\‚ÈƒXƒgƒŒ[ƒW‚Ì’PˆÊ‚Æ‚µ‚ÄAƒ{ƒŠƒ…[ƒ€‚ð’è‹`‚µ‚Ü‚·Bƒ{ƒŠƒ…[ƒ€‚ÍAroot‚ÌƒfƒBƒXƒN‚©ƒf[ƒ^‚ÌƒfƒBƒXƒN‚Å‚·BrootƒfƒBƒXƒN‚Æ‚ÍAƒtƒ@ƒCƒ‹ƒVƒXƒeƒ€‚Ì’†‚Ìu/v‚ÅA’Êí‚Íƒu[ƒg—p‚ÌƒfƒoƒCƒX‚Å‚·Bƒf[ƒ^ƒfƒBƒXƒN‚Æ‚ÍA‚½‚Æ‚¦‚Î/opt‚âD:‚È‚Ç‚ÅA’Ç‰Á‚ÌƒXƒgƒŒ[ƒW‚ð’ñ‹Ÿ‚·‚é‚à‚Ì‚Å‚·B‚·‚×‚Ä‚ÌƒQƒXƒg‰¼‘zƒ}ƒVƒ“‚ÍA1‚Â‚ÌrootƒfƒBƒXƒN‚Æ1‚Â‚Ìƒf[ƒ^ƒfƒBƒXƒN‚ðŽ‚¿‚Ü‚·BƒGƒ“ƒhƒ†[ƒU‚ÍAƒQƒXƒg‚Ì‰¼‘zƒ}ƒVƒ“‚ÅA•¡”‚Ìƒf[ƒ^ƒfƒBƒXƒN‚ðƒ}ƒEƒ“ƒg‚·‚é‚±‚Æ‚ª‚Å‚«‚Ü‚·Bƒ†[ƒU‚ÍAŠÇ—ŽÒ‚É‚æ‚Á‚Äì¬‚³‚ê‚½ƒfƒBƒXƒNƒIƒtƒ@ƒŠƒ“ƒO‚©‚çAƒf[ƒ^ƒfƒBƒXƒN‚ð‘I‘ð‚µ‚Ü‚·Bƒ†[ƒU‚ÍAƒ{ƒŠƒ…[ƒ€‚©‚çƒeƒ“ƒvƒŒ[ƒg‚ðì¬‚·‚é‚±‚Æ‚ª‚Å‚«‚Ü‚·B‚±‚ê‚ÍAƒvƒ‰ƒCƒx[ƒg‚Èƒeƒ“ƒvƒŒ[ƒgì¬‚Ì‚½‚ß‚Ì•W€“I‚ÈŽè‡‚Å‚·B
+
+ISO images may be stored in the system and made available with a privacy level similar to templates. ISO images are classified as either bootable or not bootable. A bootable ISO image is one that contains and OS image (e.g. an Ubuntu 10.04 installation CD). The CloudStack allows a user to boot a guest VM off of an ISO image. Users can also attach ISO images to guest VM's. For example, this enables installing PV drivers into Windows.
+
+ISOƒCƒ[ƒW‚ðƒVƒXƒeƒ€‚É•Û‘¶‚µAƒeƒ“ƒvƒŒ[ƒg‚Æ“¯‚¶ƒvƒ‰ƒCƒoƒV[ƒŒƒxƒ‹‚Å—˜—p‰Â”\‚É‚·‚é‚±‚Æ‚ª‚ ‚é‚©‚à‚µ‚ê‚Ü‚¹‚ñBISOƒCƒ[ƒW‚ÍAƒu[ƒg‰Â”\‚©Aƒu[ƒg•s‰Â”\‚Æ‚µ‚Ä•ª—Þ‚³‚ê‚Ü‚·Bƒu[ƒg‰Â”\‚ÈISOƒCƒ[ƒW‚ÍAOSƒCƒ[ƒWi‚½‚Æ‚¦‚ÎAUbuntu10.04ƒCƒ“ƒXƒg[ƒ‹CDj‚ðŠÜ‚ñ‚Å‚¢‚Ü‚·BCloudStack‚ÍAISOƒCƒ[ƒW‚ÌƒQƒXƒg‰¼‘zƒ}ƒVƒ“‚Åƒu[ƒg‚·‚é‚±‚Æ‚ðƒ†[ƒU‚É‹–—e‚µ‚Ü‚·B‚Ü‚½Aƒ†[ƒU‚ÍAƒQƒXƒg‰¼‘zƒ}ƒVƒ“‚ÉISOƒCƒ[ƒW‚ðƒAƒ^ƒbƒ`‚Å‚«‚Ü‚·B‚±‚ê‚ÍA‚½‚Æ‚¦‚ÎAWindows‚Ö‚ÌPVƒhƒ‰ƒCƒo[‚ÌƒCƒ“ƒXƒg[ƒ‹‚ð‰Â”\‚É‚µ‚Ü‚·B
+
+Snapshots may be taken for Volumes, including both root and data disks. The administrator places a limit on the number of stored snapshots per user. Users can restore volumes from snapshots or create new volumes from the snapshot for recovery of particular files. Snapshots may be set to occur on a recurring schedule. A completed snapshot is copied from primary storage to secondary storage.
+
+root‚Æƒf[ƒ^ƒfƒBƒXƒN‚Ì—¼•û‚ðŠÜ‚Þƒ{ƒŠƒ…[ƒ€‚ÅAƒXƒiƒbƒvƒVƒ‡ƒbƒg‚ðŽæ“¾‚Å‚«‚Ü‚·BŠÇ—ŽÒ‚ÍA1ƒ†[ƒU‚ ‚½‚è‚Ì•Û‘¶ƒXƒiƒbƒvƒVƒ‡ƒbƒg”‚ÉAãŒÀ‚ðÝ’è‚µ‚Ü‚·Bƒ†[ƒU‚ÍA“Á’è‚Ìƒtƒ@ƒCƒ‹‚ð‰ñ•œ‚·‚é‚½‚ß‚ÉAƒXƒiƒbƒvƒVƒ‡ƒbƒg‚©‚çƒ{ƒŠƒ…[ƒ€‚ð•œŒ³‚·‚é‚©A‚Ü‚½‚ÍAƒXƒiƒbƒvƒVƒ‡ƒbƒg‚©‚çV‚µ‚¢ƒ{ƒŠƒ…[ƒ€‚ðì¬‚Å‚«‚Ü‚·BƒXƒiƒbƒvƒVƒ‡ƒbƒg‚ðŒJ‚è•Ô‚µŽÀs‚·‚éƒXƒPƒWƒ…[ƒ‹‚Æ‚µ‚ÄÝ’è‚·‚é‚±‚Æ‚ª‚Å‚«‚Ü‚·BŠ®¬‚µ‚½ƒXƒiƒbƒvƒVƒ‡ƒbƒg‚ÍAƒvƒ‰ƒCƒ}ƒŠƒXƒgƒŒ[ƒW‚©‚çƒZƒJƒ“ƒ_ƒŠƒXƒgƒŒ[ƒW‚ÖƒRƒs[‚³‚ê‚Ü‚·B
+
+The administrator provisions primary and secondary storage in the CloudStack. Both primary and secondary storage can be accessible via either iSCSI or NFS. Primary storage stores the guest VM virtual disk image. It is typically located close to the Computing Nodes. Secondary storage stores the templates, ISO images, and snapshot data. There is usually one instance of secondary storage for hundreds of Computing Nodes. The CloudStack manages the allocation of guest virtual disks to particular primary storage elements.
+
+ŠÇ—ŽÒ‚ÍACloudStack‚Ìƒvƒ‰ƒCƒ}ƒŠ‚ÆƒZƒJƒ“ƒ_ƒŠ‚ÌƒXƒgƒŒ[ƒW‚ð‹Ÿ‹‹‚Å‚«‚Ü‚·Bƒvƒ‰ƒCƒ}ƒŠ‚ÆƒZƒJƒ“ƒ_ƒŠ‚ÌƒXƒgƒŒ[ƒW‚Ì—¼•û‚ªAiSCSI‚©NFS‚Ì‚Ç‚¿‚ç‚©‚ðŒo—R‚µ‚ÄƒAƒNƒZƒX‰Â”\‚Å‚·Bƒvƒ‰ƒCƒ}ƒŠƒXƒgƒŒ[ƒW‚ÍAƒQƒXƒg‰¼‘zƒ}ƒVƒ“‚Ì‰¼‘zƒfƒBƒXƒNƒCƒ[ƒW‚ð•Û‘¶‚µ‚Ü‚·B‚»‚ê‚ÍA’ÊíAƒRƒ“ƒsƒ…[ƒeƒBƒ“ƒOƒm[ƒh‚Ì‹ß‚­‚ÉˆÊ’u‚µ‚Ü‚·BƒZƒJƒ“ƒ_ƒŠƒXƒgƒŒ[ƒW‚ÍAƒeƒ“ƒvƒŒ[ƒgAISOƒCƒ[ƒWA‚¨‚æ‚ÑƒXƒiƒbƒvƒVƒ‡ƒbƒg‚Ìƒf[ƒ^‚ð•Û‘¶‚µ‚Ü‚·B’ÊíA‰½•S‚à‚ÌƒRƒ“ƒsƒ…[ƒeƒBƒ“ƒOƒm[ƒh‚Ì‚½‚ß‚ÉAƒZƒJƒ“ƒ_ƒŠƒXƒgƒŒ[ƒW‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ª1‚Â‚ ‚è‚Ü‚·BCloudStack‚ÍA“Á’è‚Ìƒvƒ‰ƒCƒ}ƒŠƒXƒgƒŒ[ƒW—v‘f‚Ö‚ÌƒQƒXƒg‚Ì‰¼‘zƒfƒBƒXƒN‚ÌŠ„“–‚Ä‚ðŠÇ—‚µ‚Ü‚·B
+
+„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ
+1.6 Administrator Controlled Allocation
+
+The CloudStack chooses an available Computing Node to create a new guest VM. The chosen Computing Node will always be close to where the guest's virtual disk image is stored. Both vertical and horizontal allocation is allowed. Vertical allocation consumes all the resources of a given Computing Node before allocating any guests on a second Computing Node. It reduces power consumption in the cloud. Horizontal allocation places a guest on each Computing Node in a round-robin fashion. This may yield better performance to the guests in some cases. The CloudStack also allows an element of CPU over-provisioning as configured by the administrator. Over-provisioning allows the administrator to commit more CPU cycles to the allocated guests than are actually available from the hardware.
+
+CloudStack‚ÍAV‚µ‚¢ƒQƒXƒg‰¼‘zƒ}ƒVƒ“‚ðì¬‚·‚é‚½‚ß‚ÉA—˜—p‰Â”\‚ÈƒRƒ“ƒsƒ…[ƒeƒBƒ“ƒOƒm[ƒh‚ð‘I‚Ñ‚Ü‚·B‘I‘ð‚³‚ê‚½ƒRƒ“ƒsƒ…[ƒeƒBƒ“ƒOƒm[ƒh‚ÍAƒQƒXƒg‚Ì‰¼‘zƒfƒBƒXƒNƒCƒ[ƒW‚ªŠi”[‚³‚ê‚Ä‚¢‚é‚Æ‚±‚ë‚Ì‹ß‚­‚ÉA‚¢‚Â‚à‚ ‚è‚Ü‚·B‚’¼‚Æ…•½A—¼•û‚Ì”z•ª‚ª‰Â”\‚Å‚·B‚’¼‚È”z•ª‚Å‚ÍA‘æ“ñ‚ÌƒRƒ“ƒsƒ…[ƒeƒBƒ“ƒOƒm[ƒh‚ÉƒQƒXƒg‚ªŠ„‚è“–‚Ä‚ç‚ê‚é‘O‚ÉA“Á’è‚ÌƒRƒ“ƒsƒ…[ƒeƒBƒ“ƒOƒm[ƒh‚Ì‚·‚×‚Ä‚ÌƒŠƒ\[ƒX‚ðÁ”ï‚µ‚Ü‚·B‚±‚Ì‚±‚Æ‚ÍAƒNƒ‰ƒEƒh‚Å‚Ì“d—ÍÁ”ï—Ê‚ð—}‚¦‚Ü‚·B…•½‚È”z•ª‚ÍAƒ‰ƒEƒ“ƒhƒƒrƒ“•ûŽ®‚ÅAŠeƒRƒ“ƒsƒ…[ƒeƒBƒ“ƒOƒm[ƒh‚ÉƒQƒXƒg‚ð”z’u‚µ‚Ü‚·B‚¢‚­‚Â‚©‚ÌƒP[ƒX‚Å‚ÍA‚±‚ê‚É‚æ‚Á‚ÄA‚æ‚è—Ç‚¢ƒpƒtƒH[ƒ}ƒ“ƒX‚ðƒQƒXƒg‚É’ñ‹Ÿ‚·‚é‚©‚à‚µ‚ê‚Ü‚¹‚ñB‚Ü‚½ACloudStack‚ÍAŠÇ—ŽÒ‚É‚æ‚éÝ’è‚ÅCPU‚ð‰ßè‹Ÿ‹‹‚·‚é—v‘f‚ð‹–—e‚µ‚Ü‚·BƒI[ƒo[ƒvƒƒrƒWƒ‡ƒjƒ“ƒO‚ÅAƒn[ƒhƒEƒFƒA‚©‚çŽÀÛ‚É—˜—p‰Â”\‚Å‚ ‚é‚æ‚è‚à‘½‚­‚ÌCPUƒTƒCƒNƒ‹‚ðAŠÇ—ŽÒ‚ªƒQƒXƒg‚ÉŠ„‚è“–‚Ä‚é‚±‚Æ‚ª‚Å‚«‚Ü‚·B
+
+The CloudStack also provides a pluggable interface for adding new allocators. These custom allocators can provide any policy the administrator desires.
+
+‚Ü‚½ACloudStack‚ÍAV‚µ‚¢ƒAƒƒP[ƒ^‚ð’Ç‰Á‚·‚é‚½‚ß‚Ìpluggable‚ÈƒCƒ“ƒ^ƒtƒF[ƒX‚ð’ñ‹Ÿ‚µ‚Ü‚·B‚±‚ê‚ç‚ÌƒJƒXƒ^ƒ€ƒAƒƒP[ƒ^‚É‚æ‚Á‚ÄAŠÇ—ŽÒ‚Ì—v–]‚É‰ž‚¦‚é‚ ‚ç‚ä‚éƒ|ƒŠƒV[‚ð’ñ‹Ÿ‚Å‚«‚Ü‚·B
+
+„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ
+1.7 Guest VM Management
+
+The CloudStack provides several guest management operations to end users and administrators. VM's may be stopped, started, rebooted, and destroyed.
+
+CloudStack‚ÍA‚¢‚­‚Â‚©‚ÌƒQƒXƒgŠÇ—ƒIƒyƒŒ[ƒVƒ‡ƒ“‚ðƒGƒ“ƒhƒ†[ƒU‚ÆŠÇ—ŽÒ‚É’ñ‹Ÿ‚µ‚Ü‚·B‰¼‘zƒ}ƒVƒ“‚ÍA’âŽ~A‹N“®AƒŒƒ|[ƒgAíœ‚·‚é‚±‚Æ‚ª‚Å‚«‚Ü‚·B
+
+Guests have a name and group. Guest names and groups are opaque to the CloudStack and are available for end users to organize their VM's.
+
+ƒQƒXƒg‚ÍA–¼‘O‚ÆƒOƒ‹[ƒv‚ðŽ‚¿‚Ü‚·BƒQƒXƒg–¼‚ÆƒOƒ‹[ƒv‚ÍACloudStack‚É‚Æ‚Á‚Ä‚Í•s“§‰ß‚ÅAƒGƒ“ƒhƒ†[ƒU‚ª‰¼‘zƒ}ƒVƒ“‚ð‘gD‰»‚·‚é‚½‚ß‚É—˜—p‰Â”\‚Å‚·B
+
+Guests can be configured to be Highly Available (HA). An HA-enabled guest is monitored by the system. If the system detects that the guest is down it will attempt to restart the guest, possibly on a different Computing Node.
+
+ƒQƒXƒg‚ÍAHAi‚‰Â—p«j‚ÉÝ’è‚·‚é‚±‚Æ‚ª‚Å‚«‚Ü‚·BHA‚ª—LŒø‚ÈƒQƒXƒg‚ÍAƒVƒXƒeƒ€‚É‚æ‚Á‚ÄŠÄŽ‹‚³‚ê‚Ü‚·BƒQƒXƒg‚ªƒ_ƒEƒ“‚µ‚Ä‚¢‚é‚±‚Æ‚ðƒVƒXƒeƒ€‚ªŒŸ’m‚·‚é‚ÆAê‡‚É‚æ‚Á‚Ä‚Í•Ê‚ÌƒRƒ“ƒsƒ…[ƒeƒBƒ“ƒOƒm[ƒhã‚ÅAƒQƒXƒg‚ÌÄ‹N“®‚ªŽŽs‚³‚ê‚Ü‚·B
+
+„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ
+1.8 Manageability
+
+The system provides Alerts and Events to help with the management of the cloud. Alerts are notices to an administrator, generally delivered by e-mail, that an error has occurred in the cloud. Alert behavior is configurable.
+
+ƒVƒXƒeƒ€‚ÍƒNƒ‰ƒEƒh‚ÌŠÇ—‚ðŽx‰‡‚·‚éƒAƒ‰[ƒg‚ÆƒCƒxƒ“ƒg‚ð’ñ‹Ÿ‚µ‚Ü‚·BƒAƒ‰[ƒg‚ÍAˆê”Ê“I‚É‚ÍEƒ[ƒ‹‚É‚æ‚éŠÇ—ŽÒ‚Ö‚Ì’Ê’m‚Å‚·B‚±‚ê‚ÍAƒNƒ‰ƒEƒh‚ÅƒGƒ‰[‚ª‹N‚«‚½‚±‚Æ‚ð’m‚ç‚¹‚é‚à‚Ì‚Å‚·BƒAƒ‰[ƒg‚ÌU‚é•‘‚¢‚ÍAÝ’è‰Â”\‚Å‚·B
+
+Events track all of the user and administrator actions in the cloud. For example, every guest VM start creates an associated event. Events are stored in the Management Server's database.
+
+ƒCƒxƒ“ƒg‚ÍAƒNƒ‰ƒEƒh‚Å‚Ìƒ†[ƒU‚ÆŠÇ—ŽÒ‚Ì‚·‚×‚Ä‚ÌƒAƒNƒVƒ‡ƒ“‚ð’ÇÕ‚µ‚Ü‚·B‚½‚Æ‚¦‚ÎA‚·‚×‚Ä‚ÌƒQƒXƒg‰¼‘zƒ}ƒVƒ“‚Ì‹N“®‚ÉŠÖ˜A‚·‚éƒCƒxƒ“ƒg‚ðì¬‚µ‚Ü‚·BƒCƒxƒ“ƒg‚Íƒ}ƒlƒWƒƒ“ƒgƒT[ƒo‚Ìƒf[ƒ^ƒx[ƒX‚É•Û‘¶‚³‚ê‚Ü‚·B
+
+The CloudStack allows administrators to place a Computing Node into maintenance mode. When maintenance mode is activated the node is first removed from the pool of nodes available to receive new guest VM's. Then, the guest VM's currently running on the node are seamlessly migrated to another Computing Node not in maintenance mode. This migration uses live migration technology and does not interrupt the execution of the guest.
+
+CloudStack‚Å‚ÍAŠÇ—ŽÒ‚ªAƒRƒ“ƒsƒ…[ƒeƒBƒ“ƒOƒm[ƒh‚ðƒƒ“ƒeƒiƒ“ƒXƒ‚[ƒh‚ÉˆÚs‚·‚é‚±‚Æ‚ª‚Å‚«‚Ü‚·Bƒƒ“ƒeƒiƒ“ƒXƒ‚[ƒh‚ª—LŒø‚ÈŽžA‚Ü‚¸Aƒm[ƒh‚ÍAV‚µ‚¢ƒQƒXƒg‰¼‘zƒ}ƒVƒ“‚ðŽó‚¯Žæ‚é‚½‚ß‚É—˜—p‰Â”\‚Èƒm[ƒh‚Ìƒv[ƒ‹‚©‚çŽæ‚èœ‚©‚ê‚Ü‚·BŽŸ‚ÉAƒm[ƒhã‚ÅŒ»ÝŽÀs’†‚Ì‰¼‘zƒ}ƒVƒ“‚ªAƒƒ“ƒeƒiƒ“ƒXƒ‚[ƒh‚É‚È‚¢‘¼‚ÌƒRƒ“ƒsƒ…[ƒeƒBƒ“ƒOƒm[ƒh‚ÖAƒV[ƒ€ƒŒƒX‚ÉˆÚsiƒ}ƒCƒOƒŒ[ƒVƒ‡ƒ“j‚³‚ê‚Ü‚·B‚±‚ÌˆÚs‚ÍAƒ‰ƒCƒuƒ}ƒCƒOƒŒ[ƒVƒ‡ƒ“ˆÚ“®‚ðŽg—p‚µ‚Ä‚¢‚é‚½‚ßAƒQƒXƒg‚ÌŽÀs‚ð’†’f‚µ‚Ü‚¹‚ñB
+
+Host and guest performance monitoring is available to the end users and administrators. This allows the user to monitor their utilization of resources and determine when it is appropriate to choose a more powerful service offering or larger disk.
+
+ƒGƒ“ƒhƒ†[ƒU‚ÆŠÇ—ŽÒ‚ÍAƒzƒXƒg‚ÆƒQƒXƒg‚ÌƒpƒtƒH[ƒ}ƒ“ƒXŠÄŽ‹‚ð—˜—p‚Å‚«‚Ü‚·B‚±‚ê‚É‚æ‚Á‚ÄAƒ†[ƒU‚ÍAƒŠƒ\[ƒX—˜—p‚ðŠÄŽ‹‚µA‚æ‚è‹­—Í‚ÈƒT[ƒrƒXƒIƒtƒ@ƒŠƒ“ƒOA‚ ‚é‚¢‚ÍA‚æ‚è‘å‚«‚ÈƒfƒBƒXƒN‚ð‘I‘ð‚·‚é‚Ì‚É‘Ã“–‚Èƒ^ƒCƒ~ƒ“ƒO‚ðŒˆ’è‚µ‚Ä‚¢‚Ü‚·B
+
+„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ
+1.9 API and Extensibility
+
+The CloudStack's end user and administrator web interfaces are built on the same HTTP query interface that is available for integration. This simple interface enables the creation of command line tools and new user interfaces to suit particular needs.
+
+CloudStack‚ÌƒGƒ“ƒhƒ†[ƒU‚ÆŠÇ—ŽÒ‚ÌWebƒCƒ“ƒ^ƒtƒF[ƒX‚ÍA“‡‚É—˜—p‰Â”\‚ÈHTTPƒNƒGƒŠƒCƒ“ƒ^ƒtƒF[ƒX‚Åì‚ç‚ê‚Ä‚¢‚Ü‚·B‚±‚ÌƒVƒ“ƒvƒ‹‚ÈƒCƒ“ƒ^ƒtƒF[ƒX‚ÍAƒRƒ}ƒ“ƒhƒ‰ƒCƒ“ƒc[ƒ‹‚âA“Á’è‚Ìƒj[ƒY‚É‡’v‚µ‚½V‚µ‚¢ƒ†[ƒUƒCƒ“ƒ^ƒtƒF[ƒX‚Ìì¬‚ð‰Â”\‚É‚µ‚Ü‚·B
+
+The CloudStack's pluggable allocation architecture allows the creation of new types of allocators for the selection of storage and Computing Nodes.
+
+CloudStack‚Ìpluggable‚ÈƒAƒƒP[ƒVƒ‡ƒ“ƒA[ƒLƒeƒNƒ`ƒƒ‚ÍAƒXƒgƒŒ[ƒW‚âƒRƒ“ƒsƒ…[ƒeƒBƒ“ƒOƒm[ƒh‚ð‘I‘ð‚·‚é‚½‚ß‚ÌV‚µ‚¢ƒ^ƒCƒv‚ÌƒAƒƒP[ƒ^‚Ìì¬‚ð‰Â”\‚É‚µ‚Ü‚·B
+
+„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ
+1.10 Scalability and Availability
+
+The CloudStack has been designed to support thousands of Computing Nodes located in multiple data centers. Administrators define a Pod as the unit of scale. Typically a Pod would be a rack of hardware. Scaling out the cloud becomes the process of adding new Pods and provisioning the added resources with the Management Server.
+
+CloudStack‚ÍA•¡”‚Ìƒf[ƒ^ƒZƒ“ƒ^‚É”z’u‚³‚ê‚½”ç‚ÌƒRƒ“ƒsƒ…[ƒeƒBƒ“ƒOƒm[ƒh‚ðƒTƒ|[ƒg‚·‚é‚æ‚¤‚ÉÝŒv‚³‚ê‚Ä‚¢‚Ü‚·BŠÇ—ŽÒ‚ÍAƒ|ƒbƒhiPodj‚ðƒXƒP[ƒ‹‚Ì’PˆÊ‚Æ‚µ‚Ä’è‹`‚µ‚Ü‚·Bƒ|ƒbƒh‚ÍA’ÊíAƒn[ƒhƒEƒFƒA‚Ìƒ‰ƒbƒN‚Å‚·BƒNƒ‰ƒEƒh‚Å‚ÌƒXƒP[ƒ‹ƒAƒEƒg‚ÍAV‚µ‚¢ƒ|ƒbƒh‚ð’Ç‰Á‚µ‚ÄAƒ}ƒlƒWƒƒ“ƒgƒT[ƒo‚Æ‚Æ‚à‚É’Ç‰ÁƒŠƒ\[ƒX‚ð‹Ÿ‹‹‚·‚é‚Æ‚¢‚Á‚½Žè‡‚É‚È‚è‚Ü‚·B
+
+The CloudStack has a number of features to increase the availability of the system. The Management Server itself may be deployed in a farm where the servers are load balanced. MySQL may be configured to use replication to provide for a manual failover in the event of database loss. For the Computing Nodes, the CloudStack supports NIC bonding and the use of separate networks for storage.
+
+CloudStack‚É‚ÍAƒVƒXƒeƒ€‚Ì‰Â—p«‚ð‘‹­‚·‚é‘½‚­‚Ì“Á’¥‚ª‚ ‚è‚Ü‚·Bƒ}ƒlƒWƒƒ“ƒgƒT[ƒoŽ©‘Ì‚ÍA•‰‰×•ªŽU‚³‚ê‚½ƒT[ƒo‚Ìƒtƒ@[ƒ€‚ÅƒfƒvƒƒC‚³‚ê‚é‚©‚à‚µ‚ê‚Ü‚¹‚ñBMySQL‚ÍAƒf[ƒ^ƒx[ƒX‚Ì‘¹Ž¸Žž‚ÉŽè“®‚ÅƒtƒFƒCƒ‹ƒI[ƒo‚·‚é‚½‚ß‚É”õ‚¦‚ÄAƒŒƒvƒŠƒP[ƒVƒ‡ƒ“‚ðŽg—p‚·‚é‚æ‚¤‚É\¬‚³‚ê‚é‚©‚à‚µ‚ê‚Ü‚¹‚ñBƒRƒ“ƒsƒ…[ƒeƒBƒ“ƒOƒm[ƒh‚ÉŠÖ‚µ‚Ä‚ÍACloudStack‚ÍANIC‚Ìç’·‰»‚ÆAƒXƒgƒŒ[ƒW‚Ì‚½‚ß‚É•ÊX‚Ìƒlƒbƒgƒ[ƒN‚ðŽg—p‚·‚é‚±‚Æ‚ðƒTƒ|[ƒg‚µ‚Ü‚·B
+
+„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ
