@@ -1,0 +1,92 @@
+﻿3 Planning a Deployment
+
+3.1 Management Server Farm
+
+The CloudStack Management Server is deployed on one or more front-end servers connected to a single MySQL database. Optionally a pair of hardware load balancers distributes requests from the web. A backup management server set may be deployed using MySQL replication at a remote site to add DR capabilities.
+
+CloudStack マネジメントサーバは、ただ1つのMySQLデータベースに接続した1つ以上のフロントエンドサーバでデプロイされます。任意に、1組のハードウェア負荷分散装置が、Webからのリクエストを分散します。バックアップ管理サーバセットは、ディザスタリカバリの効果を得るために、リモートサイトでMySQLのレプリケーションを使用してデプロイされるかもしれません。
+
+The administrator must decide
+
+管理者は次のことを決める必要があります。
+
+・ whether or not load balancers will be used
+・ how many Management Servers will be deployed
+・ if MySQL replication will be deployed to enable disaster recovery.
+
+・ 負荷分散装置を使うか
+・ マネジメントサーバをいくつデプロイするか
+・ディザスタリカバリを可能にするためにMySQLのレプリケーションをデプロイするか
+
+────────────────────────────────────────3.2 Scaling Concepts
+
+3.2.1 Computing Nodes
+
+Computing Nodes are the basic physical scaling block of the CloudStack. Additional Computing Nodes can be added at any time to provide more capacity for guest VM's.
+
+コンピューティングノードは、CloudStackの基本となる物理的なスケーリングブロックです。ゲストの仮想マシンのためにより多くのキャパシティを備えるため、いつでも追加コンピューティングノードを加えることができます。
+
+Computing Nodes are not visible to the end user: an end user cannot determine which Computing Node their guest has been assigned to.
+
+コンピューティングノードは、エンドユーザには見えません。エンドユーザは、自分のゲストが割り当てられるコンピュータノードを決定することはできません。
+
+3.2.2 Pods
+
+Pods are the second level of physical scaling in the CloudStack. A Pod is a collection of Computing Nodes and primary storage that are in the same network broadcast domain. The Management Server is used to add and remove Computing Nodes and primary storage from Pods.
+
+ポッドは、CloudStackでの第2レベルの物理的なスケーリングです。ポッドは、同じネットワークブロードキャストドメインにあるコンピューティングノードの集合とプライマリストレージです。マネジメントサーバは、ポッドからコンピューティングノードとプライマリストレージを追加・削除するために使用されます。
+
+A Pod is frequently mapped to a single rack with a L2 switch. Computing Nodes in the same Pod are in the same subnet.
+
+ポッドは、頻繁にL2スイッチで単一のラックにマップされます。同じポッドのコンピューティングノードは、同じサブネットに位置します。
+
+With Citrix XenServer as the hypervisor, a Pod is limited to 16 Computing Nodes plus primary storage and networking infrastructure. With Linux KVM as the hypervisor there is no limit on the number of Computing Nodes that may be in a Pod.
+
+ハイパーバイザーであるCitrix XenServerでは、ポッドは、16のコンピューティングノード、プライマリストレージとネットワークインフラストラクチャに制限されます。ハイパーバイザーであるLinux KVMでは、ポッド内のコンピューティングノードの数に制限はありません。
+
+Pods are not visible to the end user.
+
+ポッドは、エンドユーザには見えません。
+
+3.2.3 Availability Zones
+
+Availability Zones are the third level of physical scaling in the CloudStack. An Availability Zone is a collection of Pods and secondary storage. An Availability Zone will include one or more L3 switches. The Availability Zone implies some form of physical isolation and redundancy (e.g., separate power supply and network uplink) from other Availability Zones. It does not necessarily mean geographic distribution, and there may be one or more Availability Zones in a data center.
+
+利用可能なゾーンは、CloudStackでの第3レベルの物理的なスケーリングです。ゾーンは、ポッドの集合とセカンダリストレージです。ゾーンは、1個以上のL3スイッチを含むでしょう。ゾーンは、他のゾーンからの何らかの形での物理的な分離と冗長性（たとえば、別々の電源とネットワークアップリンク）を持ちます。それは、必ずしも地理的な分散を意味するわけではなく、1個以上のゾーンが1つのデータセンタ内にあるかもしれません。
+
+Availability Zones are visible to the end user. They must select an Availability Zone for their guest when started. They may also be required to copy their private templates to additional Availability Zones to enable creation of guest VM's in those zones from their templates.
+
+ゾーンは、エンドユーザが見ることができます。起動時に、ゲストのためのゾーンを選択しなければなりません。また、自分たちのテンプレートからゾーン内にゲスト仮想マシンを作成するために、プライベートなテンプレートを追加ゾーンにコピーしなければならないかもしれません。
+
+Computing Nodes in the same Availability Zone are directly accessible to each other without having to go through a firewall. Nodes in different Availability Zones can access each other through statically configured VPN tunnels.
+
+同じゾーンにあるコンピューティングノードは、ファイアウォールに直面する必要がないので、互いに直接アクセスしやすいです。異なったゾーンにあるノードは、静的に構成されたVPNトンネルを通じて、互いにアクセスできます。
+
+The administrator must decide:
+
+管理者は次のことを決める必要があります。
+
+・ how many computing nodes to place in a pod
+・ how many primary storage servers to place in a pod and total capacity for the storage servers
+・ how many Pods to place in an Availability Zone
+・ how much secondary storage to deploy in an Availability Zone
+
+・ ポッド内にいくつのコンピューティングノードを配置するか
+・ ポッド内とストレージサーバ全体のキャパシティに、いくつのプライマリストレージサービスを配置するか
+・ ゾーン内にいくつのポッドを配置するか
+・ ゾーン内にいくつのセカンダリストレージをデプロイするか
+
+────────────────────────────────────────
+3.3 Multi-Site Deployment
+
+The CloudStack scales well into multiple sites through the use of Availability Zones. Figure 22 is an example of a multi-site deployment.
+
+クラウドスタックは、ゾーンの使用を通して、複数のサイトでスケールします。図2は、マルチサイトデプロイの例です。
+
+Figure 2 Example of a Multi-Site Deployment
+
+図2 マルチサイトデプロイの例
+
+Data Center 1 houses the primary Management Server as well as Availability Zone 1. The MySQL database is replicated in real time to the secondary Management Server installation in Data Center 2.
+
+データセンタ1は、ゾーン1と同様にプライマリマネジメントサーバを収容します。MySQLデータベースは、データセンタ2で、セカンダリマネジメントサーバの装置に、リアルタイムでレプリケーションされます。
