@@ -1,0 +1,43 @@
+﻿4 Defining Your Service Offering
+
+The Service Offering defines the virtual hardware that the end users will be able to choose from. This includes CPU core count and speed, memory, and disk size. Here is an example of a service offering:
+
+サービスオファリングは、エンドユーザが選択可能な仮想ハードウェアを定義します。これには、CPUコア数と速度、メモリ、ディスクサイズが含まれます。次に、サービスオファリングの例を示します。:
+
+A virtual machine instance that is equivalent to 1GHZ Core 2 CPU, 1GB memory at $0.20/hour. Network traffic metered at $0.10/GB.
+
+1GHZ Core2 CPU、0.20ドル/時間で1GBのメモリに同等な仮想マシンインスタンス。0.10ドル/GBで計量されるネットワークトラフィック。
+
+The users expect that a service offering includes the following elements:
+
+ユーザは、サービスオファリングに次の要素が含まれていると予測します。
+
+・ CPU, memory, and network resource guarantees.
+・ How resources are metered.
+・ How the resource usage is charged.
+・ How often the charges are generated.
+
+・ CPU、メモリ、保証されるネットワークリソース。
+・ リソースをどのように計算するか。
+・ リソース使用がどのように請求されるか。
+・ 料金がどれくらいの頻度で発生するか。
+
+The CloudStack allows the administrator to configure the resource guarantee. It then emits usage records that the administrator can integrate with their billing system.
+
+CloudStackでは、管理者がリソース保証を設定します。そして、管理者が自分たちの請求システムと統合可能な使用記録を発行ます。
+
+Service Offerings cannot be changed once created.
+
+サービスオファリングは、一度作成したら変更することができません。
+
+A Service Offering that is no longer in use by any virtual machines can be permanently deleted.
+
+どんな仮想マシンも永久に使用していないサービスオファリングは、削除できます。
+
+A Service Offering that is still in use can be deleted by the admin. However it will remain in the database until all the virtual machines referencing it have been deleted. After deletion by the admin a Service Offering will not be available to end users that are creating new instances.
+
+adminは、まだ使用中のサービスオファリングを削除できます。しかしながら、それを参照しているすべての仮想マシンが削除されるまで、そのサービスオファリングはデータベースに残ります。adminによる削除の後、サービスオファリングは、新しいインスタンスを作成しているエンドユーザにとって、利用可能になりません。
+
+The CloudStack separates Service Offerings into Computing and Storage. The Storage Offering describes the size of the disk that will be available to the end users for their data disk volumes.
+
+CloudStackは、サービスオファリングを計算（コンピューティング）とストレージに分離します。ストレージオファリングは、エンドユーザが利用可能なデータディスクボリュームのディスクサイズを示します。
