@@ -1,0 +1,221 @@
+﻿5 Understanding Network Types and Network Virtualization
+
+In the CloudStack there are several types of networks, some real and some virtual. These include:
+
+CloudStackには、いくつかのネットワークタイプがあります。それらのいくつかは実際のネットワークで、いくつかは仮想的なものです。これには次のものを含みます。
+
+・ Guest Network: this is the virtual network that the guest virtual machines connect to. It provides the isolation discussed previously.
+・ Private Network: this is the physical network that carries guest-guest traffic between Computing Nodes.
+・ Public Network: this is the physical network that provides the guests with access to the public internet.
+・ Management Network: this is the physical network that provides the link between the Management Servers, hypervisors, and storage devices.
+・ Storage Network: this is an optional physical network that provides the link between the hypervisors and storage devices.
+
+・ Guest Network: これは、ゲストの仮想マシンが接続する仮想ネットワークです。これは、以前に述べた分離（isolation）を提供します。
+・ Private Network: これは、コンピューティングノード間のゲスト―ゲストのトラフィックを運ぶ物理的なネットワークです。
+・ Public Network: これは、ゲストに公共のインターネットへのアクセスを提供する物理的なネットワークです。
+・ Management Network: これは、マネジメントサーバ、ハイパーバイザー、ストレージデバイス間のリンクを提供する物理的なネットワークです。
+・ Storage Network: これは、ハイパーバイザーとストレージ間のリンクを提供する任意の物理的なネットワークです。
+
+There need not be a physical separation between these network types. For example, the CloudStack can run successfully on a single node install that has a single NIC. Further, in all cases the Private Network and the Management Network are the same network.
+
+これらのネットワークタイプ間は、物理的に分離している必要はありません。たとえば、CloudStackは、単独のNICを持つ単一のノードにインストールして、問題なく実行できます。さらに、すべてのケースで、プライベートネットワークとマネジメントネットワークは、同じネットワークです。
+
+Optionally, with the Premium Edition, a NIC may be dedicated to the public network. This can be used to isolate the public network traffic from the private network.
+
+オプションとして、Premium Editionでは、NICを公共のネットワーク用に使うことができます。プライベートのネットワークから公共のネットワークのトラフィックを隔離するのに、これを使うことができます。
+
+Optionally, a NIC may be dedicated to a separate Storage Network. This can be used to isolate storage traffic from other types of traffic. For example, a 1 Gbps NIC could be used for the private network while a 10 Gbps NIC is used for storage access.
+
+また、オプションとして、NICはストレージネットワークを分離するために使うことができます。他のタイプのトラフィックからストレージのトラフィックを隔離するのに、これを使うことができます。たとえば、ストレージアクセスのために10Gbps NICが使用されている間、プライベートのネットワークに1Gbps NICを使用できます。
+
+See the Install Guide for instructions on procedures for these configurations.
+
+これらの設定手順の紹介は、インストールガイドを見てください。
+
+Network virtualization is the process of creating a network for use by guest virtual machines. This virtual network has the characteristics of a LAN from the viewpoint of the guests. The resources used to create the virtual network may come from many sources and may rely on software-based components to a greater extent than is common in physical networks.
+
+ネットワーク仮想化は、ゲスト仮想マシンが使用できるようにネットワークを構築するプロセスです。この仮想ネットワークには、ゲストの観点からのLANの特性があります。仮想ネットワークを構築するのに使用されるリソースは、多くのソースからもたらされ、一般的な物理ネットワークより大きく、ソフトウェアベースのコンポーネントを当てにするかもしれません。
+
+────────────────────────────────────────
+5.1 Guest Network
+
+Each account is assigned a virtual network in its Availability Zone. A guest virtual network can be configured to any private address space. This document uses a Class A network in 10.0.0.0/8 private address space for its examples. The guest virtual network is an overlay network on top of the private network and is managed by the CloudStack.
+
+各アカウントは、ゾーンの仮想ネットワークに割り当てられます。どのようなプライベートのアドレス空間にも、ゲスト仮想ネットワークを構成できます。このドキュメントでは、例として、10.0.0.0/8のプライベートなアドレス空間で、Class Aネットワークを使用します。ゲストの仮想ネットワークは、プライベートネットワークの上にあるオーバーレイネットワークであり、CloudStackによって管理されます。
+
+A guest virtual network is valid within only one Availability Zone. Therefore virtual machines in different Availability Zones cannot communicate with each other using their IP addresses in the guest virtual network. Virtual machines in different Availability Zones must communicate with each other by routing through a public IP address.
+
+ゲスの仮想ネットワークは1つのゾーンの中だけで有効です。したがって、異なるゾーンの仮想マシンは、ゲスト仮想ネットワーク内でそれらのIPアドレスを使用しても、互いにやり取りできません。異なるゾーンの仮想マシンは、パブリックなIPアドレスを通したルーティングによって、互いにやり取りしなければなりません。
+
+Figure 1 illustrates a typical guest virtual network setup.
+
+図1に、通常のゲスト仮想ネットワークのセットアップを示します。
+
+Figure 1 Guest Virtual Network Setup
+
+図1 ゲスト仮想ネットワークセットアップ
+
+The Management Server automatically creates a Virtual Router for each guest virtual network. A virtual router is a special virtual machine that runs on the Computing Nodes. Each virtual router has three network interfaces. Its eth0 interface serves as the gateway for the guest virtual network and has the IP address of 10.1.1.1. Its eth1 interface resides on the private/management network and is used by the system to configure the virtual router. Its eth2 interface is assigned a public IP address on the public network.
+
+マネジメントサーバは、各ゲスト仮想ネットワークのために、自動的に仮想ルータを作成します。仮想ルータは、コンピューティングノード上で動作する特別な仮想マシンです。各仮想ルータには、3つのネットワーク・インターフェースがあります。eth0インタフェースは、ゲスト仮想ネットワークのためのゲートウェイとして機能し、IPアドレス10.1.1.1を持っています。eth1インタフェースは、プライベート/マネジメントネットワークに属し、仮想ルータを構成するためにシステムによって使用されます。eth2インタフェースは、公共のネットワーク上でパブリックなIPアドレスを割り当てられます。
+
+The virtual router provides DHCP and will automatically assign an IP address for each guest VM in the 10.0.0.0/8 network. The user can manually reconfigure guest VM's to assume different IP addresses.
+
+仮想ルータは、DHCPを提供して、10.0.0.0/8ネットワーク内の各ゲスト仮想マシンのために、自動的にIPアドレスを割り当てます。ユーザは、異なるIPアドレスを付けるために、ゲスト仮想マシンのIPアドレスを手動で再設定できます。
+
+Source NAT is automatically configured in the virtual router to forward out-bound traffic for all guest VMs.
+
+発信元のNATは、すべてのゲスト仮想マシンのためのoutboundトラフィックを送出するために、仮想ルータで自動的に構成されます。
+
+────────────────────────────────────────
+5.2 Network Virtualization within One Pod
+
+Figure 2 illustrates network setup within a single Pod. The Computing Nodes are connected to a Pod-level switch. At a minimum the Computing Nodes should have 1 physical uplink to each switch. Bonded NIC's are supported as well. The Pod-level switch is a pair of redundant gigabit switches with 10G uplinks.
+
+図2に、単独のポッド内でのネットワークセットアップを示します。コンピューティングノードは、ポッドレベルスイッチに接続されます。最小限の構成で、コンピューティングノードは各スイッチあたり1つの物理的なアップリンクを持っているはずです。また、冗長化されたNICがサポートされます。ポッドレベルスイッチは、10Gアップリンクでの1組の冗長なギガビットスイッチです。
+
+Figure 2 Network Setup within a Single Pod ― Logical View
+
+図2 単独ポッド内のネットワークセットアップ ― 論理図
+
+Servers are connected to the private/management and public networks as follows:
+
+サーバは、プライベート/マネジメントネットワークとパブリックネットワークに、次のように接続されます。
+
+・ Storage devices are connected to only the private/management network.
+・ Computing Nodes are connected to both the management network and the public network. Note that, strictly speaking, if there is no virtual router executing on a Computing Node, then that Computing Node will not have a NIC bound to an IP address on the management network.
+・ The Computing Nodes are connected to one or more guest networks.
+We recommend the use of multiple physical Ethernet cards to implement each network interface as well as redundant switch fabric in order to maximize throughput and improve reliability.
+
+・ ストレージデバイスは、プライベート/マネジメントネットワークにのみ接続されます。・ コンピューティングノードは、マネジメントネットワークとパブリックネットワークの両方に接続されます。厳密に言うと、コンピューティングノード上で実行される仮想ルータが全く存在しないと、コンピューティングノードがマネジメントネットワーク上のIPアドレスにNICを冗長化させないので、意してください。
+・ コンピューティングノードは、1つ以上のゲストネットワークに接続されます。
+
+We recommend the use of multiple physical Ethernet cards to implement each network interface as well as redundant switch fabric in order to maximize throughput and improve reliability.
+
+スループットを最大にして、信頼性を向上させるために、各ネットワーク・インターフェースを実装する複数の物理的なイーサネットカードを使用することを、冗長なスイッチ構成と同様に推奨します。
+
+────────────────────────────────────────
+5.3 Network Virtualization within One Availability Zone
+
+Figure 3 illustrates the network setup within a single Availability Zone.
+
+図3に、単独のゾーン内でのネットワークセットアップを示します。
+
+Figure 3 Network Setup within a Single Availability Zone
+
+図3 単独のゾーン内でのネットワークセットアップ
+
+The private/management network carries traffic in the guest virtual networks.
+
+プライベート/マネジメントネットワークは、ゲスト仮想ネットワーク内でトラフィックを運びます。
+
+A firewall for the private/management network operates in the NAT mode. The private/management network typically is assigned IP addresses in the 192.168.0.0/16 Class B private address space. Each Pod is assigned IP addresses in the 192.168.*.0/24 Class C private address space.
+
+プライベート/マネジメントネットワークのためのファイアウォールは、NATモードで作動します。プライベート/マネジメントネットワークは、通常、192.168.0.0/16 Class Bのプライベートなアドレス空間のIPアドレスが割り当てられます。各ポッドは、192.168.*.0/24 Class Cのプライベートなアドレス空間のIPアドレスが割り当てられます。
+
+Each Availability Zone has its own set of public IP addresses. Public IP addresses from different Availability Zones do not overlap.
+
+各ゾーンは、それ自体がパブリックなIPアドレスを持っています。異なるゾーンでのパブリックなIPアドレスは、重複しません。
+
+The private/management network has private IP addresses. Therefore the management networks in different Availability Zones may have the same private IP addresses. Compute nodes and storage devices have unique private addresses within the same Availability Zone. Compute Nodes and storage devices in different Availability Zones however may have the same private addresses.
+
+プライベート/マネジメントネットワークは、プライベートなIPアドレスを持っています。したがって、異なるゾーンのマネジメントネットワークには、同じプライベートIPアドレスがあるかもしれません。ノードとストレージデバイスは、同じゾーンでは、ユニークなプライベートアドレスを持っています。しかし、異なるゾーン内のノードとストレージデバイスは、同じプライベート・アドレスを持つことができます。
+
+────────────────────────────────────────
+5.4 Types of Network Virtualization
+
+As discussed earlier the CloudStack supports both software and hardware-based network virtualization. There are advantages and disadvantages to each type of network virtualization. These tradeoffs are summarized in the chart below. 
+
+以前に記述しましたが、CloudStackは、ソフトウェアベースとハードウェアベース両方のネットワーク仮想化をサポートします。それぞれのタイプのネットワーク仮想化には、利点と欠点があります。これらのトレードオフを次の表にまとめます。
+
+The Community Edition supports software-based network virtualization. The Service Provider and Enterprise Editions support hardware-based network virtualization. The two following sections contain information specific to each type of network virtualization.
+
+Community Editionは、ソフトウェアベースのネットワーク仮想化をサポートします。Service Provider と Enterprise Editions は、ハードウェアベースのネットワーク仮想化をサポートします。次の2つの項は、各タイプのネットワーク仮想化の特性についての情報を含みます。
+
+5.4.1 Software-based Network Virtualization
+
+Software-based network virtualization uses packet encapsulation and host/dom0 drivers to isolate guest virtual network traffic. VLAN's are not used, and no special switch configuration is required. Every account is assigned a "virtual network ID". This is similar in concept to a VLAN ID or tag.
+
+ソフトウェアベースのネットワーク仮想化は、ゲスト仮想ネットワークトラフィックを分離するために、パケットカプセル化とhost/dom0ドライバを使用します。VLANは使用しませんし、特別なスイッチ構成も必要としません。「仮想ネットワークID」は、すべてのアカウントに割り当てられます。これは、概念上、VLAN ID、あるいはタグと同じものです。
+
+Drivers in the dom0/host OS capture packets during entry and egress from the guest instances. On exit from a guest the Ethernet frame is encapsulated in a new UDP packet that is tagged with the guest virtual network's ID. This tagging is done at the UDP level.
+
+dom0/host OSのドライバは、ゲストのインスタンスからの入口と出口の間でパケットをキャプチャします。ゲストからの出口では、イーサネットフレームはゲスト仮想ネットワークIDでタグ付けされる新しいUDPパケットでカプセル化されます。このタグ付けは、UDPレベルで行われます。
+
+On entry to a guest a driver in the dom0/host OS extracts the original Ethernet frame, examines the virtual network ID and then writes the packet to the appropriate guest's network interface.
+
+ゲストへの入口では、dom0/host OSでのドライバは、オリジナルのイーサネットフレームを抽出し、仮想ネットワークIDを調べて、適切なゲストのネットワークインターフェースにパケットを書き込みます。
+
+No modifications or tagging are done for traffic on the public network or on the management network.
+
+トラフィックのために、公共のネットワーク、あるいはマネジメントネットワーク上では、変更やタグ付けを行いません。
+
+The CloudStack has a limit of 65536 virtual networks in an Availability Zone when software-based network virtualization is used.
+
+CloudStackは、ソフトウェアベースのネットワーク仮想化を使用する場合、ゾーン内の仮想ネットワークを65536に制限します。
+
+5.4.2 Hardware-based Network Virtualization
+
+Hardware-based network virtualization uses tagged VLAN's to provide isolation between guest virtual networks. In 2.0 beta, there is one tagged VLAN per guest virtual network.
+
+ハードウェアベースのネットワーク仮想化は、ゲスト仮想ネットワーク間に分離を提供するために、タグVLANを使用します。2.0βでは、ゲスト仮想ネットワークあたり1つのタグVLANがあります。
+
+With hardware-based network virtualization there are two base VLAN's that are present within every Availability Zone:
+
+ハードウェアベースのネットワーク仮想化では、すべてのゾーンの中に、2つのVLANのベースが存在します。
+
+・ The Private/Management VLAN. This is for the private/management network as defined above.
+・ The Public VLAN. This is for the public network as defined above.
+
+・ プライベート/マネジメントVLAN。これは、上記で定義したプライベート/マネジメントネットワークのためのものです。
+・ パブリックVLAN。これは、上記で定義したパブリックネットワークのためのものです。
+
+There are only 4094 available VLAN's according to the 802.1q standard. Of course a larger installation will require more than 4094 guest virtual networks in operation simultaneously. The CloudStack segments the VLAN namespace to enable re-use of the VLAN ID's in different Pods. This significantly increases the scalability of the CloudStack Virtual Networking technology. For example, consider this segmentation:
+
+802.1q規格にしたがって、利用可能なVLANはたった4094しかありません。もちろん、より大きな設備では、同時に稼働する4094以上のゲスト仮想ネットワークを必要とするでしょう。CloudStackは、異なるポッド上でVLAN IDを再利用可能にするために、VLAN名前空間を分割します。このことが、CloudStackの仮想ネットワーク技術のスケーラビリティをかなり増強します。たとえば、このような分割について考えてください。
+
+┌─────┬──────────────────┐
+│VLAN IDs　│　　　　　　　　Use　　　　　　　　 │
+├─────┼──────────────────┤
+│< 100 　　│Reserved for administrative purposes│
+├─────┼──────────────────┤
+│100-199　 │Public VLANs　　　　　　　　　　　　│
+├─────┼──────────────────┤
+│200-499　 │Untagged private IPs for each Pod　 │
+├─────┼──────────────────┤
+│500-999　 │Zone VLANs　　　　　　　　　　　　　│
+├─────┼──────────────────┤
+│1000-1999 │Pod VLANs　　　　　　　　　　　　　 │
+├─────┼──────────────────┤
+│> 2000　　│Reserved for future use　　　　　　 │
+└─────┴──────────────────┘
+
+Every guest virtual network is allocated one Pod VLAN. Pod VLAN's are re-used from Pod to Pod. This works well since many guest virtual networks will be contained within a single Pod. Additionally, a guest virtual network that does not have a running instance will not be allocated a Pod VLAN until one of its guests is started.
+
+すべてのゲスト仮想ネットワークに、1つのポッドVLANを割り当てます。ポッドVLANのものは、Pod間で再利用されます。多くのゲスト仮想ネットワークが単独のポッドの中に含まれるため、これはうまくいきます。さらに、実行中のインスタンスを持たないゲスト仮想ネットワークは、ゲストのうち1つでも開始されるまで、ポッドVLANに割り当てられません。
+
+Guest virtual networks that span multiple Pods are bridged by the virtual router (in whichever Pod it's in) to a Zone VLAN to transport traffic to the guest VM's in other Pods.
+
+複数のポッドにわたるゲスト仮想ネットワークは、（いずれかのPodにある）仮想ルータによって、他のポッドのゲスト仮想マシンへトラフィックを運ぶために、ゾーンVLANへ橋渡しされます。
+
+Note: Pod VLAN's are not supported in 2.0 beta. All VLAN's are Zone VLAN's in 2.0 beta.
+
+注意: ポッドVLANは、2.0ベータではサポートされません。2.0ベータでは、すべてのVLANはゾーンVLANです。
+
+────────────────────────────────────────
+5.5 Private Address Allocation
+
+The CloudStack allocates a private IP address to each virtual router. The administrator is responsible for allocating private IP addresses to the hypervisors. The administrator configures the CloudStack with the range of IP addresses available for virtual router private IP address allocation.
+
+CloudStackは、各仮想ルータにプライベートIPアドレスを割り当てます。管理者は、プライベートIPアドレスをハイパーバイザーに割り当てる責任があります。管理者は、IPアドレスの範囲が仮想ルータで使用可能なように、プライベートIPアドレスを配分する設定をCloudStackで行います。
+
+────────────────────────────────────────
+5.6 Public Address Allocation
+
+Each virtual router is assigned at least 1 public IP addresses. The user may request additional public IP addresses.
+
+各仮想ルータは、最低1つのパブリックIPアドレスに割り当てられます。ユーザは、追加のパブリックIPアドレスを要求するかもしれません。
+
+The administrator configures the available public IP address pools on a per-Availability Zone basis. Distinct public IP ranges can be added as separate VLAN's incrementally. Each public IP range can be used by any Pod inside the same Availability Zone.
+
+管理者は、1つのゾーンベースごとに利用可能なパブリックIPアドレスのプールを構成します。分割されたVLANを増やすという意味で、異なるパブリックIPの範囲を追加することができます。各パブリックIPの範囲は、同じゾーン内のすべてのポッドが使用できます。
