@@ -41,3 +41,4 @@ adminは、まだ使用中のサービスオファリングを削除できます
 The CloudStack separates Service Offerings into Computing and Storage. The Storage Offering describes the size of the disk that will be available to the end users for their data disk volumes.
 
 CloudStackは、サービスオファリングを計算（コンピューティング）とストレージに分離します。ストレージオファリングは、エンドユーザが利用可能なデータディスクボリュームのディスクサイズを示します。
+
