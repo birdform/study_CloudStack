@@ -1,0 +1,60 @@
+﻿11 Working with Computing Nodes
+
+11.1 Adding Computing Nodes with Community Edition
+
+Additional Computing Nodes may be added at any time.
+
+追加コンピューティングノードは、いつでも追加できます。
+
+The Computing Node will register itself with the Management Server (thereby adding itself) after the Agent is installed on it. You should then see the Node in the Hosts tab in the web UI.
+
+エージェントがインストールされた後に、コンピューティングノードは自分自身をマネジメントサーバへ登録するでしょう。Web UI の Hosts タブのノードを見てください。
+
+────────────────────────────────────────
+11.2 Adding Computing Nodes with Service Provider and Enterprise Edition
+
+Additional Computing Nodes may be added at any time up to the limit of nodes in a Pod. This limit is 16.
+
+追加コンピューティングノードは、1つのポッドのノードの限界まで、いつでも追加できるでしょう。この限界は、16個です。
+
+The administrator should use the "Add Host" function in the Hosts tab in the web UI to add a new XenServer host. An API call may be made as well.
+
+管理者は、新しいXenServerホストを加えるのに、Web UI の Hosts タブで「Add Host」機能を使用するべきです。APIを呼び出すこともできます。
+
+────────────────────────────────────────
+11.3 Scheduled Maintenance and Maintenance Mode
+
+The administrator can manually place a Computing Node into scheduled maintenance mode. When this is requested the Computing Node first moves into the "Prepare for Maintenance" state. In this state it cannot be the target of new guest VM starts. Then all VM's will be migrated off the server. With the Service Provider and Enterprise Editions "Live" migration will be used. This allows the guests to be migrated to other Computing Nodes with no disruption to the guests. After this migration is completed the Computing Node enters "Ready for Maintenance" mode. During this time the administrator can perform whatever actions are needed. After maintenance is done the server will rejoin the cloud after it boots up. It cannot be the target of new VM allocations until the administrator cancels maintenance for it. When the Computing Node comes back online no VM's that were migrated off of it are migrated back to it.
+
+管理者は、コンピューティングノードを手動でメンテナンスモードにできます。これは要求されています。コンピューティングノードにこれが要求されると、まず、「Prepare for Maintenance（メンテナンス前）」状態に移行します。この状態では、新しいゲスト仮想マシン開始のターゲットにはなり得ません。そして、すべての仮想マシンが、サーバからマイグレーションされるでしょう。Service Provider と Enterprise Editions は、「ライブ」マイグレーションを使用するでしょう。これで、ゲストは、ゲストを損なうことなく、他のコンピューティングノードへマイグレーションされます。このマイグレーションが完了した後に、コンピューティングノードは、「Ready for Maintenance（メンテナンス準備完了）」モードに入ります。この間に、管理者は、必要な動作を何でも実行できます。メンテナンスの完了後、サーバは起動して、クラウドに再び加わるでしょう。管理者がそのためにメンテナンスを中止するまで、それは、新しい仮想マシンアロケーションのターゲットにはなり得ません。コンピューティングノードがオンラインに戻る時、マイグレーションされた仮想マシンは、そこに戻りません。
+
+────────────────────────────────────────
+11.4 Removing Computing Nodes
+
+Computing Nodes can be removed from the cloud as needed. A node cannot be removed from a Pod until all of the VM's on it have been migrated off and it is in maintenance mode.
+
+必要に応じて、クラウドからコンピューティングノードを取り除くことができます。すべての仮想マシンがマイグレーションされて、メンテナンスモードになるまで、ポッドからノードを取り除くことはできません。
+
+────────────────────────────────────────
+11.5 Computing Node Allocation
+
+The system automatically picks the most appropriate Computing Node to host virtual machines. End users may specify the Availability Zone in which the virtual machine will be created. End users do not have control over which Computing Node will host the virtual machine instance.
+
+システムは、ホスト仮想マシンに最も適したコンピューティングノードを自動的に選びます。エンドユーザが、仮想マシンが作成されるゾーンを指定するかもしれません。エンドユーザは、どのコンピューティングノードが仮想マシンインスタンスをホストするかを制御できません。
+
+11.5.1 OS Preferences
+
+The CloudStack allows administrators to specify that certain Computing Nodes should have a preference for particular types of guest instances. For example, an administrator could state that a Computing Node should have a preference to run Windows guests. If this is set the default Computing Node allocator will attempt to place guests of that OS type on such nodes first. If no such node is available the allocator will place the node wherever there is sufficient physical capacity.
+
+CloudStackでは、あるコンピューティングノードを特定のタイプのゲストインスタンスのために優先させるように、管理者が指定できます。たとえば、管理者は、Windowsのゲストを実行することをコンピューティングノードに優先させることができます。これが設定されると、デフォルトのコンピューティングノードアロケータは、まずそのようなOSのタイプのノード上に、ゲストを置くことを試みるでしょう。そのようなノードが利用可能でない場合、アロケータは、十分な物理キャパシティがあるところならどこでも、ノードを置くでしょう。
+
+11.5.2 Over-Provisioning
+
+The CloudStack does not perform memory over provisioning.
+
+CloudStackは、メモリのオーバープロビジョニングを実行しません。
+
+The CloudStack performs CPU over-provisioning based on an over-provisioning ratio configured by the administrator.
+
+CloudStackは、管理者によって設定されたオーバープロビジョニング比に基づいて、CPUのオーバープロビジョニングを実行します。
+
