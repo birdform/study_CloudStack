@@ -1,0 +1,234 @@
+﻿10 Management Features
+
+10.1 Users, Administrators, and Domains
+
+There are two types of users in the system: administrators and users. Both administrators and users are created in a particular domain. A domain is a set of users and administrators with some logical relationship. For example, they may be in the same department or they may be customers of the same reseller.
+
+システムには2種類のユーザがいます。：それは、管理者とユーザです。管理者とユーザの両方が、特定のドメインに作成されます。ドメインとは、何らかの論理的な関係を持つユーザと管理者のセットです。たとえば、同じ部署に所属しているとか、同じ販売代理店の顧客であるなどです。
+
+Domains can have other domains as their members. This creates a hierarchy of domains. This hierarchy can be arbitrarily deep.
+
+ドメインは、メンバーとして他のドメインを持つことができます。これには、ドメインの階層を作成します。この階層は、任意の深さを持たせることができます。
+
+Administrators can perform operations across users in their domain and its subdomains. There is a ROOT domain that has no parent. Administrators in the ROOT domain are Root Administrators.
+
+管理者は、自分たちのドメインとそのサブドメイン内のユーザを越えて、操作を実行できます。親を持たないROOTドメインがあります。ROOTドメインの管理者はRoot管理者です。
+
+There may be multiple administrators in the system. Administrators can create or delete other administrators.
+
+システムには、複数の管理者を設定できます。管理者は、他の管理者を作成したり削除したりできます。
+
+10.1.1 Root Administrators
+
+Root administrators have complete access to the system, including managing templates, service offerings, customer care administrators, and domains.
+
+Root管理者は、テンプレート、サービスオファリング、カスタマーケア管理、ドメインの管理を含む、システムへの完全なアクセス権を持ちます。
+
+10.1.2 Domain Administrators
+
+Domain Administrators can perform administrative operations for users who belong to that domain. Domain administrators do not have visibility into physical servers or other domains.
+
+ドメイン管理者は、そのドメインに属するユーザのための管理的操作を実行できます。ドメイン管理者は、物理サーバ、あるいは他のドメインでの可視性を持ちません。
+
+────────────────────────────────────────
+10.2 Provisioning
+
+10.2.1 Register
+
+Users must be provisioned and modified through the provisioning API. The following user attributes are specified through the provisioning API:
+
+ユーザは、プロビジョニングAPIを通して、プロビジョンと修正を行う必要があります。次のユーザ属性は、プロビジョニングAPIを通して指定されます。
+
+・ Email address and user name (may be the same)
+・ First and last names
+・ A callback authentication function or encrypted password
+・ Reseller ID
+
+・ Eメールアドレスとユーザ名（同じ場合もあります）
+・ 姓名
+・ コールバック認証機能か暗号化されたパスワード
+・ 代理店ID
+
+────────────────────────────────────────
+10.3 VM Lifecycle Management
+
+The CloudStack provides administrators with complete control over the lifecycle of all guest VM's executing in the cloud.
+
+CloudStackは、クラウドで実行されているすべてのゲスト仮想マシンのライフサイクルに渡る完全な制御を管理者に提供します。
+
+10.3.1 VM Creation
+
+Virtual machines are usually created from a template. They may be created from a blank VM booted off an ISO.
+
+仮想マシンは、通常、テンプレートから作成されます。ISOから取り出された空の仮想マシンからも作成できます。
+
+10.3.2 VM Deletion
+
+Users can delete their own virtual machines. A running virtual machine will be abruptly stopped before it is deleted.
+
+ユーザは、自分自身の仮想マシンを削除できます。実行中の仮想マシンは、削除される前に、突然停止されるでしょう。
+
+Administrators can delete any virtual machines.
+
+管理者は、すべての仮想マシンを削除できます。
+
+10.3.3 VM Lifecycle
+
+Virtual machines can be in the following states:
+
+仮想マシンは、次のような状態になることができます。
+
+Once a virtual machine is destroyed, it cannot be recovered. All the resources used by the virtual machine will be reclaimed by the system.
+
+一度削除された仮想マシンは、復元できません。仮想マシンによって使用されていた全てのリソースは、システムによって取り戻されます。
+
+A stop will attempt to gracefully shut down the operating system, which typically involves terminating all the running applications. If the operation system cannot be stopped, it will be forcefully terminated, like yanking the power cord off a physical machine.
+
+停止は、丁寧にオペレーティングシステムをシャットダウンすることを試みるでしょう。通常、それはすべての動作中のアプリケーションを終えることを伴います。オペレーションシステムを止めることができない場合、物理マシンから電源コードを引き抜くかのように強制終了が行われます。
+
+A reboot is a stop followed by a start.
+
+再起動とは、開始が後に続く停止のことです。
+
+Unlike Amazon EC2, the system preserves the state of the virtual machine hard disk until the machine is destroyed.
+
+Amazon EC2と異なり、マシンが破壊されるまで、システムは仮想マシンのハードディスクの状態を保持します。
+
+A running virtual machine may fail because of hardware or network issues. A failed virtual machine is in the down state.
+
+実行中の仮想マシンは、ハードウェアあるいはネットワークの問題で失敗することがあります。失敗した仮想マシンは、ダウン状態になります。
+
+The system places the virtual machine into the down state if it does not receive the heartbeat from the hypervisor for 3 minutes.
+
+3分間ハイパーバイザーからのハートビートを受け取らない場合、システムは、仮想マシンをダウン状態とみなします。
+
+The hard disk image is preserved when a virtual machine enters the down state.
+The user can manually restart the virtual machine from the down state.
+
+仮想マシンがダウン状態に入る時、ハードディスクイメージが保存されます。ユーザは、ダウン状態から仮想マシンを手動でリスタートできます。
+
+The system will start the virtual machine from the down state automatically if the virtual machine is marked as HA-enabled.
+
+仮想マシンがHA有効と設定されていれば、システムは仮想マシンをダウン状態から自動で開始させることができるでしょう。
+
+10.3.4 Remote Access
+
+The user is able to access virtual machine console through the web management UI.
+
+ユーザは、Web管理UIを通して、仮想マシンコンソールにアクセスできます。
+
+Administrators can access the virtual machine consoles that belong to any users for the purpose of support and troubleshooting. The administrators will be subject to providing the root (or other) password for the guest.
+
+管理者は、サポートとトラブルシューティングを目的に、どのユーザに属する仮想マシンコンソールにもアクセスできます。管理者は、ゲストのroot（あるいは他）のパスワードの提供を受けることがあるでしょう。
+
+────────────────────────────────────────
+10.4 Administrator Alerts
+
+Emails will be sent to administrators under the following circumstances:
+
+次の状況で、管理者にEメールが送信されるでしょう。
+
+1. The Management Server cluster runs low on CPU, memory, or storage resources
+
+1. マネジメントサーバクラスタに、CPU、メモリ、ストレージのリソースが不足している時。
+
+2. The Management Server loses heartbeat from a Computing Node for more than 3 minutes
+
+2. マネジメントサーバが、コンピューティングノードからのハートビートを3分以上失った時。
+
+3. The Computing Node cluster runs low on CPU, memory, or storage resources
+
+コンピューティングノードクラスタに、CPU、メモリ、ストレージのリソースが不足している時。
+
+────────────────────────────────────────
+10.5 Event Logs
+
+The system records in the database a detailed event log of all the activities performed by users and administrators. The event log contains the user name, date/time stamp, and the relevant details of the activity.
+
+システムは、ユーザと管理者によって実行されたすべての活動の詳細なイベントログを、データベースに記録します。イベントログは、ユーザ名、日付/タイムスタンプ、および活動の関連詳細を含んでいます。
+
+Database logs can be queried from the user interface. The list of events captured by the system includes:
+
+ユーザインタフェースから、データベースログを問い合わせできます。システムによるイベントキャプチャの一覧は、次のものを含みます。
+
+・ Virtual machine creation, deletion, and on-going management operations
+・ Virtual router creation, deletion, and on-going management operations
+・ Template creation and deletion
+・ Network/load balancer rules creation and deletion
+・ Storage volume creation and deletion
+・ User login and logout
+
+・ 仮想マシンの作成、削除、継続中の管理オペレーション
+・ 仮想ルータの作成、削除、継続中の管理オペレーション
+・ テンプレートの作成と削除
+・ ネットワーク/ロードバランサルールの作成と削除
+・ ストレージボリュームの作成と削除
+・ ユーザのログインとログアウト
+
+The full list of event types are:
+
+イベントタイプの全リストを次に示します。
+
+VM.CREATE
+VM.DESTROY
+VM.START
+VM.STOP
+VM.REBOOT
+VM.HA
+VM.UPGRADE
+VM.RESETPASSWORD
+ROUTER.CREATE
+ROUTER.DESTROY
+ROUTER.START
+ROUTER.STOP
+ROUTER.REBOOT
+ROUTER.HA
+VNC.CONNECT
+VNC.DISCONNECT
+NET.IPASSIGN
+NET.IPRELEASE
+NET.RULEADD
+NET.RULEDELETE
+NET.RULEMODIFY
+SECGROUP.APPLY
+SECGROUP.REMOVE
+LB.CREATE
+LB.DELETE
+USER.LOGIN
+USER.LOGOUT
+USER.CREATE
+USER.DELETE
+USER.UPDATE
+TEMPLATE.CREATE
+TEMPLATE.DELETE
+TEMPLATE.UPDATE
+TEMPLATE.DOWNLOAD.START
+TEMPLATE.DOWNLOAD.SUCCESS
+TEMPLATE.DOWNLOAD.FAILED
+VOLUME.CREATE
+VOLUME.DELETE
+VOLUME.ATTACH
+VOLUME.DETACH
+SERVICEOFFERING.CREATE
+SERVICEOFFERING.UPDATE
+SERVICEOFFERING.DELETE
+DOMAIN.CREATE
+DOMAIN.DELETE
+DOMAIN.UPDATE
+SNAPSHOT.CREATE
+SNAPSHOT.DELETE
+SNAPSHOT.ROLLBACK
+SNAPSHOT.SCHEDULE
+ISO.ATTACH
+ISO.DETACH
+
+────────────────────────────────────────
+10.6 Working with Server Logs
+
+The CloudStack Management Server logs all web site, middle tier, and database activities for diagnostics purposes in /var/log/cloud/management/.
+
+CloudStackのマネジメントサーバは、問題を診断するために、すべてのWebサイト、ミドルティア、データベース活動を /var/log/cloud/management/ に記録します。
+
+The CloudStack Agent Server (present in the Community Edition) logs its activities in /var/log/cloud/agent/.
+
+CloudStackエージェントサーバは、（Community Editionの現状では）/var/log/cloud/agent/ にその活動を記録します。
